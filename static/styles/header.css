@@ -1,0 +1,50 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.burger-menu .line {
+    width: 25px;
+    height: 2px;
+    background: white;
+    margin: 6px 0;
+}
+
+
+.header {
+    background-color: black;
+    color: white;
+    display: none;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+.logo {
+    font-size: 24px;
+}
+
+.nav-buttons {
+    display: flex;
+}
+
+.nav-buttons a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    padding: 10px;
+}
+
+.burger-menu {
+    display: none;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+    .nav-buttons {
+        display: none;
+    }
+    .burger-menu {
+        display: block;
+    }
+}

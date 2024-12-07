@@ -1,0 +1,51 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %}{% endblock %}</title>
+        <link rel="stylesheet" href="{% static 'styles/header.css' %}">
+        <link rel="stylesheet" href="{% static 'styles/background.css' %}">
+        <link rel="stylesheet" href="{% static 'styles/loader.css' %}">
+        <link rel="stylesheet" href="{% static 'styles/footer.css' %}">
+        <script type="text/javascript" src="{% static 'js/loader.js' %}"></script>
+        {% block extra_css %}{% endblock %}
+        {% block extra_js %}{% endblock %}
+    </head>
+    <body class="loading">
+        <div id="loading" class="preloader">
+            <div class="loader"></div>
+        </div>
+        <div class="content header" data-display="flex">
+            <div class="logo">Логотип</div>
+            <div class="nav-buttons">
+                <a href="{% url 'home' %}">Главная</a>
+                <a href="{% url 'services:services' %}">Услуги</a>
+                <a href="{% url 'about' %}">О нас</a>
+                <a href="{% url 'blog:blog' %}">Блог</a>
+            </div>
+            <div class="burger-menu">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
+        </div>
+        <div class="content background" data-display="flex"></div>
+        {% block content %}
+        {% endblock %}
+        
+        <!-- Подвал -->
+        <div class="footer">
+            <div class="footer-content">
+                <p>© 2024 Your Company. Все права защищены.</p>
+                <div class="footer-links">
+                    <a href="{% url 'privacy_policy' %}">Политика конфиденциальности</a>
+                    <a href="{% url 'terms_of_service' %}">Условия использования</a>
+                    <a href="{% url 'contact' %}">Контакты</a>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

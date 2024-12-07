@@ -1,0 +1,20 @@
+<h2>{{ post.title }}</h2>
+{% if post.preview_image %}
+    <img src="{{ post.preview_image.url }}" alt="{{ post.title }}">
+{% elif post.preview_video_url %}
+    <iframe width="560" height="315" src="{{ post.preview_video_url }}" frameborder="0" allowfullscreen></iframe>
+{% endif %}
+{% for section in post.sections.all %}
+    {% if section.subtitle %}
+        <h3>{{ section.subtitle }}</h3>
+    {% endif %}
+    {% if section.content %}
+        <p>{{ section.content }}</p>
+    {% endif %}
+    {% if section.image %}
+        <img src="{{ section.image.url }}" alt="{{ section.subtitle }}">
+    {% endif %}
+    {% if section.youtube_url %}
+        <iframe width="560" height="315" src="{{ section.youtube_url }}" frameborder="0" allowfullscreen></iframe>
+    {% endif %}
+{% endfor %}

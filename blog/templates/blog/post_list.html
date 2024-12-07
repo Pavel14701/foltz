@@ -1,0 +1,8 @@
+{% for post in posts %}
+    <h2><a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a></h2>
+    {% if post.preview_image %}
+        <img src="{{ post.preview_image.url }}" alt="{{ post.title }}">
+    {% elif post.preview_video_url %}
+        <iframe width="560" height="315" src="{{ post.preview_video_url }}" frameborder="0" allowfullscreen></iframe>
+    {% endif %}
+{% endfor %}
