@@ -1,3 +1,8 @@
+{% extends 'base.html' %}
+
+{% block title %}Наши услуги{% endblock %}
+
+{% block content %}
 <!-- forms/templates/forms/popup.html -->
 <div id="myModal" class="modal">
     <div class="modal-content">
@@ -9,7 +14,9 @@
         </form>
     </div>
 </div>
-
+{% endblock %}
+<!-- Нихуёво было бы стили написать -->
+<!-- CSP Нахуй блокнет эту залупу
 <script>
     var modal = document.getElementById("myModal");
     var btn = document.getElementById("openModalBtn");
@@ -29,3 +36,4 @@
         }
     }
 </script>
+--->

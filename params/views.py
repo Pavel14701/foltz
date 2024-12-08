@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.views.decorators.cache import cache_page
 from django.conf import settings
-from django.http import HttpRequest, HttpResponse
+from django.http import HttpRequest, HttpResponse, JsonResponse
+
 
 def home(request:HttpRequest) -> HttpResponse: 
     return render(request, 'home.html')
@@ -11,6 +12,13 @@ def about(request:HttpRequest) -> HttpResponse:
 
 def privacy_policy(request:HttpRequest) -> HttpResponse: 
     return render(request, 'privacy_policy.html')
+
+def terms_of_service(request:HttpRequest) -> HttpResponse:
+    return render(request, 'terms_of_service.html')
+
+def get_image_url(request:HttpRequest, image_name: str) -> JsonResponse:
+    image_url = f'/static/images/{image_name}'
+    return JsonResponse({'image_url': image_url})
 
 def custom_error(request:HttpRequest, exception=None, status=500) -> HttpResponse: 
     status_str = str(status)
