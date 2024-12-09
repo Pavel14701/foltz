@@ -3,3 +3,4 @@ run_project.py
 staticfiles
 makets
 *__pycache__
+*migrations
