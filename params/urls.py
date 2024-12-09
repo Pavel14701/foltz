@@ -4,6 +4,12 @@ from . import views
 from django.conf.urls import handler404, handler500, handler403, handler400
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.sitemaps.views import sitemap
+from .sitemap import StaticViewSitemap
+
+sitemaps = {
+    'static': StaticViewSitemap,
+}
 
 
 urlpatterns = [
@@ -19,6 +25,7 @@ urlpatterns = [
     path('500/', views.trigger_error_500),
     path('blog/', include('blog.urls', namespace='blog')),
     path('services/', include('services.urls', namespace='services')),
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
 ]
 
 
