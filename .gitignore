@@ -2,3 +2,4 @@ run_project.py
 .env
 staticfiles
 makets
+*__pycache__
