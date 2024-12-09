@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'forms.apps.FormsConfig',
     'services.apps.ServicesConfig',
     'user.apps.UserConfig',
+    'common.apps.CommonConfig',
 ]
 
 CSP_DEFAULT_SRC = ("'self'") 
@@ -63,6 +64,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'csp.middleware.CSPMiddleware',
+    'common.custom_error_middleware.CustomErrorMiddleware'
 ]
 
 ROOT_URLCONF = 'params.urls'

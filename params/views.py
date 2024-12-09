@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views.decorators.cache import cache_page
 from django.conf import settings
 from django.http import HttpRequest, HttpResponse, JsonResponse
+from django.views.decorators.http import require_http_methods
 
 
 def home(request:HttpRequest) -> HttpResponse: 
@@ -16,34 +17,15 @@ def privacy_policy(request:HttpRequest) -> HttpResponse:
 def terms_of_service(request:HttpRequest) -> HttpResponse:
     return render(request, 'terms_of_service.html')
 
+@require_http_methods(["GET"])
 def get_image_url(request:HttpRequest, image_name: str) -> JsonResponse:
     image_url = f'/static/images/{image_name}'
     return JsonResponse({'image_url': image_url})
 
-def custom_error(request:HttpRequest, exception=None, status=500) -> HttpResponse: 
-    status_str = str(status)
-    context = { 
-        'status_code': status,
-        'digit_1': status_str[0],
-        'digit_2': status_str[1],
-        'digit_3': status_str[2], 
-        'error_message': {
-            400: 'BAD REQUEST',
-            403: 'FORBIDDEN',
-            404: 'NOT FOUND',
-            500: 'SERVER ERROR' 
-        }.get(status, 'UNKNOWN') 
-    } 
-    return render(request, 'error.html', context, status=status)
-
-def trigger_error_400(request:HttpRequest) -> HttpResponse: 
-    return custom_error(request, status=400) 
-
-def trigger_error_403(request:HttpRequest) -> HttpResponse: 
-    return custom_error(request, status=403)
-
-def trigger_error_404(request:HttpRequest) -> HttpResponse:
-    return custom_error(request, status=404)
-
-def trigger_error_500(request:HttpRequest) -> HttpResponse:
-    return custom_error(request, status=500)
+@require_http_methods(["GET"])
+def robots_txt(request:HttpRequest) -> HttpResponse:
+    lines = [
+        "User-agent: *",
+        "Disallow: /admin/",
+    ]
+    return HttpResponse("\n".join(lines), content_type="text/plain")
