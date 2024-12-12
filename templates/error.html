@@ -4,11 +4,10 @@
 {% block title %}Ошибка {{ status_code }}{% endblock %}
 
 {% block extra_css %}
-    <link rel="stylesheet" type="text/css" href="{% static 'styles/error.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/error/error.css' %}">
 {% endblock %}
-
 {% block content %}
-    <div class="center background" data-display="flex">
+    <div class="center background" data-display="flex" style="flex-direction:column;">
         <div class="main_wrapper">
             <div class="main">
                 <div class="antenna">
@@ -52,29 +51,35 @@
                     <div class="buttons_div">
                         <div class="b1">
                         <div></div>
-                    </div>
-                    <div class="b2"></div>
-                    <div class="speakers">
-                        <div class="g1">
-                            <div class="g11"></div>
-                            <div class="g12"></div>
-                            <div class="g13"></div>
                         </div>
-                        <div class="g"></div>
-                        <div class="g"></div>
+                        <div class="b2"></div>
+                        <div class="speakers">
+                            <div class="g1">
+                                <div class="g11"></div>
+                                <div class="g12"></div>
+                                <div class="g13"></div>
+                            </div>
+                            <div class="g"></div>
+                            <div class="g"></div>
+                        </div>
                     </div>
                 </div>
+                <div class="bottom">
+                    <div class="base1"></div>
+                    <div class="base2"></div>
+                    <div class="base3"></div>
+                </div>
             </div>
-            <div class="bottom">
-                <div class="base1"></div>
-                <div class="base2"></div>
-                <div class="base3"></div>
+            <div class="text_404">
+                <div class="text_4041">{{ digit_1 }}</div>
+                <div class="text_4042">{{ digit_2 }}</div>
+                <div class="text_4043">{{ digit_3 }}</div>
             </div>
         </div>
-        <div class="text_404">
-            <div class="text_4041">{{ digit_1 }}</div>
-            <div class="text_4042">{{ digit_2 }}</div>
-            <div class="text_4043">{{ digit_3 }}</div>
+        <div class="error-description-wrapper" data-display="flex">
+            <h1 class="error-description-message">
+                {{ error_message_full }}
+            </h1>
         </div>
     </div>
 {% endblock %}
