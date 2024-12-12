@@ -1,14 +1,28 @@
+/*
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; Отключает горизонтальную прокрутку 
+}
+*/
+
 .footer {
     background-color: black;
     color: #fff;
-    padding: 20px 0;
+    padding: 25px 0;
     text-align: center;
+    width: 100%; /* Убедитесь, что ширина ограничена 100% */
+    height:20vh;
+    box-sizing: border-box; /* Включаем паддинги в ширину */
+    position: relative; /* Оставляем элемент в нормальном потоке */
+    left: 0; /* Обеспечиваем, что он будет в начале окна */
 }
 
 .footer-content {
-    min-width: 100%;
+    width: 100%; /* Убедитесь, что ширина ограничена 100% */
     margin: 0 auto;
     padding: 0 20px;
+    box-sizing: border-box; /* Включаем паддинги в ширину */
 }
 
 .footer-links {
@@ -18,7 +32,6 @@
 .footer-links a {
     color: #fff;
     text-decoration: none;
-    margin: 0 10px;
 }
 
 .footer-links a:hover {

@@ -1,64 +1,63 @@
-/**
- * @type {number}
- */
-let currentIndex = 0;
-/**
- * @type {number|undefined}
- */
-let interval;
-/**
- * @type {number}
- */
-let remainingTime = 7000;
-/**
- * @type {number}
- */
-let startTime;
-
-/**
- * @param {NodeListOf<Element>} cards
- */
-function showNextCard(cards) {
-    const oldLoader = cards[currentIndex].querySelector('.change-loader');
-    oldLoader.classList.remove('restart-animation');
-
-    cards[currentIndex].classList.remove('setted');
-    currentIndex = (currentIndex + 1) % cards.length;
-    cards[currentIndex].classList.add('setted');
-
-    const newLoader = cards[currentIndex].querySelector('.change-loader');
-    void newLoader.offsetWidth;
-    newLoader.classList.add('restart-animation');
-
-    remainingTime = 7000;
-    startInterval(cards);
-}
-
-/**
- * @param {NodeListOf<Element>} cards
- */
-function startInterval(cards) {
-    startTime = Date.now();
-    interval = setTimeout(() => showNextCard(cards), remainingTime);
-}
-
-function stopInterval() {
-    clearTimeout(interval);
-    remainingTime -= Date.now() - startTime;
-}
-
 document.addEventListener('DOMContentLoaded', () => {
-    const cards = document.querySelectorAll('.gallery-wrapper .card-wrapper');
-    const initialLoader = cards[currentIndex].querySelector('.change-loader');
-    initialLoader.classList.add('restart-animation');
-    cards[currentIndex].classList.add('setted');
-    startInterval(cards);
 
-    cards.forEach(cardWrapper => {
-        const card = cardWrapper.querySelector('.card');
-        const loader = card.querySelector('.change-loader');
+    const galleries = document.querySelectorAll('.gallery-wrapper');
+    
+    galleries.forEach(gallery => {
+        let currentIndex = 0;
+        let interval;
+        let remainingTime = 7000;
+        let startTime;
 
-        card.addEventListener('mouseenter', stopInterval);
-        card.addEventListener('mouseleave', () => startInterval(cards));
+        const cards = gallery.querySelectorAll('.card-wrapper');
+
+        function showNextCard() {
+            const oldLoader = cards[currentIndex].querySelector('.change-loader');
+            oldLoader.classList.remove('restart-animation');
+
+            cards[currentIndex].classList.remove('setted');
+            currentIndex = (currentIndex + 1) % cards.length;
+            cards[currentIndex].classList.add('setted');
+
+            const newLoader = cards[currentIndex].querySelector('.change-loader');
+            void newLoader.offsetWidth;
+            newLoader.classList.add('restart-animation');
+
+            remainingTime = 7000;
+            startInterval();
+        }
+
+        function startInterval() {
+            startTime = Date.now();
+            interval = setTimeout(() => showNextCard(), remainingTime);
+        }
+
+        function stopInterval() {
+            clearTimeout(interval);
+            remainingTime -= Date.now() - startTime;
+        }
+
+        const initialLoader = cards[currentIndex].querySelector('.change-loader');
+        initialLoader.classList.add('restart-animation');
+        cards[currentIndex].classList.add('setted');
+        startInterval();
+
+        cards.forEach(cardWrapper => {
+            const card = cardWrapper.querySelector('.card');
+
+            card.addEventListener('mouseenter', stopInterval);
+            card.addEventListener('mouseleave', startInterval);
+        });
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    startInterval();
+                } else {
+                    stopInterval();
+                }
+            });
+        });
+
+        observer.observe(gallery);
     });
 });

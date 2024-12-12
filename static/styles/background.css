@@ -1,3 +1,14 @@
+* { box-sizing: border-box; }
+
+main{
+    width: 100vw;
+    display: flex;
+    pointer-events: auto;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
 .background {
     display: flex;
     width: 100%;
@@ -31,10 +42,4 @@
 
 .content-wrapper { 
     display: flex; 
-    flex-direction: column; 
-    min-height: 100vh; 
 } 
-
-main { 
-    flex: 1;
-}
