@@ -1,14 +1,14 @@
 from django.contrib import admin
-from .models import Post, Section
+from .models import Post,  BlogSection
 
-class SectionInline(admin.TabularInline):
-    model = Section
+class  BlogSectionInline(admin.TabularInline):
+    model =  BlogSection
     extra = 1
 
 
 class PostAdmin(admin.ModelAdmin):
-    inlines = [SectionInline]
+    inlines = [ BlogSectionInline]
 
 
 admin.site.register(Post, PostAdmin)
-admin.site.register(Section)
+admin.site.register( BlogSection)

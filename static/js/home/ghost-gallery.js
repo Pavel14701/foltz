@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const cards = gallery.querySelectorAll('.card-wrapper');
 
+// sourcery skip: avoid-function-declarations-in-blocks
         function showNextCard() {
             const oldLoader = cards[currentIndex].querySelector('.change-loader');
             oldLoader.classList.remove('restart-animation');

@@ -42,7 +42,7 @@ class SectionsBase(models.Model):
         filled_fields = [field for field in fields if field]
         if len(filled_fields) > 1:
             raise ValidationError('Можно выбрать только одно поле для заполнения.')
-        if len(filled_fields) == 0:
+        if not filled_fields:
             raise ValidationError('Необходимо заполнить хотя бы одно поле.')
 
     def save(self, *args, **kwargs):
