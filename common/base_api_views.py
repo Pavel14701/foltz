@@ -43,8 +43,19 @@ class BaseViewApiSet(viewsets.ModelViewSet, ABC):
         self.perform_destroy(instance)
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+    def list(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset())
+        if not queryset.exists():
+            return Response({'detail': 'No available objects'}, status=status.HTTP_204_NO_CONTENT)
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
 
-class BaseSectionSearchView(generics.RetrieveUpdateDestroyAPIView):
+
+class BaseSectionSearchView(viewsets.ModelViewSet):
     serializer_class = None
 
     @abstractmethod

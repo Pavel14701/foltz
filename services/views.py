@@ -22,5 +22,6 @@ def form_view(request:HttpRequest) -> HttpResponseRedirect|HttpResponse:
         form = ContactForm()
     return render(request, 'contact.html', {'form': form})
 
-def service_view(request:HttpRequest) -> HttpResponse:
+#TO DO Написать это блядство
+def services_view(request:HttpRequest) -> HttpResponse:
     pass

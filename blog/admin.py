@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Post,  BlogSection
+from .models import Blog,  BlogSection
 
 class  BlogSectionInline(admin.TabularInline):
     model =  BlogSection
@@ -7,8 +7,8 @@ class  BlogSectionInline(admin.TabularInline):
 
 
 class PostAdmin(admin.ModelAdmin):
-    inlines = [ BlogSectionInline]
+    inlines = [BlogSectionInline]
 
 
-admin.site.register(Post, PostAdmin)
-admin.site.register( BlogSection)
+admin.site.register(Blog, PostAdmin)
+admin.site.register(BlogSection)

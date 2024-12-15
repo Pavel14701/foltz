@@ -2,6 +2,7 @@ from bot.bot_instance import bot, configs
 import requests
 from telebot.types import Message
 
+
 class SiteMsgAPI:
     api_url = configs.site_api_url
     def get_messages(self):
@@ -20,6 +21,7 @@ class SiteMsgAPI:
         message = f"Сообщение от {sender}:\nТема: {subject}\n{body}"
         bot.send_message(configs.supergroup_id, message)
 
+
 def send_welcome(message:Message):
     if message.from_user.id in configs.admin_user_ids:
         return bot.reply_to(message, "Welcome Admin! Use comand \"/messages\" to get user messages.")
@@ -32,7 +34,9 @@ def fetch_messages(message:Message):
         for msg in messages:
             api.send_message_to_group(msg['name'], msg['subject'], msg['body'])
 
-def handle_all_messages(message:Message):
+configs.supergroup_id
+
+def handle_group_messages(message:Message):
     api = SiteMsgAPI()
     if message.reply_to_message and str(message.chat.id) in configs.admin_user_ids:
         original_message = message.reply_to_message.text

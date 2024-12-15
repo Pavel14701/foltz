@@ -2,7 +2,7 @@ from rest_framework import serializers
 from products.models import Product, ProductSection
 
 
-class SectionSerializer(serializers.ModelSerializer):
+class ProductSectionSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProductSection
         fields = '__all__'
@@ -29,7 +29,7 @@ class SectionSerializer(serializers.ModelSerializer):
 
 
 class ProductSerializer(serializers.ModelSerializer):
-    sections = SectionSerializer(many=True, read_only=True)
+    sections = ProductSectionSerializer(many=True, read_only=True)
 
     class Meta:
         model = Product

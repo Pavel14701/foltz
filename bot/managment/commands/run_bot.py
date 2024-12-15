@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand
 from bot.bot_instance import bot, configs
-from bot.handlers import send_welcome, fetch_messages, handle_all_messages
+from bot.handlers import send_welcome, fetch_messages, handle_group_messages
 
 class Command(BaseCommand):
     help = 'Run the Telegram bot and set webhook or use polling'
@@ -22,14 +22,14 @@ class Command(BaseCommand):
         })
         # Регистрация обработчика для всех остальных сообщений
         bot.add_message_handler({
-            'function': handle_all_messages,
+            'function': handle_group_messages,
             'filters': {
-                'func': lambda message: True
-            }
+                'func': lambda message: str(message.chat.id)==configs.supergroup_id
+            } 
         })
         if configs.use_webhook:
             # Установка вебхука
-            bot.set_webhook(url=configs.webhook_url)
+            bot.set_webhook(url=configs.bot_webhook)
             self.stdout.write(self.style.SUCCESS('Webhook set.'))
         else:
             # Использование пуллинга

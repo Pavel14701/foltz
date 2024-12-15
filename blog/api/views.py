@@ -1,15 +1,14 @@
-from rest_framework import status
-from rest_framework import serializers
+from rest_framework import status, serializers
 from rest_framework.response import Response
 from rest_framework.exceptions import NotFound
 from rest_framework.decorators import action
-from blog.models import Post, BlogSection
+from blog.models import Blog, BlogSection
 from blog.api.serializers import PostSerializer, SectionSerializer
 from common.base_api_views import BaseViewApiSet, BaseSectionSearchView
 
 
-class PostViewSet(BaseViewApiSet):
-    queryset = Post.objects.all()
+class BlogViewSet(BaseViewApiSet):
+    queryset = Blog.objects.all()
     serializer_class = PostSerializer
     search_fields = ['title', 'id']
 
@@ -21,13 +20,25 @@ class PostViewSet(BaseViewApiSet):
         return self.sections(request, pk)
 
 
-class SectionSearchView(BaseSectionSearchView):
+class BlogSectionSearchView(BaseSectionSearchView):
     serializer_class = SectionSerializer
+
+    def retrieve(self, request, post_id=None, section_id=None):
+        try: 
+            post = Blog.objects.get(id=post_id) 
+        except Blog.DoesNotExist:
+            return Response({'error': 'Post not found'}, status=404)
+        try: 
+            section = BlogSection.objects.get(id=section_id, post=post)
+        except BlogSection.DoesNotExist: 
+            return Response({'error': 'Section of post does not found'}, status=404)
+        serializer = SectionSerializer(section) 
+        return Response(serializer.data)
 
     def get_queryset(self):
         post_id = self.kwargs['post_id']
         section_id = self.kwargs['section_id']
-        post = Post.objects.filter(id=post_id).first()
+        post = Blog.objects.filter(id=post_id).first()
         if not post:
             raise NotFound("Post not found.")
         if not (section := BlogSection.objects.filter(post=post, id=section_id).first()):

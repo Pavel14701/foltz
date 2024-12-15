@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from blog.models import BlogSection, Post
+from blog.models import BlogSection, Blog
 
 class SectionSerializer(serializers.ModelSerializer):
     section_type = serializers.CharField(write_only=True)
@@ -34,5 +34,5 @@ class PostSerializer(serializers.ModelSerializer):
     sections = SectionSerializer(many=True, read_only=True)
 
     class Meta:
-        model = Post
+        model = Blog
         fields = '__all__'
