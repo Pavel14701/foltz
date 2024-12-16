@@ -7,7 +7,7 @@ class ProductSectionSerializer(serializers.ModelSerializer):
         model = ProductSection
         fields = '__all__'
 
-    def validate(self, data:dict) -> None|dict: 
+    def validate(self, data:dict) -> dict: 
         section_type = data.get('section_type')
         valid_section_types = ['image_section', 'youtube_url_section', 'content_section', 'subtitle_section']
         if section_type not in valid_section_types:

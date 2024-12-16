@@ -65,16 +65,3 @@ class ProductSectionSearchView(BaseSectionSearchView):
     @action(detail=True, methods=['post'])
     def move_service_section(self, request, *args, **kwargs):
         return self.move(request, *args, **kwargs)
-
-    def validate_section_type(self, request, section_type, serializer:ProductSectionSerializer):
-        if section_type == 'image_section' and serializer.validated_data.get('image'):
-            ProductSection.objects.create(product_id=request.data['product_id'], **serializer.validated_data)
-        elif section_type == 'youtube_url_section' and serializer.validated_data.get('youtube_url'):
-            ProductSection.objects.create(product_id=request.data['product_id'], **serializer.validated_data)
-        elif section_type == 'content_section' and serializer.validated_data.get('content'):
-            ProductSection.objects.create(product_id=request.data['product_id'], **serializer.validated_data)
-        elif section_type == 'subtitle_section' and serializer.validated_data.get('subtitle'):
-            ProductSection.objects.create(product_id=request.data['product_id'], **serializer.validated_data)
-        else:
-            raise serializers.ValidationError('Invalid section type or missing required fields.')
-

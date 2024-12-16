@@ -65,16 +65,3 @@ class ServiceSectionSearchView(BaseSectionSearchView):
     @action(detail=True, methods=['post'])
     def move_service_section(self, request, *args, **kwargs):
         return self.move(request, *args, **kwargs)
-
-    def validate_section_type(self, request, section_type, serializer:ServiceSectionSerializer):
-        if section_type == 'image_section' and serializer.validated_data.get('image'):
-            ServiceSection.objects.create(post_id=request.data['service_id'], **serializer.validated_data)
-        elif section_type == 'youtube_url_section' and serializer.validated_data.get('youtube_url'):
-            ServiceSection.objects.create(post_id=request.data['service_id'], **serializer.validated_data)
-        elif section_type == 'content_section' and serializer.validated_data.get('content'):
-            ServiceSection.objects.create(post_id=request.data['service_id'], **serializer.validated_data)
-        elif section_type == 'subtitle_section' and serializer.validated_data.get('subtitle'):
-            ServiceSection.objects.create(post_id=request.data['service_id'], **serializer.validated_data)
-        else:
-            raise serializers.ValidationError('Invalid section type or missing required fields.')
-

@@ -65,15 +65,3 @@ class BlogSectionSearchView(BaseSectionSearchView):
     @action(detail=True, methods=['post'])
     def move_post_section(self, request, *args, **kwargs):
         return self.move(request, *args, **kwargs)
-
-    def validate_section_type(self, request, section_type, serializer:SectionSerializer):
-        if section_type == 'image_section' and serializer.validated_data.get('image'):
-            BlogSection.objects.create(post_id=request.data['post_id'], **serializer.validated_data)
-        elif section_type == 'youtube_url_section' and serializer.validated_data.get('youtube_url'):
-            BlogSection.objects.create(post_id=request.data['post_id'], **serializer.validated_data)
-        elif section_type == 'content_section' and serializer.validated_data.get('content'):
-            BlogSection.objects.create(post_id=request.data['post_id'], **serializer.validated_data)
-        elif section_type == 'subtitle_section' and serializer.validated_data.get('subtitle'):
-            BlogSection.objects.create(post_id=request.data['post_id'], **serializer.validated_data)
-        else:
-            raise serializers.ValidationError('Invalid section type or missing required fields.')

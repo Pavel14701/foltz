@@ -24,7 +24,7 @@ class Command(BaseCommand):
         bot.add_message_handler({
             'function': handle_group_messages,
             'filters': {
-                'func': lambda message: str(message.chat.id)==configs.supergroup_id
+                'func': lambda message: message.chat.id == configs.supergroup_id
             } 
         })
         if configs.use_webhook:

@@ -4,9 +4,18 @@ from rest_framework.response import Response
 from rest_framework import status
 from user.models import Message
 from user.api.serializers import MessageSerializer
+from rest_framework.pagination import PageNumberPagination  
+
+
+class StandardResultsSetPagination(PageNumberPagination):  
+    page_size = 100  
+    page_size_query_param = 'page_size'  
+    max_page_size = 1000  
 
 
 class MessageListView(APIView):
+    pagination_class = StandardResultsSetPagination
+
     def get(self, request: Request) -> Response:
         messages = Message.objects.all()
         serializer = MessageSerializer(messages, many=True)

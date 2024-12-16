@@ -140,10 +140,5 @@ class BaseSectionSearchView(viewsets.ModelViewSet):
             return Response({'error': 'Section type is required'}, status=status.HTTP_400_BAD_REQUEST)
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        self.validate_section_type(request, section_type, serializer)
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
-
-    @abstractmethod
-    def validate_section_type(self, request, section_type, serializer):
-        pass
