@@ -5,7 +5,7 @@ from common.dto import FormData
 from common.aplications import SendAplications
 
 
-def services_view(request:HttpRequest) -> HttpResponseRedirect|HttpResponse:
+def form_view(request:HttpRequest) -> HttpResponseRedirect|HttpResponse:
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
@@ -21,3 +21,7 @@ def services_view(request:HttpRequest) -> HttpResponseRedirect|HttpResponse:
     else:
         form = ContactForm()
     return render(request, 'contact.html', {'form': form})
+
+#TO DO Написать это блядство
+def services_view(request:HttpRequest) -> HttpResponse:
+    pass

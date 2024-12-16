@@ -4,26 +4,139 @@
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'styles/home/gallery.css' %}">
 <link rel="stylesheet" href="{% static 'styles/home/benefits.css' %}">
+<link rel="stylesheet" href="{% static 'styles/home/grid-gallery.css' %}">
 {% endblock %}
 {% block extra_js %}
 <script type="text/javascript" src="{% static 'js/home/bg_image.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/home/ghost-gallery.js' %}"></script>
+
 {% endblock %}
 {% block content %}
 <div class="background" data-display="flex"></div>
 <!-- end gallery -->
-<section class="benefit hero">
-    <div class="card hero-card">
-        <div class="card-content ">
-            <div class="card-top">
-                <span class="card-title">05.<br>
-                    <h1>Hero block</h1>
-                </span>
+<section class="benefit hero" >
+    <div class="card hero-card grid-gallery">
+        <div class="grid">
+            <div class="row">
+                <div class="row__item">
+                    <div id="row__item1" class="row__item__iner"></div>
+                </div>
+                <div class="row__item">
+                    <div id="row__item2" class="row__item__iner"></div>
+                </div>
+                <div class="row__item">
+                    <div id="row__item3" class="row__item__iner"></div>
+                </div>
+                <div class="row__item">
+                    <div id="row__item4" class="row__item__iner"></div>
+                </div>
+                <div class="row__item">
+                    <div id="row__item5" class="row__item__iner"></div>
+                </div>
+                <div class="row__item">
+                    <div id="row__item6" class="row__item__iner"></div>
+                </div>
+                <div class="row__item">
+                    <div id="row__item7" class="row__item__iner"></div>
+                </div>
+            </div>
+            <div class="row row-reverse">
+                <div class="row__item">
+                    <div id="row__item8" class="row__item__iner"></div>
+                </div>
+                <div class="row__item">
+                    <div id="row__item9" class="row__item__iner"></div>
+                </div>
+                <div class="row__item">
+                    <div id="row__item10" class="row__item__iner"></div>
+                </div>
+                <div class="row__item">
+                    <div id="row__item11" class="row__item__iner"></div>
+                </div>
+                <div class="row__item">
+                    <div id="row__item12" class="row__item__iner"></div>
+                </div>
+                <div class="row__item">
+                    <div id="row__item13" class="row__item__iner"></div>
+                </div>
+                <div class="row__item">
+                    <div id="row__item14" class="row__item__iner"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="row__item">
+                    <div id="row__item15" class="row__item__iner">
+                    </div>
+                </div>
+                <div class="row__item">
+                    <div id="row__item16" class="row__item__iner"></div>
+                </div>
+                <div class="row__item">
+                    <div id="row__item17" class="row__item__iner"></div>
+                </div>
+                <div class="row__item">
+                    <div id="row__item18" class="row__item__iner"></div>
+                </div>
+                <div class="row__item">
+                    <div id="row__item19" class="row__item__iner"></div>
+                </div>
+                <div class="row__item">
+                    <div id="row__item20" class="row__item__iner"></div>
+                </div>
+                <div class="row__item">
+                    <div id="row__item21" class="row__item__iner"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="row__item">
+                    <div id="row__item22" class="row__item__iner"></div>
+                </div>
+                <div class="row__item">
+                    <div id="row__item23" class="row__item__iner"></div>
+                </div>
+                <div class="row__item">
+                    <div id="row__item24" class="row__item__iner"></div>
+                </div>
+                <div class="row__item">
+                    <div id="row__item25" class="row__item__iner"></div>
+                </div>
+                <div class="row__item">
+                    <div id="row__item26" class="row__item__iner"></div>
+                </div>
+                <div class="row__item">
+                    <div id="row__item27" class="row__item__iner"></div>
+                </div>
+                <div class="row__item">
+                    <div id="row__item28" class="row__item__iner"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="row__item">
+                    <div id="row__item29" class="row__item__iner"></div>
+                </div>
+                <div class="row__item">
+                    <div class="row__item__iner"></div>
+                </div>
+                <div id="row__item31" class="row__item">
+                    <div id="row__item31" class="row__item__iner"></div>
+                </div>
+                <div class="row__item">
+                    <div id="row__item32" class="row__item__iner"></div>
+                </div>
+                <div class="row__item">
+                    <div id="row__item33" class="row__item__iner"></div>
+                </div>
+                <div class="row__item">
+                    <div id="row__item34" class="row__item__iner"></div>
+                </div>
+                <div class="row__item">
+                    <div id="row__item35" class="row__item__iner"></div>
+                </div>
             </div>
         </div>
     </div>
 </section>
-<section class="benefit">
+<section class="benefit" >
         <div class="card-large card">
             <div class="card-content ">
                 <div class="card-top">
@@ -44,7 +157,7 @@
         </div>
 </section>
 
-<section class="gallery-wrapper">
+<section class="gallery-wrapper" >
     <div class="card-wrapper">
         <div class="card need-background-image" data-image-name="manitoo_pogr.jpg" data-image-back-pos="right">
             <div class="card-content">
@@ -60,14 +173,13 @@
                     <div class="change-loader"></div>
                     <svg width="32" viewBox="0 -960 960 960" height="32" xmlns="http://www.w3.org/2000/svg"><path d="M226-160q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19ZM226-414q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19ZM226-668q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Z"></path>
                     </svg>
-                    <a href="{% url 'services:services' %}">
-                        <button class="more-button">
-                            <svg viewBox="0 0 16 16" class="bi bi-lightning-charge-fill" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"></path>
-                            </svg>
-                            <span class="span">подробнее</span>
-                        </button>
-                    </a>
+                    
+                    <button class="more-button">
+                        <svg viewBox="0 0 16 16" class="bi bi-lightning-charge-fill" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"></path>
+                        </svg>
+                        <a class="span" href="{% url 'services:services' %}">подробнее</a>
+                    </button>
                 </div>
             </div>
         </div>
@@ -87,14 +199,12 @@
                     <div class="change-loader"></div>
                     <svg width="32" viewBox="0 -960 960 960" height="32" xmlns="http://www.w3.org/2000/svg"><path d="M226-160q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19ZM226-414q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19ZM226-668q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Z"></path>
                     </svg>
-                    <a href="{% url 'services:services' %}">
-                        <button class="more-button">
-                            <svg viewBox="0 0 16 16" class="bi bi-lightning-charge-fill" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"></path>
-                            </svg>
-                            <span class="span">подробнее</span>
-                        </button>
-                    </a>
+                    <button class="more-button">
+                        <svg viewBox="0 0 16 16" class="bi bi-lightning-charge-fill" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"></path>
+                        </svg>
+                        <a class="span" href="{% url 'services:services' %}">подробнее</a>
+                    </button>
                 </div>
             </div>
         </div>
@@ -114,16 +224,12 @@
                     <div class="change-loader"></div>
                     <svg width="32" viewBox="0 -960 960 960" height="32" xmlns="http://www.w3.org/2000/svg"><path d="M226-160q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19ZM226-414q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19ZM226-668q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Z"></path>
                     </svg>
-                    <a href="{% url 'services:services' %}">
-                        <a href="{% url 'services:services' %}">
-                            <button class="more-button">
-                                <svg viewBox="0 0 16 16" class="bi bi-lightning-charge-fill" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"></path>
-                                </svg>
-                                <span class="span">подробнее</span>
-                            </button>
-                        </a>
-                    </a>
+                    <button class="more-button">
+                        <svg viewBox="0 0 16 16" class="bi bi-lightning-charge-fill" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"></path>
+                        </svg>
+                        <a class="span" href="{% url 'services:services' %}">подробнее</a>
+                    </button>
                 </div>
             </div>
         </div>
@@ -143,14 +249,12 @@
                     <div class="change-loader"></div>
                     <svg width="32" viewBox="0 -960 960 960" height="32" xmlns="http://www.w3.org/2000/svg"><path d="M226-160q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19ZM226-414q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19ZM226-668q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Z"></path>
                     </svg>
-                    <a href="{% url 'services:services' %}">
-                        <button class="more-button">
-                            <svg viewBox="0 0 16 16" class="bi bi-lightning-charge-fill" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"></path>
-                            </svg>
-                            <span class="span">подробнее</span>
-                        </button>
-                    </a>
+                    <button class="more-button">
+                        <svg viewBox="0 0 16 16" class="bi bi-lightning-charge-fill" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"></path>
+                        </svg>
+                        <a class="span" href="{% url 'services:services' %}">подробнее</a>
+                    </button>
                 </div>
             </div>
         </div>
@@ -193,14 +297,12 @@
                     <div class="change-loader"></div>
                     <svg width="32" viewBox="0 -960 960 960" height="32" xmlns="http://www.w3.org/2000/svg"><path d="M226-160q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19ZM226-414q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19ZM226-668q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Z"></path>
                     </svg>
-                    <a href="{% url 'services:services' %}">
-                        <button class="more-button">
-                            <svg viewBox="0 0 16 16" class="bi bi-lightning-charge-fill" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"></path>
-                            </svg>
-                            <span class="span">подробнее</span>
-                        </button>
-                    </a>
+                    <button class="more-button">
+                        <svg viewBox="0 0 16 16" class="bi bi-lightning-charge-fill" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"></path>
+                        </svg>
+                        <a class="span" href="{% url 'services:services' %}">подробнее</a>
+                    </button>
                 </div>
             </div>
         </div>
@@ -220,14 +322,12 @@
                     <div class="change-loader"></div>
                     <svg width="32" viewBox="0 -960 960 960" height="32" xmlns="http://www.w3.org/2000/svg"><path d="M226-160q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19ZM226-414q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19ZM226-668q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Z"></path>
                     </svg>
-                    <a href="{% url 'services:services' %}">
-                        <button class="more-button">
-                            <svg viewBox="0 0 16 16" class="bi bi-lightning-charge-fill" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"></path>
-                            </svg>
-                            <span class="span">подробнее</span>
-                        </button>
-                    </a>
+                    <button class="more-button">
+                        <svg viewBox="0 0 16 16" class="bi bi-lightning-charge-fill" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"></path>
+                        </svg>
+                        <a class="span" href="{% url 'services:services' %}">подробнее</a>
+                    </button>
                 </div>
             </div>
         </div>
@@ -247,16 +347,12 @@
                     <div class="change-loader"></div>
                     <svg width="32" viewBox="0 -960 960 960" height="32" xmlns="http://www.w3.org/2000/svg"><path d="M226-160q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19ZM226-414q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19ZM226-668q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Z"></path>
                     </svg>
-                    <a href="{% url 'services:services' %}">
-                        <a href="{% url 'services:services' %}">
-                            <button class="more-button">
-                                <svg viewBox="0 0 16 16" class="bi bi-lightning-charge-fill" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"></path>
-                                </svg>
-                                <span class="span">подробнее</span>
-                            </button>
-                        </a>
-                    </a>
+                    <button class="more-button">
+                        <svg viewBox="0 0 16 16" class="bi bi-lightning-charge-fill" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"></path>
+                        </svg>
+                        <a class="span" href="{% url 'services:services' %}">подробнее</a>
+                    </button>
                 </div>
             </div>
         </div>
@@ -276,25 +372,26 @@
                     <div class="change-loader"></div>
                     <svg width="32" viewBox="0 -960 960 960" height="32" xmlns="http://www.w3.org/2000/svg"><path d="M226-160q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19ZM226-414q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19ZM226-668q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Z"></path>
                     </svg>
-                    <a href="{% url 'services:services' %}">
-                        <button class="more-button">
-                            <svg viewBox="0 0 16 16" class="bi bi-lightning-charge-fill" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"></path>
-                            </svg>
-                            <span class="span">подробнее</span>
-                        </button>
-                    </a>
+                    <button class="more-button">
+                        <svg viewBox="0 0 16 16" class="bi bi-lightning-charge-fill" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"></path>
+                        </svg>
+                        <a class="span" href="{% url 'services:services' %}">подробнее</a>
+                    </button>
                 </div>
             </div>
         </div>
     </div>
 </section>
+<section class="benefit hero map">
+    <div class="card map-card">
+        <div class="card-content ">
+            <div class="card-top">
+                <span class="card-title">05.<br>
+                    <h1>Hero block</h1>
+                </span>
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock %}
-
-
-
-
-
-
-
-

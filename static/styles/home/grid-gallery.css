@@ -1,0 +1,303 @@
+:root {
+    --angle: -15deg;
+}
+.grid-gallery{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow:hidden;
+    background: black;
+}
+.grid {
+    gap: 1rem;
+    flex: none;
+    width: 175%;
+    height: 175%;
+    display: grid;
+    grid-template-rows: repeat(5, 1fr);
+    grid-template-columns: 100%;
+    transform: rotate(var(--angle));
+    transform-origin: center center;
+}
+
+.row {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(7, 1fr);
+    will-change: transform, filter;
+}
+
+.row__item{
+    position: relative;
+}
+
+.row__item__iner{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.row__item__iner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0; 
+    background-color: rgba(0, 0, 0, 0.7); /* Полупрозрачный черный цвет */ 
+    border-radius: 10px; /* Сохранение закругленных углов */ 
+}
+
+#row__item1{
+    background-image: url('manitoo_pogr.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#row__item2{
+    background-image: url('manitoo_pogr.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#row__item3{
+    background-image: url('manitoo_pogr.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#row__item4{
+    background-image: url('manitoo_pogr.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#row__item5{
+    background-image: url('manitoo_pogr.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#row__item6{
+    background-image: url('manitoo_pogr.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#row__item7{
+    background-image: url('manitoo_pogr.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#row__item7{
+    background-image: url('manitoo_pogr.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#row__item8{
+    background-image: url('manitoo_pogr.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#row__item9{
+    background-image: url('manitoo_pogr.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#row__item10{
+    background-image: url('manitoo_pogr.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#row__item11{
+    background-image: url('manitoo_pogr.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#row__item12{
+    background-image: url('manitoo_pogr.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#row__item13{
+    background-image: url('manitoo_pogr.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#row__item14{
+    background-image: url('manitoo_pogr.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#row__item15{
+    background-image: url('manitoo_pogr.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#row__item16{
+    background-image: url('manitoo_pogr.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#row__item17{
+    background-image: url('manitoo_pogr.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#row__item18{
+    background-image: url('manitoo_pogr.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#row__item19{
+    background-image: url('manitoo_pogr.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#row__item20{
+    background-image: url('manitoo_pogr.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#row__item21{
+    background-image: url('manitoo_pogr.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#row__item22{
+    background-image: url('manitoo_pogr.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#row__item23{
+    background-image: url('manitoo_pogr.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#row__item24{
+    background-image: url('manitoo_pogr.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#row__item25{
+    background-image: url('manitoo_pogr.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#row__item26{
+    background-image: url('manitoo_pogr.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#row__item27{
+    background-image: url('manitoo_pogr.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#row__item28{
+    background-image: url('manitoo_pogr.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#row__item29{
+    background-image: url('manitoo_pogr.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#row__item30{
+    background-image: url('manitoo_pogr.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#row__item31{
+    background-image: url('manitoo_pogr.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#row__item32{
+    background-image: url('manitoo_pogr.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#row__item33{
+    background-image: url('manitoo_pogr.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#row__item34{
+    background-image: url('manitoo_pogr.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#row__item35{
+    background-image: url('manitoo_pogr.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}

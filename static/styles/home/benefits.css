@@ -30,3 +30,12 @@
 .hero-card{
     height:80vh;
 }
+
+.map{
+    margin-top:0;
+    height: 50vh;
+}
+
+.map-card{
+    height:40vh;
+}

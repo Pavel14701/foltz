@@ -1,8 +1,8 @@
 from django.contrib import admin
-from .models import Service, Section
+from .models import Service, ServiceSection
 
 class SectionInline(admin.TabularInline):
-    model = Section
+    model = ServiceSection
     extra = 1
 
 class ServiceAdmin(admin.ModelAdmin):
@@ -16,4 +16,4 @@ class SectionAdmin(admin.ModelAdmin):
     list_filter = ('service',)
 
 admin.site.register(Service, ServiceAdmin)
-admin.site.register(Section, SectionAdmin)
+admin.site.register(ServiceSection, SectionAdmin)

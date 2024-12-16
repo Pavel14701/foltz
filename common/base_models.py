@@ -33,8 +33,11 @@ class SectionsBase(models.Model):
         ordering = ['order']
 
     def __str__(self):
-        if self.__class__.__name__ == 'Services':
+        classname = self.__class__.__name__
+        if classname == 'Service':
             return f"{self.service.title} - {self.order}"
+        elif classname == 'Product':
+            return f"{self.product.title} - {self.order}"
         return f"{self.post.title} - {self.order}"
 
     def clean(self):
@@ -42,7 +45,7 @@ class SectionsBase(models.Model):
         filled_fields = [field for field in fields if field]
         if len(filled_fields) > 1:
             raise ValidationError('Можно выбрать только одно поле для заполнения.')
-        if len(filled_fields) == 0:
+        if not filled_fields:
             raise ValidationError('Необходимо заполнить хотя бы одно поле.')
 
     def save(self, *args, **kwargs):

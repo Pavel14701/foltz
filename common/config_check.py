@@ -19,8 +19,8 @@ class Configs:
             raise ValueError(f"Environment variable '{key.upper()}' is not set")
         try:
             return self.type_map[_type](value)
-        except KeyError:
-            raise ValueError(f"Unsupported type for variable '{key.upper()}'")
+        except KeyError as e:
+            raise ValueError(f"Unsupported type for variable '{key.upper()}'") from e
 
     def get_param_list(self, key: str, _type: str = 'str') -> list[str|int|bool|float]|str|int|bool|float:
         if not (values:= os.getenv(f'{key.upper()}')):
@@ -30,5 +30,5 @@ class Configs:
                 return [self.type_map[_type](value) for value in values.split(',')]
             else:
                 return self.type_map[_type](values)
-        except KeyError:
-            raise ValueError(f"Unsupported type for variable '{key.upper()}'")
+        except KeyError as e:
+            raise ValueError(f"Unsupported type for variable '{key.upper()}'") from e
