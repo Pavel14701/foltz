@@ -1,0 +1,42 @@
+#Django secret phrase
+DJANGO_SECRET=
+SITE_BASE_URL=
+
+
+#Cache settings
+REDIS_HOST=
+REDIS_PORT=
+REDIS_DB_SESSION=
+REDIS_DB_CACHE=
+CLIENT_CACHE_MAX_AGE=
+
+#Database settings
+POSTGRES_DB_NAME=
+POSTGRES_DB_USER=
+POSTGRES_DB_PASSWORD=
+POSTGRES_DB_HOST=
+POSTGRES_DB_PORT=
+
+#Localization settings
+TIME_ZONE=UTC
+LANGUAGE_CODE=en-us
+
+# Email configs
+EMAIL_SEND_FROM=
+EMAIL_HOST_PASSWORD=
+EMAIL_PORT=
+# Converted to bool
+EMAIL_USE_TLS=1
+
+# Utils
+# Add your api website url
+YOUR_SITE_API_URL=
+#Your bot tiken
+BOT_TOKEN=
+#Add bot to this group with admin rights
+SUPERGROUP_ID=
+ADMIN_IDS=
+USE_WEBHOOK=0
+BOT_WEBHOOK=
+SITE_ADMIN_NAME=
+SITE_ADMIN_PASSWORD=
