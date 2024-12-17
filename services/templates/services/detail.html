@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ service.title }}</title>
+</head>
+<body>
+    <h1>{{ service.title }}</h1>
+    <img src="{{ service.preview_image.url }}" alt="{{ service.title }}">
+    <p>Цена: {{ service.price }}</p>
+    <p>Категория: {{ category.name }}</p>
+    <p>Метки: 
+        {% for tag in tags %}
+            <span>{{ tag.name }}</span>{% if not forloop.last %}, {% endif %}
+        {% endfor %}
+    </p>
+
+    <h2>Секции</h2>
+    <ul>
+        {% for section in sections %}
+            <li>
+                {% if section.image %}
+                    <img src="{{ section.image.url }}" alt="Section Image">
+                {% endif %}
+                {% if section.youtube_url %}
+                    <p>ютуб <a href="{{ section.youtube_url }}">{{ section.youtube_url }}</a></p>
+                {% endif %}
+                {% if section.subtitle %}
+                    <h3>{{ section.subtitle }}</h3>
+                {% endif %}
+                {% if section.content %}
+                    <p>{{ section.content }}</p>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

@@ -3,8 +3,8 @@ from django.core.exceptions import ValidationError
 
 
 class ObjectBaseModel(models.Model):
-    preview_text = models.TextField(max_length=500, blank=True, null=False)
-    preview_video_url = models.URLField(blank=True, null=True)
+    preview_text = models.TextField('Краткое описание(превью)', max_length=500, blank=True, null=False)
+    preview_video_url = models.URLField('Видео youtube(превью)', blank=True, null=True)
 
     def __str__(self):
         return self.title
@@ -24,9 +24,9 @@ class ObjectBaseModel(models.Model):
 
 class SectionsBase(models.Model):
     order = models.PositiveIntegerField()
-    subtitle = models.CharField(max_length=200, blank=True, null=True)
-    content = models.TextField(blank=True, null=True)
-    youtube_url = models.URLField(blank=True, null=True)
+    subtitle = models.CharField('Подзаголовок', max_length=200, blank=True, null=True)
+    content = models.TextField('Блок текста', blank=True, null=True)
+    youtube_url = models.URLField('Видео youtube', blank=True, null=True)
 
     class Meta:
         abstract = True

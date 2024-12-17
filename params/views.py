@@ -6,6 +6,7 @@ from django.views.decorators.http import require_http_methods
 
 
 def home(request:HttpRequest) -> HttpResponse: 
+    
     return render(request, 'home.html')
 
 def about(request:HttpRequest) -> HttpResponse: 
@@ -27,5 +28,6 @@ def robots_txt(request:HttpRequest) -> HttpResponse:
     lines = [
         "User-agent: *",
         "Disallow: /admin/",
+        "Disallow: /api/"
     ]
     return HttpResponse("\n".join(lines), content_type="text/plain")

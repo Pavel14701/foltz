@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Home</title>
+    <link rel="stylesheet" href="{% static 'fonts/fonts.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/base/header.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/base/background.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/base/loader.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/base/footer.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/services/search_form.css' %}">
+    <script type="text/javascript" src="{% static 'js/loader.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="{% static 'js/search.js' %}"></script>
+</head>
+<body class = "loading">
+    {% include 'loader.html' %}
+    {% include 'header.html' %}
+    <h1>Service Home</h1>
+    {% include 'services/search_form.html' %}
+    {% if not search_performed %}
+        {% include 'services/home.html' %}
+    {% else %}
+        {% include 'services/search_results.html' %}
+    {% endif %}
+    {% include 'footer.html' %}
+</body>
+</html>
+

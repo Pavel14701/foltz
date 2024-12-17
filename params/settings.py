@@ -30,12 +30,15 @@ INSTALLED_APPS = [
     'django.contrib.sitemaps',
 
     'blog.apps.BlogConfig',
-    'forms.apps.FormsConfig',
+    'site_forms.apps.SiteFormsConfig',
     'services.apps.ServicesConfig',
     'user.apps.UserConfig',
     'common.apps.CommonConfig',
     'products.apps.ProductsConfig',
 
+    'dal', 
+    'dal_select2',
+    'django_filters',
     'rest_framework',
     'csp',
     'compressor',
@@ -43,7 +46,7 @@ INSTALLED_APPS = [
 
 CSP_DEFAULT_SRC = ("'self'",) 
 CSP_STYLE_SRC = ("'self'", 'https://fonts.googleapis.com')
-CSP_SCRIPT_SRC = ("'self'", 'https://cdnjs.cloudflare.com')
+CSP_SCRIPT_SRC = ("'self'", 'https://cdnjs.cloudflare.com', 'https://code.jquery.com')
 CSP_IMG_SRC = ("'self'",) 
 CSP_MEDIA_SRC = ("'self'",)
 
@@ -62,7 +65,7 @@ MIDDLEWARE = [
     'csp.middleware.CSPMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     
-    'common.custom_error_middleware.CustomErrorMiddleware'
+    #'common.custom_error_middleware.CustomErrorMiddleware'
 ]
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
@@ -76,6 +79,10 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             os.path.join(BASE_DIR, 'templates'),
+            os.path.join(BASE_DIR, 'blog/templates'),
+            os.path.join(BASE_DIR, 'services/templates'),
+            os.path.join(BASE_DIR, 'products/templates'),
+            os.path.join(BASE_DIR, 'user/templates')
         ],
         'APP_DIRS': True,
         'OPTIONS': {

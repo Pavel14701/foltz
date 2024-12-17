@@ -1,0 +1,20 @@
+/* Добавьте этот код в ваш файл CSS */
+.suggestions-box {
+    border: 1px solid #ccc;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.suggestion-item {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.suggestion-item:hover {
+    background-color: #f0f0f0;
+}
+
+.no-results {
+    color: red;
+    cursor: default;
+}

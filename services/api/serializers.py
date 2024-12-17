@@ -30,10 +30,10 @@ class ServiceSectionSerializer(serializers.ModelSerializer):
         return data
 
 
-
 class ServiceSerializer(serializers.ModelSerializer):
-    sections = ServiceSectionSerializer(many=True, read_only=True)
+    tags = serializers.StringRelatedField(many=True)
 
     class Meta:
         model = Service
-        fields = '__all__'
+        fields = ['id', 'title', 'preview_image', 'price', 'category', 'tag']
+

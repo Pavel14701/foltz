@@ -18,9 +18,12 @@ urlpatterns = [
     path('about/', views.about, name='about'),
     path('privacy_policy/', views.privacy_policy, name='privacy'),
     path('terms_of_service/', views.terms_of_service, name='terms_of_service'),
+
+    path('', include('site_forms.urls', namespace='site_forms')),
+    path('', include('blog.urls', namespace='blog')),
+    path('', include('services.urls', namespace='services')),
+
     path('get-image-url/<str:image_name>/', views.get_image_url, name='get_image_url'),
-    path('blog/', include('blog.urls', namespace='blog')),
-    path('services/', include('services.urls', namespace='services')),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
     path('robots.txt', views.robots_txt, name='robots_txt'),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),

@@ -16,77 +16,16 @@
         {% block extra_js %}{% endblock %}
     </head>
     <body class="loading">
-        <div id="loading" class="preloader">
-            <div class="loader"></div>
-        </div>
+        {% include 'loader.html' %}
         <div class="content-wrapper">
             <div id="custom-cursor">🔧</div>
-            <div class="content header" data-display="flex">
-                <div class="logo">
-                    <img url="{% url 'home' %}" class="logo-img" src="{% static 'images/main_logo.webp' %}" alt="Агросервис">
-                    <img url="{% url 'home' %}" class="logo-text" src="{% static 'images/logo_text_white.webp' %}" alt="Foltz">
-                </div>
-                <div class="nav-buttons">
-                    <button class="header-button">
-                        <svg viewBox="0 0 16 16" class="bi bi-lightning-charge-fill" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"></path>
-                        </svg>
-                        <a class="span" href="{% url 'services:services' %}">УСЛУГИ</a>
-                    </button>
-                    <button class="header-button">
-                        <svg viewBox="0 0 16 16" class="bi bi-lightning-charge-fill" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"></path>
-                        </svg>
-                        <a class="span" href="{% url 'about' %}">О НАС</a>
-                    </button>
-                    <button class="header-button">
-                        <svg viewBox="0 0 16 16" class="bi bi-lightning-charge-fill" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"></path>
-                        </svg>
-                        <a class="span" href="{% url 'blog:blog' %}">БЛОГ</a>
-                    </button>
-                    <button class="header-button">
-                        <svg viewBox="0 0 16 16" class="bi bi-lightning-charge-fill" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"></path>
-                        </svg>
-                        <a class="span" href="{% url 'services:services' %}">КОНТАКТЫ</a>
-                    </button>
-                </div>
-                <div class="burger-menu">
-                    <div class="line"></div>
-                    <div class="line"></div>
-                    <div class="line"></div>
-                </div>
-                <div class="content header" data-display="flex">
-                    <div class="logo">Логотип</div>
-                    <div class="nav-buttons">
-                        <a href="{% url 'home' %}">Главная</a>
-                        <a href="{% url 'services:services' %}">Услуги</a>
-                        <a href="{% url 'about' %}">О нас</a>
-                        <a href="{% url 'blog:blog' %}">Блог</a>
-                    </div>
-                    <div class="burger-menu">
-                        <div class="line"></div>
-                        <div class="line"></div>
-                        <div class="line"></div>
-                    </div>
-                </div>
-            </div>
+            {% include 'header.html' %}
             <main>
             {% block content %}
             {% endblock %}
 
         </div>
     </main>
-    <div class="footer">
-        <div class="footer-content">
-            <p>© 2024 Your Company. Все права защищены.</p>
-            <div class="footer-links">
-                <a href="{% url 'privacy' %}">Политика конфиденциальности</a>
-                <a href="{% url 'terms_of_service' %}">Условия использования</a>
-                <a tel="+375295410647">+375(29) 541-06-47</a>
-            </div>
-        </div>
-    </div>
+    {% include 'footer.html' %}
     </body>
 </html>

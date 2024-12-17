@@ -1,16 +1,21 @@
-from rest_framework import status, serializers
+from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.exceptions import NotFound
 from rest_framework.decorators import action
 from services.models import Service, ServiceSection
 from services.api.serializers import ServiceSerializer, ServiceSectionSerializer
 from common.base_api_views import BaseViewApiSet, BaseSectionSearchView
+from rest_framework import  filters
+from django_filters.rest_framework import DjangoFilterBackend
+from services.utils import ServiceFilter
 
 
 class ServiceViewSet(BaseViewApiSet):
     queryset = Service.objects.all()
     serializer_class = ServiceSerializer
-    search_fields = ['title', 'id']
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter]
+    filterset_class = ServiceFilter
+    search_fields = ['title', 'id', 'category__name', 'tag__name']
 
     def get_section_serializer(self, sections, many):
         return ServiceSectionSerializer(sections, many)

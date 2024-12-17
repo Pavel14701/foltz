@@ -174,6 +174,25 @@ files = [
 django = "*"
 
 [[package]]
+name = "django-autocomplete-light"
+version = "3.11.0"
+description = "Fresh autocompletes for Django"
+optional = false
+python-versions = "*"
+files = [
+    {file = "django-autocomplete-light-3.11.0.tar.gz", hash = "sha256:212576a17e3308ef7ca77e280b86684167916d2091d4b73640f38845d9516328"},
+]
+
+[package.dependencies]
+django = ">=3.2"
+
+[package.extras]
+genericm2m = ["django-generic-m2m"]
+gfk = ["django-querysetsequence (>=0.11)"]
+nested = ["django-nested-admin (>=3.0.21)"]
+tags = ["django-taggit"]
+
+[[package]]
 name = "django-compressor"
 version = "4.5.1"
 description = "('Compresses linked and inline JavaScript or CSS into single cached files.',)"
@@ -207,6 +226,20 @@ Django = ">=3.2"
 [package.extras]
 jinja2 = ["jinja2 (>=2.9.6)"]
 tests = ["jinja2 (>=2.9.6)", "pytest", "pytest-cov", "pytest-django", "pytest-ruff"]
+
+[[package]]
+name = "django-filter"
+version = "24.3"
+description = "Django-filter is a reusable Django application for allowing users to filter querysets dynamically."
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "django_filter-24.3-py3-none-any.whl", hash = "sha256:c4852822928ce17fb699bcfccd644b3574f1a2d80aeb2b4ff4f16b02dd49dc64"},
+    {file = "django_filter-24.3.tar.gz", hash = "sha256:d8ccaf6732afd21ca0542f6733b11591030fa98669f8d15599b358e24a2cd9c3"},
+]
+
+[package.dependencies]
+Django = ">=4.2"
 
 [[package]]
 name = "django-redis"
@@ -708,4 +741,4 @@ brotli = ["brotli"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "9d6a713e282f7ea44e0ef01ec8fe2b3cec004c5b865e53e21b117f39c3e6f5be"
+content-hash = "d20f21f60efec17057b7775dfbc86b7971f62b1323ff632cfa6814319fbc4090"

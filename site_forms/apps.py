@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class FormsConfig(AppConfig):
+class SiteFormsConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'forms'
+    name = 'site_forms'

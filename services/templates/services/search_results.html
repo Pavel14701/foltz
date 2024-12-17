@@ -1,0 +1,16 @@
+<div id="search-results">
+    {% if services %}
+        <h2>Search Results:</h2>
+        <ul>
+            {% for service in services %}
+                <li>
+                    <h3>{{ service.title }}</h3>
+                    <p>Price: {{ service.price }}</p>
+                    <img src="{{ service.preview_image.url }}" alt="{{ service.title }}">
+                </li>
+            {% endfor %}
+        </ul>
+    {% elif search_performed %}
+        <p>No services found.</p>
+    {% endif %}
+</div>
