@@ -31,7 +31,7 @@ class ServiceFormView(View):
 
 
 class ServicesViews(View):
-    def get(self, request, *args, **kwargs): 
+    def get(self, request:HttpRequest, *args, **kwargs) -> HttpResponse|HttpResponseNotModified|JsonResponse: 
         action = kwargs.pop('action', None) 
         if action == 'get_service':
             return self.get_service(request, *args, **kwargs) 
@@ -41,10 +41,9 @@ class ServicesViews(View):
             return self.service_search(request, *args, **kwargs) 
         elif action == 'home_view':
             return self.home_view(request, *args, **kwargs)
-        return super().get(request, *args, **kwargs)
 
 
-    def get_service(self, request:HttpRequest, *args, **kwargs):
+    def get_service(self, request:HttpRequest, *args, **kwargs) -> JsonResponse:
         service = Service.objects.get(pk=kwargs['pk'])
         content = {
             'title': service.title,
@@ -63,7 +62,7 @@ class ServicesViews(View):
         return response
 
 
-    def get_service_details(self, request:HttpRequest, *args, **kwargs):
+    def get_service_details(self, request:HttpRequest, *args, **kwargs) -> HttpResponseNotModified|HttpResponse:
         service = get_object_or_404(Service, pk=kwargs['pk'])
         sections = service.service_section.all()
         etag_content = f"{service.title}-{service.preview_image}-{service.price}-{service.modified}"
@@ -84,6 +83,7 @@ class ServicesViews(View):
         return response
 
 
+    #TO DO Add subcategory in filter
     def service_search(self, request:HttpRequest) -> HttpResponse:
         title_query = request.GET.get('title', '')
         category_query = request.GET.get('category', '')
@@ -103,6 +103,7 @@ class ServicesViews(View):
         return render(request, 'services/base.html', context)
 
 
+    #TO DO Add subcategory in filter
     def home_view(self, request: HttpRequest) -> HttpResponseNotModified | HttpResponse:
         title_query = request.GET.get('title', '')
         category_query = request.GET.get('category', '')

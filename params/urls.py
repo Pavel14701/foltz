@@ -22,7 +22,9 @@ urlpatterns = [
 
     path('', include('site_forms.urls', namespace='site_forms')),
     path('blog/', include('blog.urls', namespace='blog')),
-    path('', include('services.urls', namespace='services')),
+    path('services/', include('services.urls', namespace='services')),
+    path('products/', include('products.urls', namespace='products')),
+
 
     path('get-image-url/<str:image_name>/', views.get_image_url, name='get_image_url'),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),

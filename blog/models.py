@@ -82,7 +82,7 @@ class BlogPost(ObjectBaseModel):
 
 class BlogPostSection(SectionsBase):
     post = models.ForeignKey(
-        to='BlogPost',
+        to=BlogPost,
         related_name='blog_section',
         on_delete=models.CASCADE,
         verbose_name='К какому посту относится?'
