@@ -1,15 +1,11 @@
 import graphene
 from graphql import GraphQLError
-from graphene_django.types import DjangoObjectType
-from services.models import Service, ServiceTags, ServiceSubCategory, ServiceCategory
-from site_api.utils import save_obj
-from site_api.schema_service.graphene_inputs import ServiceInput
-from site_api.schema_service.utils import save_service, validate_input_cat_subcat, add_tags, find_service, remove_tags
+from services.models import Service
+from site_api.schema_service.inputs import ServiceInput
+from site_api.schema_service.types import ServiceType
+from site_api.schema_service.utils import save_service,\
+    validate_input_cat_subcat, add_tags, find_service, remove_tags
 
-
-class ServiceType(DjangoObjectType):
-    class Meta:
-        model = Service
 
 
 class CreateService(graphene.Mutation):
@@ -21,9 +17,16 @@ class CreateService(graphene.Mutation):
 
     def mutate(self, info:any, _input: ServiceInput) -> 'CreateService':
         if Service.objects.filter(title=_input.service_title).exists():
-            raise GraphQLError("Service with this title already exists.")
+            raise GraphQLError(
+                "Service with this\
+                title already exists."
+            )
         if bool(_input.preview_video_url) == bool(_input.preview_image):
-            raise GraphQLError("Either preview_video_url or preview_image must be provided, but not both.")
+            raise GraphQLError(
+                "Either preview_video_url \
+                or preview_image must be \
+                provided, but not both."
+            )
         category, subcategory = validate_input_cat_subcat(_input) 
         service = save_service(_input, category=category, subcategory=subcategory)
         service = add_tags(_input, service)
@@ -42,7 +45,10 @@ class CreateMultipleServices(graphene.Mutation):
         services = []
         for _input in inputs:
             if Service.objects.filter(title=_input.service_title).exists():
-                raise GraphQLError("Service with this title already exists.")
+                raise GraphQLError(
+                    "Service with this \
+                    title already exists."
+                )
             category, subcategory = validate_input_cat_subcat(_input) 
             service = save_service(_input, category=category, subcategory=subcategory)
             service = add_tags(_input, service)
@@ -59,7 +65,11 @@ class UpdateService(graphene.Mutation):
 
     def mutate(self, info:any, _input:ServiceInput) -> 'UpdateService': 
         if _input.preview_video_url and _input.preview_image:
-            raise GraphQLError("Both preview_video_url and preview_image cannot be provided simultaneously.")
+            raise GraphQLError(
+                "Both preview_video_url and \
+                preview_image cannot be \
+                provided simultaneously."
+            )
         service = find_service(_input)
         category, subcategory = validate_input_cat_subcat(_input)
         service = save_service(_input, service, category, subcategory)
@@ -78,7 +88,11 @@ class UpdateMultipleServices(graphene.Mutation):
         services = []
         for _input in inputs:
             if _input.preview_video_url and _input.preview_image:
-                raise GraphQLError("Both preview_video_url and preview_image cannot be provided simultaneously.")
+                raise GraphQLError(
+                    "Both preview_video_url \
+                    and preview_image cannot \
+                    be provided simultaneously."
+                )
             service = find_service(_input)
             category, subcategory = validate_input_cat_subcat(_input)
             service = save_service(_input, service, category, subcategory)

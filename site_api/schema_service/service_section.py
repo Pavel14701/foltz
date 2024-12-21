@@ -1,7 +1,7 @@
 import graphene
 from graphene_django.types import DjangoObjectType
 from services.models import ServiceSection
-from site_api.schema_service.graphene_inputs import ServiceSectionInput
+from site_api.schema_service.inputs import ServiceSectionInput
 from site_api.schema_service.utils import find_service, find_service_section, null_section,\
     validate_section_input, save_section
 
@@ -101,7 +101,7 @@ class DeleteMultipleServiceSections(graphene.Mutation):
         return DeleteMultipleServiceSections(ok=True)
 
 
-class ServiceMutation(graphene.ObjectType):
+class ServiceSectionMutation(graphene.ObjectType):
     create_service_section = CreateServiceSection.Field()
     create_multiple_services = CreateMultipleServiceSections.Field()
     update_service = UpdateServiceSection.Field()

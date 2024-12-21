@@ -21,7 +21,6 @@ def save_obj(model_type:Model, command:dict[str, str], input:graphene.InputObjec
                 _object.preview_video_url = _field
             case 'preview_image' :
                 _object.preview_image = _field
-            case ''
             case _:
                 raise GraphQLError(f"Field {_field} not founded in model {model_type.__name__}")
     _object.save()

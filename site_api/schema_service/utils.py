@@ -1,9 +1,9 @@
 from services.models import ServiceSection, Service, ServiceCategory, ServiceSubCategory, ServiceTags
 from graphql import GraphQLError
-from site_api.schema_service.graphene_inputs import ServiceSectionInput, ServiceInput
+from site_api.schema_service.inputs import ServiceSectionInput, ServiceInput, ServiceSubCategoryInput
 
 
-def find_service(_input:'ServiceSectionInput'|'ServiceInput') -> Service:
+def find_service(_input:ServiceSectionInput|ServiceInput) -> Service:
     service = None
     if _input.service_pk:
         try:
@@ -20,7 +20,7 @@ def find_service(_input:'ServiceSectionInput'|'ServiceInput') -> Service:
     return service
 
 
-def find_service_section(_input:'ServiceSectionInput') -> ServiceSection:
+def find_service_section(_input:ServiceSectionInput) -> ServiceSection:
     service = find_service(_input)
     try:
         service_section = ServiceSection.objects.get(service=service, order=_input.old_order)
@@ -29,7 +29,7 @@ def find_service_section(_input:'ServiceSectionInput') -> ServiceSection:
     return service_section
 
 
-def validate_section_input(_input:'ServiceSectionInput') -> 'ServiceSectionInput':
+def validate_section_input(_input:ServiceSectionInput) -> ServiceSectionInput:
     filled_fields = [
         _input.subtitle, _input.content,
         _input.content, _input.youtube_url, 
@@ -51,7 +51,7 @@ def null_section(service_section:ServiceSection) -> ServiceSection:
     service_section.characteristics = None
     return service_section
 
-def save_section(_input:'ServiceSectionInput', section:ServiceSection=None, service:Service=None) -> ServiceSection:
+def save_section(_input:ServiceSectionInput, section:ServiceSection=None, service:Service=None) -> ServiceSection:
     if service:
         section = ServiceSection(
             service=service,
@@ -159,3 +159,29 @@ def remove_tags(_input: ServiceInput, service: Service) -> Service:
                 continue
     service.save()
     return service
+
+def get_category(_input:ServiceSubCategoryInput) -> ServiceCategory:
+    if _input.category_pk:
+        try:
+            return ServiceCategory.objects.get(pk=_input.category_pk)
+        except ServiceCategory.DoesNotExist as e:
+            raise GraphQLError("Category not found by ID.") from e
+    elif _input.category_name:
+        try:
+            return ServiceCategory.objects.get(name=_input.category_name)
+        except ServiceCategory.DoesNotExist as e:
+            raise GraphQLError("Category not found by name.") from e
+    else:
+        raise GraphQLError(
+            "Either category ID or category \
+            name must be provided."
+        )
+
+
+def get_subcategory(_input:ServiceSubCategoryInput) -> ServiceSubCategory:
+    category = get_category(_input)
+    try:
+        if _input.pk:
+            return ServiceSubCategory.objects.get(pk=_input.pk, category=category)
+    except ServiceSubCategory.DoesNotExist as e:
+        raise GraphQLError("SubCategory not found in the specified category") from e

@@ -25,3 +25,17 @@ class ServiceInput(graphene.InputObjectType):
     price = graphene.Int()
     tags = graphene.List(graphene.String)
     tags_to_del = graphene.List(graphene.String)
+
+
+class ServiceCategoryInput(graphene.InputObjectType):
+    pk = graphene.ID()
+    name = graphene.String()
+    new_name = graphene.String()
+
+
+class ServiceSubCategoryInput(graphene.InputObjectType):
+    pk = graphene.ID()
+    name = graphene.String()
+    new_name = graphene.String()
+    category_pk = graphene.ID()
+    category_name = graphene.String()
