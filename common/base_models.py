@@ -23,14 +23,13 @@ class ObjectBaseModel(models.Model):
         abstract = True
 
 class SectionsBase(models.Model):
-    order = models.PositiveIntegerField()
+    order = models.PositiveIntegerField('Порядок')
     subtitle = models.CharField('Подзаголовок', max_length=200, blank=True, null=True)
     content = models.TextField('Блок текста', blank=True, null=True)
     youtube_url = models.URLField('Видео youtube', blank=True, null=True)
 
     class Meta:
         abstract = True
-        ordering = ['order']
 
     def __str__(self):
         classname = self.__class__.__name__
@@ -47,7 +46,3 @@ class SectionsBase(models.Model):
             raise ValidationError('Можно выбрать только одно поле для заполнения.')
         if not filled_fields:
             raise ValidationError('Необходимо заполнить хотя бы одно поле.')
-
-    def save(self, *args, **kwargs):
-        self.clean()
-        super().save(*args, **kwargs)

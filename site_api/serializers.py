@@ -1,11 +1,11 @@
 from rest_framework import serializers
-from blog.models import BlogSection, Blog
+from blog.models import BlogPostSection, BlogPost
 
 class SectionSerializer(serializers.ModelSerializer):
     section_type = serializers.CharField(write_only=True)
 
     class Meta:
-        model = BlogSection
+        model = BlogPostSection
         fields = ['order', 'subtitle', 'content', 'youtube_url', 'image', 'section_type']
 
     def validate(self, data):
@@ -34,5 +34,5 @@ class PostSerializer(serializers.ModelSerializer):
     sections = SectionSerializer(many=True, read_only=True)
 
     class Meta:
-        model = Blog
+        model = BlogPost
         fields = '__all__'

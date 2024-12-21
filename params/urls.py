@@ -1,7 +1,6 @@
 from django.contrib import admin
 from django.urls import path, include
-from . import views
-from django.conf.urls import handler404, handler500, handler403, handler400
+from params import views
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.sitemaps.views import sitemap
@@ -19,8 +18,10 @@ urlpatterns = [
     path('privacy_policy/', views.privacy_policy, name='privacy'),
     path('terms_of_service/', views.terms_of_service, name='terms_of_service'),
 
+    path('api/', include('site_api.urls', namespace='site_api')),
+
     path('', include('site_forms.urls', namespace='site_forms')),
-    path('', include('blog.urls', namespace='blog')),
+    path('blog/', include('blog.urls', namespace='blog')),
     path('', include('services.urls', namespace='services')),
 
     path('get-image-url/<str:image_name>/', views.get_image_url, name='get_image_url'),
@@ -30,10 +31,6 @@ urlpatterns = [
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]
 
-
-errors = [handler400, handler403, handler404, handler500]
-for error in errors:
-    error = 'params.views.custom_error'
 
 
 # Static and media files configuration

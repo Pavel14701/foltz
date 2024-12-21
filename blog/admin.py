@@ -1,8 +1,8 @@
 from django.contrib import admin
-from .models import Blog,  BlogSection
+from .models import BlogPost,  BlogPostSection
 
 class  BlogSectionInline(admin.TabularInline):
-    model =  BlogSection
+    model =  BlogPostSection
     extra = 1
 
 
@@ -10,5 +10,5 @@ class PostAdmin(admin.ModelAdmin):
     inlines = [BlogSectionInline]
 
 
-admin.site.register(Blog, PostAdmin)
-admin.site.register(BlogSection)
+admin.site.register(BlogPost, PostAdmin)
+admin.site.register(BlogPostSection)

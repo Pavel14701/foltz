@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'user.apps.UserConfig',
     'common.apps.CommonConfig',
     'products.apps.ProductsConfig',
+    'site_api.apps.SiteApiConfig',
 
     'dal', 
     'dal_select2',
@@ -42,11 +43,13 @@ INSTALLED_APPS = [
     'rest_framework',
     'csp',
     'compressor',
+    'graphene_django',
+    'graphql_jwt',
 ]
 
 CSP_DEFAULT_SRC = ("'self'",) 
-CSP_STYLE_SRC = ("'self'", 'https://fonts.googleapis.com')
-CSP_SCRIPT_SRC = ("'self'", 'https://cdnjs.cloudflare.com', 'https://code.jquery.com')
+CSP_STYLE_SRC = ("'self'", 'https://fonts.googleapis.com', 'https://cdnjs.cloudflare.com')
+CSP_SCRIPT_SRC = ("'self'", 'https://cdnjs.cloudflare.com', 'https://code.jquery.com', 'https://ajax.googleapis.com')
 CSP_IMG_SRC = ("'self'",) 
 CSP_MEDIA_SRC = ("'self'",)
 
@@ -112,6 +115,11 @@ DATABASES = {
     }
 }
 
+AUTHENTICATION_BACKENDS = [
+    'graphql_jwt.backends.JSONWebTokenBackend',
+    'django.contrib.auth.backends.ModelBackend',
+]
+
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
@@ -149,6 +157,16 @@ SESSION_REDIS = {
     'retry_on_timeout': False,
     #'unix_socket_path': None
 }
+
+
+GRAPHENE = {
+    'SCHEMA': 'site_api.schema.schema',
+    'MIDDLEWARE': [
+        'graphql_jwt.middleware.JSONWebTokenMiddleware',
+    ],
+}
+
+
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),

@@ -1,7 +1,8 @@
 from django.urls import path
 from services.views import ServiceFormView, ServicesViews
 from services.api.views import ServiceViewSet, ServiceSectionSearchView
-from services.autocompletes import ServiceAutocomplete, TagAutocomplete, CategoryAutocomplete
+from services.utils.autocompletes import ServiceAutocomplete, CategoryAutocomplete,\
+    SubCategoryAutocomplete, TagsAutocomplete
 
 
 app_name = "services"
@@ -61,10 +62,10 @@ urlpatterns = [
         name='service-section-create'),
 
 
-    path('services/search/', ServicesViews.as_view(), {'action': 'service_search'}, name='service-search'),
     path('service-autocomplete/', ServiceAutocomplete.as_view(), name='service-autocomplete'),
     path('category-autocomplete/', CategoryAutocomplete.as_view(), name='category-autocomplete'),
-    path('tag-autocomplete/', TagAutocomplete.as_view(), name='tag-autocomplete'),
+    path('subcategory-autocomplete/', SubCategoryAutocomplete.as_view(), name='subcategory-autocomplete'),
+    path('tag-autocomplete/', TagsAutocomplete.as_view(), name='tag-autocomplete'),
 
 
 

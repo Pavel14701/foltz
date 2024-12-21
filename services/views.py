@@ -6,7 +6,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.utils.http import http_date
 from django.views import View
 from site_forms.custom_form import ContactForm
-from services.models import Service, Category, Tag
+from services.models import Service, ServiceCategory, ServiceSubCategory, ServiceTags
 from common.dto import FormData
 from common.aplications import SendAplications
 
@@ -75,7 +75,7 @@ class ServicesViews(View):
         context = {
             'service': service,
             'sections': sections,
-            'tags': service.tag.all(),
+            'tags': service.tags.all(),
             'category': service.category
         }
         response = render(request, 'services/detail.html', context)
@@ -103,13 +103,14 @@ class ServicesViews(View):
         return render(request, 'services/base.html', context)
 
 
-    def home_view(self, request:HttpRequest) -> HttpResponseNotModified|HttpResponse:
+    def home_view(self, request: HttpRequest) -> HttpResponseNotModified | HttpResponse:
         title_query = request.GET.get('title', '')
         category_query = request.GET.get('category', '')
         tag_query = request.GET.get('tag', '')
         services_by_category = {}
         search_performed = False
-        categories = Category.objects.all()
+        categories = ServiceCategory.objects.all()
+        page_number = request.GET.get('page')
         if title_query or category_query or tag_query:
             search_performed = True
             services = Service.objects.all()
@@ -124,7 +125,6 @@ class ServicesViews(View):
                 services = Service.objects.filter(category=category)[:4]
                 services_by_category[category] = services
             paginator = Paginator(categories, 1)
-            page_number = request.GET.get('page')
             page_obj = paginator.get_page(page_number)
         etag_content = f"{title_query}-{category_query}-{tag_query}-{page_number}"
         etag = hashlib.md5(etag_content.encode('utf-8')).hexdigest()

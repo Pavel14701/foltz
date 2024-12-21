@@ -1,20 +1,24 @@
-    <link href="{% static 'autocomplete_light/select2.css' %}" rel="stylesheet">
-    <link href="{% static 'autocomplete_light/select2-bootstrap.css' %}" rel="stylesheet">
-    <form id="search-form" method="get" action="{% url 'services:service-search' %}">
+{% load static %}
+<form id="search-form" method="get">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
         <label for="title">Title:</label>
-        <input type="text" id="title" name="title" class="django-select2" data-autocomplete-light-url="{% url 'services:service-autocomplete' %}" autocomplete="off">
+        <input type="text" id="title" name="title" class="django-select2" data-autocomplete-light-url="{% url 'services:service-autocomplete' %}" autocomplete="on">
         <div id="title-suggestions" class="suggestions-box"></div>
 
         <label for="category">Category:</label>
-        <input type="text" id="category" name="category" class="django-select2" data-autocomplete-light-url="{% url 'services:category-autocomplete' %}" autocomplete="off">
+        <input type="text" id="category" name="category" class="django-select2" data-autocomplete-light-url="{% url 'services:category-autocomplete' %}" autocomplete="on">
         <div id="category-suggestions" class="suggestions-box"></div>
 
+        <label for="subcategory">Subcategory</label>
+        <input type="text" id="subcategory" name="category" class="django-select2" data-autocomplete-light-url="{% url 'services:subcategory-autocomplete'%}" autocomplete="on">
+        <div id="subcategory-suggestions" class="suggestions-box"></div>
+
         <label for="tag">Tag:</label>
-        <input type="text" id="tag" name="tag" class="django-select2" data-autocomplete-light-url="{% url 'services:tag-autocomplete' %}" autocomplete="off">
+        <input type="text" id="tag" name="tag" class="django-select2" data-autocomplete-light-url="{% url 'services:tag-autocomplete' %}" autocomplete="on">
         <div id="tag-suggestions" class="suggestions-box"></div>
 
         <button type="submit">Search</button>
     </form>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="{% static 'autocomplete_light/select2.js' %}"></script>
-    <script src="{% static 'autocomplete_light/your_dal_init.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.full.js"></script>
+    <script src="{% static 'js/services/your_dal_init.js' %}"></script>

@@ -1,5 +1,5 @@
 from dal import autocomplete
-from services.models import Service, Category, Tag
+from services.models import Service, ServiceCategory, ServiceSubCategory, ServiceTags
 
 class ServiceAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
@@ -10,14 +10,21 @@ class ServiceAutocomplete(autocomplete.Select2QuerySetView):
 
 class CategoryAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
-        qs = Category.objects.all()
+        qs = ServiceCategory.objects.all()
         if self.q:
             qs = qs.filter(name__icontains=self.q)
         return qs
 
-class TagAutocomplete(autocomplete.Select2QuerySetView):
+class SubCategoryAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
-        qs = Tag.objects.all()
+        qs = ServiceSubCategory.objects.all()
+        if self.q:
+            qs = qs.filter(name__icontains=self.q)
+        return qs
+
+class TagsAutocomplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        qs = ServiceTags.objects.all()
         if self.q:
             qs = qs.filter(name__icontains=self.q)
         return qs

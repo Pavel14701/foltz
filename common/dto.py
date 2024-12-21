@@ -27,7 +27,7 @@ class DtoBotConfigs(Configs):
     site_api_url:str = field(init=False)
     use_webhook:bool = field(init=False)
     bot_webhook:str = field(init=False)
-    username:str = field(init=False)
+    user_name:str = field(init=False)
     password:str = field(init=False)
 
     def __post_init__(self):
@@ -37,5 +37,5 @@ class DtoBotConfigs(Configs):
         self.site_api_url = self.check_env_var("YOUR_SITE_API_URL")
         self.use_webhook = bool(int(self.check_env_var('USE_WEBHOOK')))
         self.bot_webhook = self.check_env_var('BOT_WEBHOOK')
-        self.username = self.check_env_var('SITE_ADMIN_NAME')
+        self.user_name = self.check_env_var('SITE_ADMIN_NAME')
         self.password = self.check_env_var('SITE_ADMIN_PASSWORD')

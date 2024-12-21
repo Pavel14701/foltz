@@ -2,13 +2,13 @@ from rest_framework import status, serializers
 from rest_framework.response import Response
 from rest_framework.exceptions import NotFound
 from rest_framework.decorators import action
-from blog.models import Blog, BlogSection
-from blog.api.serializers import PostSerializer, SectionSerializer
+from blog.models import BlogPost, BlogPostSection
+from site_api.serializers import PostSerializer, SectionSerializer
 from common.base_api_views import BaseViewApiSet, BaseSectionSearchView
 
 
 class BlogViewSet(BaseViewApiSet):
-    queryset = Blog.objects.all()
+    queryset = BlogPost.objects.all()
     serializer_class = PostSerializer
     search_fields = ['title', 'id']
 
@@ -25,12 +25,12 @@ class BlogSectionSearchView(BaseSectionSearchView):
 
     def retrieve(self, request, post_id=None, section_id=None):
         try: 
-            post = Blog.objects.get(id=post_id) 
-        except Blog.DoesNotExist:
+            post = BlogPost.objects.get(id=post_id) 
+        except BlogPost.DoesNotExist:
             return Response({'error': 'Post not found'}, status=404)
         try: 
-            section = BlogSection.objects.get(id=section_id, post=post)
-        except BlogSection.DoesNotExist: 
+            section = BlogPostSection.objects.get(id=section_id, post=post)
+        except BlogPostSection.DoesNotExist: 
             return Response({'error': 'Section of post does not found'}, status=404)
         serializer = SectionSerializer(section) 
         return Response(serializer.data)
@@ -38,12 +38,12 @@ class BlogSectionSearchView(BaseSectionSearchView):
     def get_queryset(self):
         post_id = self.kwargs['post_id']
         section_id = self.kwargs['section_id']
-        post = Blog.objects.filter(id=post_id).first()
+        post = BlogPost.objects.filter(id=post_id).first()
         if not post:
             raise NotFound("Post not found.")
-        if not (section := BlogSection.objects.filter(post=post, id=section_id).first()):
+        if not (section := BlogPostSection.objects.filter(post=post, id=section_id).first()):
             raise NotFound("Section not found.")
-        return BlogSection.objects.filter(post=post, id=section_id)
+        return BlogPostSection.objects.filter(post=post, id=section_id)
 
     def get_section_serializer(self, instance):
         return PostSerializer(instance.post)
@@ -54,11 +54,11 @@ class BlogSectionSearchView(BaseSectionSearchView):
             'section': section_serializer.data
         }
 
-    def get_target_section(self, instance: BlogSection, direction: str) -> BlogSection | Response:
+    def get_target_section(self, instance: BlogPostSection, direction: str) -> BlogPostSection | Response:
         if direction == 'up':
-            return BlogSection.objects.filter(post=instance.post, order__lt=instance.order).order_by('-order').first()
+            return BlogPostSection.objects.filter(post=instance.post, order__lt=instance.order).order_by('-order').first()
         elif direction == 'down':
-            return BlogSection.objects.filter(post=instance.post, order__gt=instance.order).order_by('order').first()
+            return BlogPostSection.objects.filter(post=instance.post, order__gt=instance.order).order_by('order').first()
         else:
             return Response({"detail": "Invalid direction"}, status=status.HTTP_400_BAD_REQUEST)
 
