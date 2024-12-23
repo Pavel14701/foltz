@@ -1,4 +1,4 @@
 from django.shortcuts import render
 
-def products():
+def products(request):
     pass

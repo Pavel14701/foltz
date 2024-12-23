@@ -1,6 +1,6 @@
 from django.db import models
 from django.core.exceptions import ValidationError
-from pytils.translit import slugify
+from slugify import slugify
 from django.utils import timezone
 from services.utils.json_validators import validate_characteristics, validate_service
 import os, json
@@ -18,6 +18,7 @@ def get_upload_to(instance, filename):
 class ServiceCategory(models.Model):
     name = models.CharField('Имя категории', max_length=50)
     slug = models.SlugField('Url представление', blank=True, unique=True)
+    modified = models.DateTimeField('Дополнено', auto_now=True)
 
 
     class Meta:
@@ -40,8 +41,10 @@ class ServiceSubCategory(models.Model):
     category = models.ForeignKey(
         to=ServiceCategory,
         on_delete=models.SET_NULL,
+        null=True,
         verbose_name='К какой категории относится?'
     )
+    modified = models.DateTimeField('Дополнено', auto_now=True)
 
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -59,6 +62,7 @@ class ServiceSubCategory(models.Model):
 class ServiceTags(models.Model):
     name = models.CharField('Имя тега', max_length=50)
     slug = models.SlugField('Url представление', blank=True, unique=True)
+    modified = models.DateTimeField('Дополнено', auto_now=True)
 
     def save(self, *args, **kwargs):
         if not self.slug:

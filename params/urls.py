@@ -4,8 +4,8 @@ from params import views
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.sitemaps.views import sitemap
-from .sitemap import StaticViewSitemap
-from rest_framework_simplejwt.views import (TokenObtainPairView,TokenRefreshView,)
+from params.sitemap import StaticViewSitemap
+from params.views import obtain_token, verify_token, refresh_token
 
 sitemaps = {
     'static': StaticViewSitemap,
@@ -18,7 +18,7 @@ urlpatterns = [
     path('privacy_policy/', views.privacy_policy, name='privacy'),
     path('terms_of_service/', views.terms_of_service, name='terms_of_service'),
 
-    path('api/', include('site_api.urls', namespace='site_api')),
+    path('api/', include('site_api.urls', namespace='api')),
 
     path('', include('site_forms.urls', namespace='site_forms')),
     path('blog/', include('blog.urls', namespace='blog')),
@@ -29,8 +29,11 @@ urlpatterns = [
     path('get-image-url/<str:image_name>/', views.get_image_url, name='get_image_url'),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
     path('robots.txt', views.robots_txt, name='robots_txt'),
-    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+
+    path('api/token/', obtain_token, name='token_obtain'),
+    path('api/token/verify/', verify_token, name='token_verify'),
+    path('api/token/refresh/', refresh_token, name='token_refresh'),
+
 ]
 
 

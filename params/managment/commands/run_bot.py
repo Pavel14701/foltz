@@ -3,9 +3,9 @@ from bot.bot_instance import bot, configs
 from bot.handlers import send_welcome, fetch_messages, handle_group_messages
 
 class Command(BaseCommand):
-    help = 'Run the Telegram bot and set webhook or use polling'
+    help = 'Run the Telegram bot with setting webhook or use infinity polling'
 
-    def handle(self, *args, **kwargs):
+    def handle(self, *args, **kwargs) -> None:
         # Регистрация обработчика для команды 'start' и 'help'
         bot.add_message_handler({
             'function': send_welcome,

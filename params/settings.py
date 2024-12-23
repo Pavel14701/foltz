@@ -30,17 +30,16 @@ INSTALLED_APPS = [
     'django.contrib.sitemaps',
 
     'blog.apps.BlogConfig',
-    'site_forms.apps.SiteFormsConfig',
     'services.apps.ServicesConfig',
-    'user.apps.UserConfig',
-    'common.apps.CommonConfig',
     'products.apps.ProductsConfig',
+    'user.apps.UserConfig',
+    'site_forms.apps.SiteFormsConfig',
     'site_api.apps.SiteApiConfig',
+    'common.apps.CommonConfig',
 
     'dal', 
     'dal_select2',
     'django_filters',
-    'rest_framework',
     'csp',
     'compressor',
     'graphene_django',
@@ -138,14 +137,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
-    ],
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
-    ],
-}
 
 SESSION_ENGINE = 'redis_sessions.session'
 SESSION_REDIS = {
@@ -167,31 +158,14 @@ GRAPHENE = {
 }
 
 
-
-SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
-    'ROTATE_REFRESH_TOKENS': True,
-    'BLACKLIST_AFTER_ROTATION': True,
-    'UPDATE_LAST_LOGIN': False,
-    'ALGORITHM': 'HS256',
-    'SIGNING_KEY': SECRET_KEY,
-    'VERIFYING_KEY': None,
-    'AUDIENCE': None,
-    'ISSUER': None,
-    'JWK_URL': None,
-    'LEEWAY': 0,
-    'AUTH_HEADER_TYPES': ('Bearer',),
-    'AUTH_HEADER_NAME': 'HTTP_AUTHORIZATION',
-    'USER_ID_FIELD': 'id',
-    'USER_ID_CLAIM': 'user_id',
-    'USER_AUTHENTICATION_RULE': 'rest_framework_simplejwt.authentication.default_user_authentication_rule',
-    'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
-    'TOKEN_TYPE_CLAIM': 'token_type',
-    'JTI_CLAIM': 'jti',
-    'SLIDING_TOKEN_REFRESH_EXP_CLAIM': 'refresh_exp',
-    'SLIDING_TOKEN_LIFETIME': timedelta(minutes=5),
-    'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
+GRAPHQL_JWT = {
+    'JWT_EXPIRATION_DELTA': timedelta(minutes=5),
+    'JWT_REFRESH_EXPIRATION_DELTA': timedelta(days=1),
+    'JWT_ALGORITHM': 'HS256',
+    'JWT_SECRET_KEY': conf_checker.check_env_var('DJANGO_SECRET'),
+    'JWT_ALLOW_REFRESH': True,
+    'JWT_AUTH_HEADER_PREFIX': 'Bearer',
+    'JWT_AUTH_HEADER_NAME': 'HTTP_AUTHORIZATION',
 }
 
 

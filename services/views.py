@@ -108,6 +108,7 @@ class ServicesViews(View):
         title_query = request.GET.get('title', '')
         category_query = request.GET.get('category', '')
         tag_query = request.GET.get('tag', '')
+        subcategory_query = request.GET.get('subcategory', '')
         services_by_category = {}
         search_performed = False
         categories = ServiceCategory.objects.all()
@@ -119,6 +120,8 @@ class ServicesViews(View):
                 services = services.filter(title__icontains=title_query)
             if category_query:
                 services = services.filter(category__name__icontains=category_query)
+            if subcategory_query:
+                services = services.filter(subcategory__name_icontains=subcategory_query)
             if tag_query:
                 services = services.filter(tags__name__icontains=tag_query)
         else:
@@ -127,7 +130,7 @@ class ServicesViews(View):
                 services_by_category[category] = services
             paginator = Paginator(categories, 1)
             page_obj = paginator.get_page(page_number)
-        etag_content = f"{title_query}-{category_query}-{tag_query}-{page_number}"
+        etag_content = f"{title_query}-{category_query}-{subcategory_query}-{tag_query}-{page_number}"
         etag = hashlib.md5(etag_content.encode('utf-8')).hexdigest()
         if_none_match = request.headers.get('If-None-Match')
         if if_none_match == etag:
