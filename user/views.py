@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from user.models import Profile, Message
 from django.http import HttpRequest, HttpResponseRedirect, HttpResponse
+from django.utils.http import url_has_allowed_host_and_scheme
 from user.forms import CustomUserCreationForm, ProfileForm, MessageForm
 from common.utils import get_admin_profile_id
 
@@ -20,9 +21,10 @@ def login_user(request: HttpRequest) -> HttpResponseRedirect|HttpResponse:
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect(
-                request.GET['next'] if 'next' in request.GET else 'account'
-            )
+            next_url = request.GET['next'] if 'next' in request.GET else 'account'
+            if not url_has_allowed_host_and_scheme(next_url, allowed_hosts=request.get_host()):
+                next_url = 'account'
+            return redirect(next_url)
         else:
             messages.error(request, 'Неверное имя пользователя или пароль')
     return render(request, 'users/login_register.html')
