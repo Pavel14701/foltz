@@ -1,32 +1,53 @@
+from typing import Any, Optional, Iterable
+
 from django.db import models
 from django.core.exceptions import ValidationError
 
 
 class ObjectBaseModel(models.Model):
-    preview_text = models.TextField(max_length=500, blank=True, null=False)
-    preview_video_url = models.URLField(blank=True, null=True)
+    preview_text: str = models.TextField(max_length=500, blank=True, null=False)
+    preview_video_url: str | None = models.URLField(blank=True, null=True)
+    title: str
+    preview_image: object
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.title
 
     def clean(self):
+        # Превью не обязательно, но нельзя использовать одновременно картинку и видео
         if self.preview_image and self.preview_video_url:
             raise ValidationError('Можно выбрать только одно: либо изображение, либо URL видео.')
-        if not self.preview_image and not self.preview_video_url:
-            raise ValidationError('Необходимо указать либо изображение, либо URL видео.')
 
-    def save(self, *args, **kwargs):
+    def save(
+        self,
+        force_insert: bool = False,
+        force_update: bool = False,
+        using: Optional[str] = None,
+        update_fields: Optional[Iterable[str]] = None,
+        **kwargs: Any,
+    ) -> None:
         self.clean()
-        super().save(*args, **kwargs)
+        super().save(
+            force_insert=force_insert,
+            force_update=force_update,
+            using=using,
+            update_fields=update_fields,
+            **kwargs
+        )
 
     class Meta:
         abstract = True
 
+
 class SectionsBase(models.Model):
-    order = models.PositiveIntegerField()
-    subtitle = models.CharField(max_length=200, blank=True, null=True)
-    content = models.TextField(blank=True, null=True)
-    youtube_url = models.URLField(blank=True, null=True)
+    order: int = models.PositiveIntegerField()
+    subtitle: str | None = models.CharField(max_length=200, blank=True, null=True)
+    content: str | None = models.TextField(blank=True, null=True)
+    youtube_url: str | None = models.URLField(blank=True, null=True)
+    service: Any
+    product: Any
+    post: Any
+    image: Any
 
     class Meta:
         abstract = True
@@ -48,6 +69,19 @@ class SectionsBase(models.Model):
         if not filled_fields:
             raise ValidationError('Необходимо заполнить хотя бы одно поле.')
 
-    def save(self, *args, **kwargs):
+    def save(
+        self,
+        force_insert: bool = False,
+        force_update: bool = False,
+        using: Optional[str] = None,
+        update_fields: Optional[Iterable[str]] = None,
+        **kwargs: Any,
+    ) -> None:
         self.clean()
-        super().save(*args, **kwargs)
+        super().save(
+            force_insert=force_insert,
+            force_update=force_update,
+            using=using,
+            update_fields=update_fields,
+            **kwargs
+        )

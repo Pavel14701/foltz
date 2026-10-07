@@ -1,7 +1,13 @@
 run_project.py
 .env
+.env.*
+!.env.example
 staticfiles
 makets
 *__pycache__
-*migrations
-
+.venv
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+staticfiles
+.mypy_cache

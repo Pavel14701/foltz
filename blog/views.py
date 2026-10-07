@@ -1,22 +1,16 @@
-from django.shortcuts import render
-from common.utils import paginateObjects
+from django.shortcuts import get_object_or_404, render
+from django.http import HttpRequest, HttpResponse
 
-# Create your views here.
-def blog(request):
-    profile = request.user.profile
-    posts = profile.post_set.all()
-    tags, categories = get_tags_categories(posts)
-    custom_range, posts = paginateObjects(request, posts, 3)
-    context = {'profile': profile, 'posts': posts, 
-    'custom_range': custom_range, 'tags': tags, 
-    'categories': categories}
-    return render(request, 'blog/post_{title}.html', context)
+from blog.models import Blog
 
-def get_tags_categories(posts):
-    categories = set()
-    tags = set()
-    for post in posts:
-        categories.add(post.category)
-        for tag in post.tags.all():
-            tags.add(tag)
-    return tags, categories
+
+def blog(request: HttpRequest) -> HttpResponse:
+    """Список статей блога — доступен всем, без авторизации."""
+    posts = Blog.objects.all()
+    return render(request, 'blog/post_list.html', {'posts': posts})
+
+
+def post_detail(request: HttpRequest, slug: str) -> HttpResponse:
+    """Страница статьи по ЧПУ-slug."""
+    post = get_object_or_404(Blog, slug=slug)
+    return render(request, 'blog/post_details.html', {'post': post})

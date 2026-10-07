@@ -1,0 +1,9 @@
+{# Единый блок призыва к действию (DRY): подключается через {% include '_cta.html' %} #}
+<section class="cta-block">
+    <h2 class="cta-title">Есть задача? Обсудим</h2>
+    <p class="cta-text">Позвоните — подскажем по ремонту гидравлики, двигателям и обменному фонду.</p>
+    <div class="cta-actions">
+        <a class="cta-button" href="tel:+375295410647">+375 (29) 541-06-47</a>
+        <a class="cta-button cta-button--ghost" href="{% url 'forms:contact' %}">Оставить заявку</a>
+    </div>
+</section>

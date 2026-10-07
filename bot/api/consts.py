@@ -1,7 +1,7 @@
-from common.config_check import Configs
+from common.config import env
 
 class ApiUrls:
-    base_url:str = Configs().check_env_var('SITE_BASE_URL')
+    base_url:str = env.SITE_API_URL
     blog:str = 'blog/'
     service:str = 'service/'
     product:str = 'product/'

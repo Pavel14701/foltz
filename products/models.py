@@ -4,10 +4,14 @@ from django.core.exceptions import ValidationError
 from common.base_models import ObjectBaseModel, SectionsBase
 
 def get_upload_to(instance, filename):
+    """Путь загрузки превью товара и картинок его секций."""
     if isinstance(instance, Product):
-        return os.path.join('static', 'services', f'service_{instance.title}', filename)
-    elif isinstance(instance, ProductSection):
-        return os.path.join('static', 'services', f'service_{instance.service.id}', 'sections', f'section_{instance.id}', filename)
+        return os.path.join('static', 'products', f'product_{instance.pk}', filename)
+    if isinstance(instance, ProductSection):
+        return os.path.join(
+            'static', 'products', f'product_{instance.product.pk}',
+            'sections', f'section_{instance.pk}', filename,
+        )
     return os.path.join('static', 'uploads', filename)
 
 

@@ -57,6 +57,8 @@ urlpatterns = [
     path('api/services/<int:post_id>/sections/create/', 
         ServiceSectionSearchView.as_view({'post': 'create'}), 
         name='service-section-create'),
-    # Отображение услуг
-    path('services/', views.services_view, name="services")
+    # Отображение каталога услуг
+    path('', views.services_view, name="services"),
+    # Страница конкретной услуги (ЧПУ)
+    path('<slug:slug>/', views.service_detail_view, name="service_detail"),
 ]

@@ -1,67 +1,69 @@
-from rest_framework import status, serializers
-from rest_framework.response import Response
-from rest_framework.exceptions import NotFound
+"""API продуктов: CRUD продуктов и управление их секциями."""
+from typing import Any
+
+from rest_framework import status
 from rest_framework.decorators import action
-from products.models import Product, ProductSection
+from rest_framework.request import Request
+from rest_framework.response import Response
+from rest_framework.serializers import BaseSerializer
+
+from common.base_api_views import BaseSectionSearchView, BaseViewApiSet
 from products.api.serializers import ProductSerializer, ProductSectionSerializer
-from common.base_api_views import BaseViewApiSet, BaseSectionSearchView
+from products.models import Product, ProductSection
 
 
 class ProductViewSet(BaseViewApiSet):
+    """CRUD продуктов: список, создание, обновление, удаление, получение секций."""
+
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     search_fields = ['title', 'id']
 
-    def get_section_serializer(self, sections, many):
-        return ProductSectionSerializer(sections, many)
+    def get_section_serializer(self, sections: Any, many: bool = False) -> BaseSerializer:
+        return ProductSectionSerializer(sections, many=many)
+
+    def get_section_queryset(self, instance: Product) -> Any:
+        return ProductSection.objects.filter(product=instance)
 
     @action(detail=True, methods=['get'])
-    def get_service_section(self, request, pk):
+    def get_product_sections(self, request: Request, pk: int | None = None) -> Response:
+        """Секции конкретного продукта."""
         return self.sections(request, pk)
 
 
 class ProductSectionSearchView(BaseSectionSearchView):
+    """Поиск, обновление, перемещение и создание секций продукта."""
+
     serializer_class = ProductSectionSerializer
 
-    def retrieve(self, request, service_id=None, section_id=None): 
-        try: 
-            service = Product.objects.get(id=service_id) 
-        except Product.DoesNotExist:
-            return Response({'error': 'Product not found'}, status=404)  
-        try: 
-            section = ProductSection.objects.get(id=section_id, service=service)
-        except ProductSection.DoesNotExist: 
-            return Response({'error': 'Section of product does not found'}, status=404)
-        serializer = ProductSectionSerializer(section) 
-        return Response(serializer.data)
-
     def get_queryset(self):
-        product_id = self.kwargs['product_id']
-        section_id = self.kwargs['section_id']
-        product = Product.objects.filter(id=product_id).first()
-        if not product:
-            raise NotFound("Product not found.")
-        if not (section := ProductSection.objects.filter(product=product, id=section_id).first()):
-            raise NotFound("Section of product does not found.")
-        return section
+        return ProductSection.objects.filter(
+            product_id=self.kwargs['post_id'], id=self.kwargs['section_id'],
+        )
 
-    def get_section_serializer(self, instance):
-        return ProductSerializer(instance.post)
+    def get_parent_lookup(self) -> str:
+        return 'product'
 
-    def create_responce_data(self, product_serializer, section_serializer) -> dict:
-        return {
-            'product': product_serializer.data,
-            'section': section_serializer.data
-        }
+    def get_section_serializer(self, instance: ProductSection) -> BaseSerializer:
+        """Сериализатор родительского продукта для объединённого ответа."""
+        return ProductSerializer(instance.product)
 
-    def get_target_section(self, instance: ProductSection, direction: str) -> ProductSection|Response:
+    def create_response_data(self, product_serializer, section_serializer) -> dict:
+        return {'product': product_serializer.data, 'section': section_serializer.data}
+
+    def get_target_section(self, instance: ProductSection, direction: str) -> ProductSection | Response:
+        """Соседняя секция для перемещения (up/down)."""
         if direction == 'up':
-            return ProductSection.objects.filter(product=instance.product, order__lt=instance.order).order_by('-order').first()
-        elif direction == 'down':
-            return ProductSection.objects.filter(post=instance.product, order__gt=instance.order).order_by('order').first()
-        else:
-            return Response({"detail": "Invalid direction"}, status=status.HTTP_400_BAD_REQUEST)
+            return ProductSection.objects.filter(
+                product=instance.product, order__lt=instance.order,
+            ).order_by('-order').first()
+        if direction == 'down':
+            return ProductSection.objects.filter(
+                product=instance.product, order__gt=instance.order,
+            ).order_by('order').first()
+        return Response({'detail': 'Invalid direction'}, status=status.HTTP_400_BAD_REQUEST)
 
     @action(detail=True, methods=['post'])
-    def move_service_section(self, request, *args, **kwargs):
+    def move_product_section(self, request: Request, *args: Any, **kwargs: Any) -> Response:
+        """Перемещение секции продукта вверх/вниз."""
         return self.move(request, *args, **kwargs)

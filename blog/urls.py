@@ -58,5 +58,7 @@ urlpatterns = [
         BlogSectionSearchView.as_view({'post': 'create'}), 
         name='post-section-create'),
     # Отображение блога
-    path('', views.blog, name="blog")
+    path('', views.blog, name="blog"),
+    # Страница статьи по ЧПУ
+    path('<slug:slug>/', views.post_detail, name="post_detail"),
 ]

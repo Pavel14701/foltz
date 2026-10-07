@@ -5,11 +5,13 @@ from django.conf.urls import handler404, handler500, handler403, handler400
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.sitemaps.views import sitemap
-from .sitemap import StaticViewSitemap
+from .sitemap import StaticViewSitemap, ServiceSitemap, PostSitemap
 from rest_framework_simplejwt.views import (TokenObtainPairView,TokenRefreshView,)
 
 sitemaps = {
     'static': StaticViewSitemap,
+    'services': ServiceSitemap,
+    'blog': PostSitemap,
 }
 
 urlpatterns = [
@@ -21,6 +23,8 @@ urlpatterns = [
     path('get-image-url/<str:image_name>/', views.get_image_url, name='get_image_url'),
     path('blog/', include('blog.urls', namespace='blog')),
     path('services/', include('services.urls', namespace='services')),
+    path('', include('products.urls')),
+    path('', include('forms.urls')),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
     path('robots.txt', views.robots_txt, name='robots_txt'),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),

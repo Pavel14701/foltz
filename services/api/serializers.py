@@ -32,7 +32,7 @@ class ServiceSectionSerializer(serializers.ModelSerializer):
 
 
 class ServiceSerializer(serializers.ModelSerializer):
-    sections = ServiceSectionSerializer(many=True, read_only=True)
+    sections = ServiceSectionSerializer(source='service_section', many=True, read_only=True)
 
     class Meta:
         model = Service

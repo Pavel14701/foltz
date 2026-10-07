@@ -1,6 +1,7 @@
 from django.db import models
-import os
 from django.core.exceptions import ValidationError
+from pytils.translit import slugify as translit_slugify
+import os
 from common.base_models import ObjectBaseModel, SectionsBase
 
 def get_upload_to(instance, filename):
@@ -13,7 +14,17 @@ def get_upload_to(instance, filename):
 
 class Service(ObjectBaseModel):
     title = models.CharField(max_length=200, unique=True)
+    slug = models.SlugField(max_length=220, unique=True, blank=True, null=True)
     preview_image = models.ImageField(upload_to=get_upload_to, blank=True, null=True)
+
+    class Meta:
+        ordering = ['id']
+
+    def save(self, *args, **kwargs):
+        # ЧПУ для SEO: генерируем из заголовка, если slug не задан вручную
+        if not self.slug:
+            self.slug = translit_slugify(self.title)
+        super().save(*args, **kwargs)
 
 
 class ServiceSection(SectionsBase):
@@ -25,6 +36,13 @@ class ServiceSection(SectionsBase):
 
     def __str__(self):
         return f"{self.service.title} - {self.order}"
+
+    @property
+    def embed_url(self) -> str:
+        """YouTube-ссылка, пригодная для вставки в iframe."""
+        if self.youtube_url and 'watch?v=' in self.youtube_url:
+            return self.youtube_url.replace('watch?v=', 'embed/')
+        return self.youtube_url or ''
 
     def clean(self):
         fields = [self.image, self.youtube_url, self.subtitle, self.content]

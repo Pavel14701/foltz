@@ -29,7 +29,7 @@ class ProductSectionSerializer(serializers.ModelSerializer):
 
 
 class ProductSerializer(serializers.ModelSerializer):
-    sections = ProductSectionSerializer(many=True, read_only=True)
+    sections = ProductSectionSerializer(source='product_section', many=True, read_only=True)
 
     class Meta:
         model = Product

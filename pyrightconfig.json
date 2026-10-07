@@ -1,0 +1,8 @@
+{
+  "typeCheckingMode": "strict",
+  "reportUnknownVariableType": true,
+  "reportMissingTypeStubs": false,
+  "extraPaths": [
+    "./.venv/Lib/site-packages"
+  ]
+}

@@ -1,27 +1,18 @@
-from django.shortcuts import render, redirect
-from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
-from forms.forms import ContactForm
-from common.dto import FormData
-from common.aplications import SendAplications
+from django.shortcuts import render, get_object_or_404
+from django.http import HttpRequest, HttpResponse
+from services.models import Service
 
 
-def form_view(request:HttpRequest) -> HttpResponseRedirect|HttpResponse:
-    if request.method == 'POST':
-        form = ContactForm(request.POST)
-        if form.is_valid():
-            form_data = FormData(
-                name = form.cleaned_data['name'],
-                phone = form.cleaned_data['phone'],
-                question = form.cleaned_data['question']
-            )
-            sendler = SendAplications(form_data)
-            sendler.email()
-            sendler.tg()
-            return redirect('success')
-    else:
-        form = ContactForm()
-    return render(request, 'contact.html', {'form': form})
+def services_view(request: HttpRequest) -> HttpResponse:
+    """Каталог услуг."""
+    services = Service.objects.prefetch_related('service_section')
+    return render(request, 'services/service_list.html', {'services': services})
 
-#TO DO Написать это блядство
-def services_view(request:HttpRequest) -> HttpResponse:
-    pass
+
+def service_detail_view(request: HttpRequest, slug: str) -> HttpResponse:
+    """Страница конкретной услуги."""
+    service = get_object_or_404(
+        Service.objects.prefetch_related('service_section'),
+        slug=slug,
+    )
+    return render(request, 'services/service_detail.html', {'service': service})

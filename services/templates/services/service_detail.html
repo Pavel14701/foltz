@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ service.title }} | Фольц{% endblock %}
+{% block meta_description %}{{ service.preview_text }}{% endblock %}
+
+{% block content %}
+<section class="content-section">
+    <a class="back-link" href="{% url 'services:services' %}">← Все услуги</a>
+    <h1>{{ service.title }}</h1>
+
+    {% if service.preview_image %}
+        <img class="service-card__image" src="{{ service.preview_image.url }}" alt="{{ service.title }}">
+    {% elif service.preview_video_url %}
+        <iframe width="560" height="315" src="{{ service.preview_video_url }}" title="{{ service.title }}" frameborder="0" allowfullscreen></iframe>
+    {% endif %}
+
+    {% for section in service.service_section.all %}
+        {% if section.subtitle %}
+            <h2>{{ section.subtitle }}</h2>
+        {% elif section.content %}
+            <p class="service-section-content">{{ section.content }}</p>
+        {% elif section.image %}
+            <img class="service-card__image" src="{{ section.image.url }}" alt="{{ service.title }} — фото {{ section.order }}">
+        {% elif section.youtube_url %}
+            <iframe width="560" height="315" src="{{ section.embed_url }}" title="{{ service.title }} — видео {{ section.order }}" frameborder="0" allowfullscreen></iframe>
+        {% endif %}
+    {% endfor %}
+
+    {% include '_cta.html' %}
+</section>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Услуги — ремонт гидравлики, двигателей и спецтехники | Фольц{% endblock %}
+{% block meta_description %}Каталог услуг: ремонт гидравлики МТЗ и Амкодор, гидронасосов, гидромоторов и гидрораспределителей, капитальный ремонт двигателей Deutz, JCB, Perkins, выездная диагностика гидросистем. Цены и гарантия до 24 месяцев.{% endblock %}
+
+{% block content %}
+<section class="content-section">
+    <h1>Услуги Агросервиса «Фольц»</h1>
+    <p class="section-lead">
+        Ремонт гидравлики, капитальный ремонт двигателей и выездная диагностика гидросистем
+        тракторов МТЗ, погрузчиков Амкодор и импортной спецтехники. Работа по договору,
+        гарантия 6–24 месяца.
+    </p>
+
+    <div class="services-grid">
+        {% for service in services %}
+        <a class="service-card" href="{% url 'services:service_detail' service.slug %}">
+            {% if service.preview_image %}
+                <img class="service-card__image" src="{{ service.preview_image.url }}" alt="{{ service.title }}">
+            {% endif %}
+            <h2>{{ service.title }}</h2>
+            <p>{{ service.preview_text }}</p>
+            <span class="service-card__more">Подробнее →</span>
+        </a>
+        {% empty %}
+        <p>Каталог услуг сейчас наполняется — свяжитесь с нами, и мы подскажем по вашей задаче.</p>
+        {% endfor %}
+    </div>
+
+    {% include '_cta.html' %}
+</section>
+{% endblock %}

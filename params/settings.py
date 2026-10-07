@@ -1,9 +1,9 @@
 import os
 from pathlib import Path
-from common.config_check import Configs
 from datetime import timedelta
 
-conf_checker = Configs()
+from common.config import env as conf
+from common.utils import add_cache_control_headers
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -12,12 +12,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = conf_checker.check_env_var('DJANGO_SECRET')
+SECRET_KEY = conf.DJANGO_SECRET
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# Прод: DJANGO_DEBUG не задан или false. Для локальной разработки — DJANGO_DEBUG=True в .env
+DEBUG = conf.DJANGO_DEBUG
 
-ALLOWED_HOSTS = ['127.0.0.1','localhost']
+ALLOWED_HOSTS = conf.DJANGO_ALLOWED_HOSTS
+CSRF_TRUSTED_ORIGINS = conf.DJANGO_CSRF_TRUSTED_ORIGINS
 
 # Application definition
 INSTALLED_APPS = [
@@ -41,11 +43,16 @@ INSTALLED_APPS = [
     'compressor',
 ]
 
-CSP_DEFAULT_SRC = ("'self'",) 
-CSP_STYLE_SRC = ("'self'", 'https://fonts.googleapis.com')
-CSP_SCRIPT_SRC = ("'self'", 'https://cdnjs.cloudflare.com')
-CSP_IMG_SRC = ("'self'",) 
-CSP_MEDIA_SRC = ("'self'",)
+# django-csp >= 4.0
+CONTENT_SECURITY_POLICY = {
+    'DIRECTIVES': {
+        'default-src': ("'self'",),
+        'img-src': ("'self'",),
+        'media-src': ("'self'",),
+        'script-src': ("'self'",),
+        'style-src': ("'self'", 'https://fonts.googleapis.com'),
+    }
+}
 
 COMPRESS_ENABLED = True
 COMPRESS_OFFLINE = True
@@ -66,8 +73,9 @@ MIDDLEWARE = [
 ]
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-WHITENOISE_ADD_HEADERS_FUNCTION = 'common.utils.add_cache_control_headers'
-CLIENT_CACHE_MAX_AGE = conf_checker.check_env_var('CLIENT_CACHE_MAX_AGE')
+# Whitenoise ждёт функцию, а не строку-путь (иначе падает при старте)
+WHITENOISE_ADD_HEADERS_FUNCTION = add_cache_control_headers
+CLIENT_CACHE_MAX_AGE = conf.CLIENT_CACHE_MAX_AGE
 
 ROOT_URLCONF = 'params.urls'
 
@@ -84,6 +92,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'common.context_processors.site_contacts',
             ],
         },
     },
@@ -97,11 +106,11 @@ WSGI_APPLICATION = 'params.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': conf_checker.check_env_var('POSTGRES_DB_NAME'),
-        'USER': conf_checker.check_env_var('POSTGRES_DB_USER'),
-        'PASSWORD': conf_checker.check_env_var('POSTGRES_DB_PASSWORD'),
-        'HOST': conf_checker.check_env_var('POSTGRES_DB_HOST'),
-        'PORT': conf_checker.check_env_var('POSTGRES_DB_PORT')
+        'NAME': conf.POSTGRES_DB_NAME,
+        'USER': conf.POSTGRES_DB_USER,
+        'PASSWORD': conf.POSTGRES_DB_PASSWORD,
+        'HOST': conf.POSTGRES_DB_HOST,
+        'PORT': conf.POSTGRES_DB_PORT,
     }
 }
 
@@ -134,9 +143,9 @@ REST_FRAMEWORK = {
 
 SESSION_ENGINE = 'redis_sessions.session'
 SESSION_REDIS = {
-    'host': conf_checker.check_env_var('REDIS_HOST'),
-    'port': int(conf_checker.check_env_var('REDIS_PORT')),
-    'db': int(conf_checker.check_env_var('REDIS_DB_SESSION')),
+    'host': conf.REDIS_HOST,
+    'port': conf.REDIS_PORT,
+    'db': conf.REDIS_DB_SESSION,
     #'password': 'your_redis_password',
     'socket_timeout': 1,
     'retry_on_timeout': False,
@@ -174,8 +183,8 @@ SIMPLE_JWT = {
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
-LANGUAGE_CODE = conf_checker.check_env_var('LANGUAGE_CODE')
-TIME_ZONE = conf_checker.check_env_var('TIME_ZONE')
+LANGUAGE_CODE = conf.LANGUAGE_CODE
+TIME_ZONE = conf.TIME_ZONE
 USE_I18N = True
 USE_TZ = True
 
@@ -196,9 +205,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CACHES = {
     'default': {
         'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': f'redis://{conf_checker.check_env_var('REDIS_HOST')}:\
-            {conf_checker.check_env_var('REDIS_PORT')}/\
-            {conf_checker.check_env_var('REDIS_DB_CACHE')}',
+        'LOCATION': f'redis://{conf.REDIS_HOST}:{conf.REDIS_PORT}/{conf.REDIS_DB_CACHE}',
         'OPTIONS': {
             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
         }
@@ -208,7 +215,12 @@ CACHE_TTL = 60 * 60
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = conf_checker.check_env_var('EMAIL_PORT') #587
-EMAIL_USE_TLS = conf_checker.check_env_var('EMAIL_USE_TLS', 'bool')
-EMAIL_HOST_USER = conf_checker.check_env_var('EMAIL_SEND_FROM') #'your_email@gmail.com'
-EMAIL_HOST_PASSWORD = conf_checker.check_env_var('EMAIL_HOST_PASSWORD') #'your_email_password'
+EMAIL_PORT = conf.EMAIL_PORT
+EMAIL_USE_TLS = conf.EMAIL_USE_TLS
+EMAIL_HOST_USER = conf.EMAIL_SEND_FROM
+EMAIL_HOST_PASSWORD = conf.EMAIL_HOST_PASSWORD
+
+# Контактные данные сайта (используются во всех шаблонах через context processor)
+SITE_PHONE = conf.SITE_PHONE
+SITE_EMAIL = conf.SITE_EMAIL
+SITE_ADDRESS = conf.SITE_ADDRESS

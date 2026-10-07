@@ -1,67 +1,69 @@
-from rest_framework import status, serializers
-from rest_framework.response import Response
-from rest_framework.exceptions import NotFound
+"""API услуг: CRUD услуг и управление их секциями."""
+from typing import Any
+
+from rest_framework import status
 from rest_framework.decorators import action
-from services.models import Service, ServiceSection
+from rest_framework.request import Request
+from rest_framework.response import Response
+from rest_framework.serializers import BaseSerializer
+
+from common.base_api_views import BaseSectionSearchView, BaseViewApiSet
 from services.api.serializers import ServiceSerializer, ServiceSectionSerializer
-from common.base_api_views import BaseViewApiSet, BaseSectionSearchView
+from services.models import Service, ServiceSection
 
 
 class ServiceViewSet(BaseViewApiSet):
+    """CRUD услуг: список, создание, обновление, удаление, получение секций."""
+
     queryset = Service.objects.all()
     serializer_class = ServiceSerializer
     search_fields = ['title', 'id']
 
-    def get_section_serializer(self, sections, many):
-        return ServiceSectionSerializer(sections, many)
+    def get_section_serializer(self, sections: Any, many: bool = False) -> BaseSerializer:
+        return ServiceSectionSerializer(sections, many=many)
+
+    def get_section_queryset(self, instance: Service) -> Any:
+        return ServiceSection.objects.filter(service=instance)
 
     @action(detail=True, methods=['get'])
-    def get_service_section(self, request, pk):
+    def get_service_sections(self, request: Request, pk: int | None = None) -> Response:
+        """Секции конкретной услуги."""
         return self.sections(request, pk)
 
 
 class ServiceSectionSearchView(BaseSectionSearchView):
+    """Поиск, обновление, перемещение и создание секций услуги."""
+
     serializer_class = ServiceSectionSerializer
 
-    def retrieve(self, request, service_id=None, section_id=None): 
-        try: 
-            service = Service.objects.get(id=service_id) 
-        except Service.DoesNotExist:
-            return Response({'error': 'Post not found'}, status=404)  
-        try: 
-            section = ServiceSection.objects.get(id=section_id, service=service)
-        except ServiceSection.DoesNotExist: 
-            return Response({'error': 'Section of post does not found'}, status=404)
-        serializer = ServiceSectionSerializer(section) 
-        return Response(serializer.data)
-
     def get_queryset(self):
-        service_id = self.kwargs['post_id']
-        section_id = self.kwargs['section_id']
-        service = Service.objects.filter(id=service_id).first()
-        if not service:
-            raise NotFound("Post not found.")
-        if not (section := ServiceSection.objects.filter(service=service, id=section_id).first()):
-            raise NotFound("Section not found.")
-        return ServiceSection.objects.filter(service=service, id=section_id)
+        return ServiceSection.objects.filter(
+            service_id=self.kwargs['post_id'], id=self.kwargs['section_id'],
+        )
 
-    def get_section_serializer(self, instance):
-        return ServiceSerializer(instance.post)
+    def get_parent_lookup(self) -> str:
+        return 'service'
 
-    def create_responce_data(self, post_serializer, section_serializer) -> dict:
-        return {
-            'post': post_serializer.data,
-            'section': section_serializer.data
-        }
+    def get_section_serializer(self, instance: ServiceSection) -> BaseSerializer:
+        """Сериализатор родительской услуги для объединённого ответа."""
+        return ServiceSerializer(instance.service)
 
-    def get_target_section(self, instance: ServiceSection, direction: str) -> ServiceSection|Response:
+    def create_response_data(self, service_serializer, section_serializer) -> dict:
+        return {'service': service_serializer.data, 'section': section_serializer.data}
+
+    def get_target_section(self, instance: ServiceSection, direction: str) -> ServiceSection | Response:
+        """Соседняя секция для перемещения (up/down)."""
         if direction == 'up':
-            return ServiceSection.objects.filter(post=instance.service, order__lt=instance.order).order_by('-order').first()
-        elif direction == 'down':
-            return ServiceSection.objects.filter(post=instance.service, order__gt=instance.order).order_by('order').first()
-        else:
-            return Response({"detail": "Invalid direction"}, status=status.HTTP_400_BAD_REQUEST)
+            return ServiceSection.objects.filter(
+                service=instance.service, order__lt=instance.order,
+            ).order_by('-order').first()
+        if direction == 'down':
+            return ServiceSection.objects.filter(
+                service=instance.service, order__gt=instance.order,
+            ).order_by('order').first()
+        return Response({'detail': 'Invalid direction'}, status=status.HTTP_400_BAD_REQUEST)
 
     @action(detail=True, methods=['post'])
-    def move_service_section(self, request, *args, **kwargs):
+    def move_service_section(self, request: Request, *args: Any, **kwargs: Any) -> Response:
+        """Перемещение секции услуги вверх/вниз."""
         return self.move(request, *args, **kwargs)
