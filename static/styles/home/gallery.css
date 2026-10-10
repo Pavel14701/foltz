@@ -285,24 +285,16 @@
     }
 }
 
-/* Слайдер чуть компактнее по вертикали */
+/* Слайдер: авторазмер — фиксированная высота резала длинный контент.
+   Карточки сами растягиваются (height auto, min 62.7vh — см. правило выше). */
 .gallery-wrapper {
-    height: 62vh;
-    max-height: 62vh;
+    height: auto;
+    min-height: 62vh;
 }
 
 .card-wrapper {
-    height: 62vh;
-}
-
-.card {
-    height: 92%;
-    overflow-y: auto; /* длинный контент — скролл внутри слайда */
-    scrollbar-width: none;
-}
-
-.card::-webkit-scrollbar {
-    display: none;
+    height: auto;
+    min-height: 62vh;
 }
 
 @media screen and (max-width: 640px) {
