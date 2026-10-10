@@ -127,9 +127,9 @@ a {
 }
 
 .cta-block {
+    width: min(90vw, 1440px); /* вровень с секциями главной — ничего не выезжает */
     margin: var(--section-gap) auto 0;
-    padding: 32px 24px;
-    max-width: 720px;
+    padding: 32px 40px;
     text-align: center;
     background: black;
     color: #fff;
@@ -154,12 +154,13 @@ a {
 
 .cta-button {
     display: inline-block;
-    padding: 12px 28px;
+    padding: 16px 38px; /* крупная удобная кнопка */
     border-radius: 8px;
     background: #fff;
     color: black;
     text-decoration: none;
-    font-weight: 600;
+    font-size: 17px;
+    font-weight: 700;
 }
 
 .cta-button--ghost {
@@ -366,8 +367,8 @@ a {
 }
 
 @media screen and (max-width: 640px) {
-    .cta-block--wide {
-        width: 100%;
+    .cta-block {
+        width: 92vw;
         padding: 28px 16px;
     }
 
@@ -377,18 +378,18 @@ a {
     }
 }
 
-/* Hover-эффекты CTA — в тон карточкам услуг (scale + тень). */
-.cta-block:not(.cta-block--wide) {
+/* На контентных страницах CTA лежит внутри .content-section — тянется на всю ширину секции. */
+.content-section .cta-block {
     width: 100%;
-    max-width: none; /* вровень с остальными секциями страницы */
 }
 
-.cta-block:not(.cta-block--wide) .cta-title {
+.cta-block .cta-title {
     font-size: clamp(22px, 3vw, 34px);
 }
 
-.cta-block:not(.cta-block--wide) .cta-text {
+.cta-block .cta-text {
     font-size: clamp(15px, 1.6vw, 19px);
+    line-height: 1.6;
 }
 
 /* Единый вертикальный ритм на контентных страницах: между любыми секциями
