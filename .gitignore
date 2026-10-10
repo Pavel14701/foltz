@@ -10,4 +10,6 @@ makets
 .pytest_cache/
 .ruff_cache/
 staticfiles
-.mypy_cachedb*.sqlite3
+.mypy_cache/
+db*.sqlite3
+media/static/posts/
