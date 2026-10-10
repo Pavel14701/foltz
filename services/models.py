@@ -8,7 +8,8 @@ from common.base_models import ObjectBaseModel, SectionsBase
 
 def get_upload_to(instance, filename):
     if isinstance(instance, Service):
-        return os.path.join('static', 'services', f'service_{instance.title}', filename)
+        # slug безопасен для файловой системы (title может содержать «:» и пр.)
+        return os.path.join('static', 'services', f'service_{instance.slug or instance.pk}', filename)
     elif isinstance(instance, ServiceSection):
         return os.path.join('static', 'services', f'service_{instance.service.id}', 'sections', f'section_{instance.id}', filename)
     return os.path.join('static', 'uploads', filename)
@@ -49,6 +50,14 @@ class Service(ObjectBaseModel):
             (int(re.sub(r'\D', '', p.price) or 0) for p in self._priceable_rows()),
             default=0,
         )
+
+    @property
+    def gallery_preview(self):
+        """Первые картинки галереи услуги (собраны из секций) — блок после заголовка."""
+        images = []
+        for section in self.service_section.all():
+            images.extend(section.gallery.all())
+        return images[:3]
 
     @property
     def main_price(self) -> str:
@@ -109,3 +118,33 @@ class ServiceSection(SectionsBase):
     def save(self, *args, **kwargs):
         self.clean()
         super().save(*args, **kwargs)
+
+
+def upload_to_section_gallery(instance: 'ServiceSectionImage', filename: str) -> str:
+    if instance.section_id:
+        return os.path.join(
+            'static', 'services', f'service_{instance.section.service_id}',
+            'sections', f'section_{instance.section_id}', 'gallery', filename,
+        )
+    return os.path.join('static', 'uploads', filename)
+
+
+class ServiceSectionImage(models.Model):
+    """Картинка галереи секции услуги (мини-карусель в карточке)."""
+
+    section = models.ForeignKey(
+        'ServiceSection',
+        on_delete=models.CASCADE,
+        related_name='gallery',
+        verbose_name='секция',
+    )
+    image = models.ImageField('картинка', upload_to=upload_to_section_gallery)
+    order = models.PositiveIntegerField('порядок', default=0, help_text='Чем меньше число — тем раньше в галерее.')
+
+    class Meta:
+        ordering = ['order']
+        verbose_name = 'картинка галереи услуги'
+        verbose_name_plural = 'галереи секций услуг'
+
+    def __str__(self) -> str:
+        return f'{self.section} #{self.order}'

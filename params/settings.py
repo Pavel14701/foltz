@@ -227,5 +227,23 @@ SITE_EMAIL = conf.SITE_EMAIL
 SITE_ADDRESS = conf.SITE_ADDRESS
 SITE_HOURS = conf.SITE_HOURS
 
-# Yandex-карта в блоке «О нас» (iframe).
-CONTENT_SECURITY_POLICY['DIRECTIVES']['frame-src'] = ("'self'", 'https://yandex.ru')
+# Яндекс-карта офиса («О нас»): JS API 2.1 (script + тайлы рендера + шрифты иконок).
+CONTENT_SECURITY_POLICY['DIRECTIVES']['frame-src'] = ("'self'",)
+CONTENT_SECURITY_POLICY['DIRECTIVES']['script-src'] = (
+    "'self'", 'https://api-maps.yandex.ru', 'https://yastatic.net',
+)
+CONTENT_SECURITY_POLICY['DIRECTIVES']['img-src'] = (
+    "'self'", 'data:',
+    'https://core-stv.render.yandex.net',
+    'https://core-renderer-tiles.maps.yandex.net',
+    'https://yastatic.net',
+)
+CONTENT_SECURITY_POLICY['DIRECTIVES']['style-src'] = (
+    # 'unsafe-inline' обязателен: JS API 2.1 расставляет inline-стили программно.
+    "'self'", 'https://fonts.googleapis.com', 'https://yastatic.net', "'unsafe-inline'",
+)
+CONTENT_SECURITY_POLICY['DIRECTIVES']['font-src'] = ("'self'", 'https://yastatic.net', 'https://fonts.gstatic.com')
+CONTENT_SECURITY_POLICY['DIRECTIVES']['connect-src'] = (
+    "'self'", 'https://api-maps.yandex.ru', 'https://yandex.ru',
+    'https://log.api-maps.yandex.ru',
+)

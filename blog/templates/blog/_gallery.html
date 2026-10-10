@@ -4,7 +4,7 @@
         <div class="blog-gallery__viewport">
             <div class="blog-gallery__track">
                 {% for gi in imgs %}
-                <div class="blog-gallery__slide"><img src="{{ gi.image.url }}" alt="{{ post.title }}" loading="lazy"></div>
+                <div class="blog-gallery__slide"><img src="{{ gi.image.url }}" alt="{{ alt }}" loading="lazy"></div>
                 {% endfor %}
             </div>
         </div>
@@ -16,12 +16,12 @@
     {% if imgs|length == 2 %}
     <div class="blog-article-gallery blog-article-gallery--pair">
         {% for gi in imgs %}
-        <div class="post-image-card"><img src="{{ gi.image.url }}" alt="{{ post.title }}" loading="lazy"></div>
+        <div class="post-image-card"><img src="{{ gi.image.url }}" alt="{{ alt }}" loading="lazy"></div>
         {% endfor %}
     </div>
     {% else %}
     <div class="blog-article-gallery">
-        <img src="{{ imgs.0.image.url }}" alt="{{ post.title }}" loading="lazy">
+        <img src="{{ imgs.0.image.url }}" alt="{{ alt }}" loading="lazy">
     </div>
     {% endif %}
     {% endif %}

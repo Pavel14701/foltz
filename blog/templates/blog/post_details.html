@@ -38,13 +38,13 @@
         {% if section.youtube_url %}
             <iframe class="post-card__video" width="560" height="315" src="{{ section.embed_url }}" title="{{ section.subtitle|default:post.title }}" frameborder="0" allowfullscreen></iframe>
         {% endif %}
-        {% include 'blog/_gallery.html' with imgs=section.gallery.all %}
+        {% include 'blog/_gallery.html' with imgs=section.gallery.all alt=post.title %}
     {% if post.show_cta and post.cta_position == forloop.counter %}
     {% include '_cta.html' with cta_title=post.cta_title cta_text=post.cta_text cta_variant='accent' %}
     {% endif %}
     {% endfor %}
 
-    {% include 'blog/_gallery.html' with imgs=post.end_gallery %}
+    {% include 'blog/_gallery.html' with imgs=post.end_gallery alt=post.title %}
 
     {% if post.show_cta and not post.cta_position %}
     {% include '_cta.html' with cta_title=post.cta_title cta_text=post.cta_text cta_variant='accent' %}

@@ -7,27 +7,70 @@
 
 {% block content %}
 <section class="content-section">
-    <a class="back-link" href="{% url 'services:services' %}">← Все услуги</a>
+    <a class="back-link" href="{% url 'services:services' %}">&larr; Все услуги</a>
     <h1>{{ service.title }}</h1>
 
-    {% if service.preview_image %}
-        <img class="service-card__image" src="{{ service.preview_image.url }}" alt="{{ service.title }}">
-    {% elif service.preview_video_url %}
-        <iframe width="560" height="315" src="{{ service.preview_video_url }}" title="{{ service.title }}" frameborder="0" allowfullscreen></iframe>
-    {% endif %}
+    {# Блок «галерея + текст»: сразу после заголовка, ширина = ширине текстовых блоков #}
+    <div class="service-hero">
+        <div class="service-hero__media">
+            {% if service.gallery_preview %}
+                {% include 'blog/_gallery.html' with imgs=service.gallery_preview alt=service.title %}
+            {% elif service.preview_image %}
+                <img src="{{ service.preview_image.url }}" alt="{{ service.title }}">
+            {% elif service.preview_video_url %}
+                <iframe src="{{ service.preview_video_url }}" title="{{ service.title }}" frameborder="0" allowfullscreen></iframe>
+            {% endif %}
+        </div>
+        <p class="service-hero__lead">{{ service.preview_text }}</p>
+    </div>
 
     {% for section in service.service_section.all %}
-        {% if section.subtitle %}
-            <h2>{{ section.subtitle }}</h2>
-        {% endif %}
+        {% if section.subtitle %}<h2>{{ section.subtitle }}</h2>{% endif %}
+
         {% if section.content %}
-            <div class="service-section-content">{{ section.content|richtext }}</div>
-        {% endif %}
-        {% if section.image %}
-            <img class="service-card__image" src="{{ section.image.url }}" alt="{{ service.title }} — фото {{ section.order }}">
-        {% endif %}
-        {% if section.youtube_url %}
-            <iframe width="560" height="315" src="{{ section.embed_url }}" title="{{ service.title }} — видео {{ section.order }}" frameborder="0" allowfullscreen></iframe>
+            {% if forloop.counter0 == 1 %}
+                {# Блок-схема: как отрабатывается заявка #}
+                <ol class="steps-flow">
+                    {% for step in section.content|steps %}
+                    <li class="step">
+                        <span class="step__num">{{ forloop.counter }}</span>
+                        <span class="step__text">{{ step }}</span>
+                    </li>
+                    {% endfor %}
+                </ol>
+            {% elif forloop.counter0 == 5 %}
+                {# Преимущества: карточки-факты без списков #}
+                <div class="facts-grid">
+                    {% for fact in section.content|facts %}
+                    <div class="fact">{{ fact }}</div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {# Обычная секция: только текст (или одиночное медиа) #}
+                <div class="media-split{% if section.order|divisibleby:2 %} media-split--rev{% endif %}">
+                    <div class="media-split__text">{{ section.content|richtext }}</div>
+                    {% if section.image or section.youtube_url %}
+                    <div class="media-split__media">
+                        {% if section.image %}
+                            <img src="{{ section.image.url }}" alt="{{ service.title }}, фото {{ section.order }}">
+                        {% else %}
+                            <iframe src="{{ section.embed_url }}" title="{{ service.title }}, видео {{ section.order }}" frameborder="0" allowfullscreen></iframe>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                </div>
+            {% endif %}
+        {% elif section.image or section.youtube_url %}
+            {# Секция только с медиа #}
+            <div class="media-split{% if section.order|divisibleby:2 %} media-split--rev{% endif %}">
+                <div class="media-split__media">
+                    {% if section.image %}
+                        <img src="{{ section.image.url }}" alt="{{ service.title }}, фото {{ section.order }}">
+                    {% else %}
+                        <iframe src="{{ section.embed_url }}" title="{{ service.title }}, видео {{ section.order }}" frameborder="0" allowfullscreen></iframe>
+                    {% endif %}
+                </div>
+            </div>
         {% endif %}
     {% endfor %}
 

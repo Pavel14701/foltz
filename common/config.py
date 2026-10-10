@@ -74,6 +74,9 @@ class Env(BaseModel):
     SITE_ADDRESS: str = 'г. Минск, ул. Сухаревская, д. 16, пом. 6'
     SITE_HOURS: str = 'Пн–Пт: 09:00–17:00'
 
+    # --- Статик API Яндекс.Карт (карта офиса на «О нас», без рекламы) ---
+    YANDEX_MAPS_API_KEY: str = ''
+
     # --- Сайт и Telegram-бот ---
     SITE_BASE_URL: str = ''
     SITE_API_URL: str = ''

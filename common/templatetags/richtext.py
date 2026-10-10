@@ -18,6 +18,30 @@ _NUMBERED_RE = re.compile(r'^\d+[.)]\s+')
 
 
 @register.filter
+def steps(value: str) -> list[str]:
+    """Нумерованный список '1. текст' -> список шагов (для блок-схемы)."""
+    if not value:
+        return []
+    result: list[str] = []
+    for raw_line in str(value).splitlines():
+        line = raw_line.strip()
+        if not line:
+            continue
+        match = _NUMBERED_RE.match(line)
+        result.append(escape(line[match.end():]) if match else escape(line))
+    return result
+
+
+@register.filter
+def facts(value: str) -> list[str]:
+    """Сплошной текст -> карточки-факты (разбивка по предложениям)."""
+    if not value:
+        return []
+    sentences = re.split(r'(?<=[.!?])\s+', str(value).replace('\n', ' '))
+    return [escape(s.strip()) for s in sentences if len(s.strip()) > 2]
+
+
+@register.filter
 def richtext(value: str) -> SafeString:
     """Простой текст -> абзацы и списки (с автоэкранированием)."""
     if not value:

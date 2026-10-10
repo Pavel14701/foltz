@@ -3,6 +3,7 @@ import re
 from django.conf import settings
 from django.http import HttpRequest
 
+from common.config import env
 from forms.forms import ContactForm
 
 
@@ -15,6 +16,8 @@ def site_contacts(request: HttpRequest) -> dict:
             'email': settings.SITE_EMAIL,
             'address': settings.SITE_ADDRESS,
             'hours': settings.SITE_HOURS,
+            # JS API Яндекс.Карт на «О нас»; пусто -> статичная картинка-фолбэк.
+            'yandex_maps_api_key': env.YANDEX_MAPS_API_KEY,
         }
     }
 

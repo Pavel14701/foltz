@@ -8,45 +8,98 @@
 <section class="content-section">
     <h1>О Агросервисе «Фольц»</h1>
 
-    <div class="about-hero">
-        <div>
+    {# Зебра 1: кто мы (текст + фото мастера) #}
+    <div class="media-split">
+        <div class="media-split__text">
             <p class="section-lead">
-                Мы ремонтируем гидравлику и двигатели спецтехники с 2004 года: тракторы МТЗ,
-                погрузчики Амкодор, импортная техника с двигателями Deutz, JCB, Perkins.
+                С 2004 года возвращаем к работе технику, которую другие списывают.
+                Гидравлика и двигатели МТЗ, Амкодор, импортных машин — Deutz, JCB, Perkins, Cummins.
             </p>
             <p>
-                За это время через наш цех прошли тысячи гидронасосов, гидромоторов,
-                гидрораспределителей и двигателей. Мы знаем слабые места каждой модели
-                и держим запас типовых запчастей, чтобы не растягивать сроки.
+                Через наш цех прошли тысячи гидронасосов, гидромоторов, распределителей и моторов.
+                Мы знаем слабые места каждой модели — и не «перебираем на глазок»: сначала дефектовка
+                на стенде, потом письменная смета, и только после вашего «ок» — ремонт.
             </p>
-            <ul class="about-list">
-                <li>Собственный цех: расточка, шлифовка, испытательный стенд гидроагрегатов.</li>
-                <li>Выездная диагностика гидросистем по всей Беларуси.</li>
-                <li>Обменный фонд насосов и гидрораспределителей — не ждёте ремонта.</li>
-                <li>Работа по договору, гарантия 6–24 месяца.</li>
-            </ul>
+            <p>
+                Поэтому к нам возвращаются: цена известна до разборки, сроки не плывут,
+                а каждый узел перед выдачей проходит испытание под нагрузкой.
+            </p>
         </div>
-        <img class="about-hero__img" src="{% static 'images/man_hero.jpg' %}" alt="Мастер Агросервиса «Фольц» за работой">
+        <div class="media-split__media">
+            <img src="{% static 'images/man_hero.jpg' %}" alt="Мастер Агросервиса «Фольц» за ремонтом гидроагрегата">
+        </div>
     </div>
 
+    {# Цифры #}
     <div class="about-stats">
-        <div class="about-stats__item"><strong>20+</strong><span>лет опыта с 2004 года</span></div>
-        <div class="about-stats__item"><strong>6–24</strong><span>месяца гарантии по договору</span></div>
-        <div class="about-stats__item"><strong>РБ</strong><span>выездная диагностика по всей Беларуси</span></div>
+        <div class="about-stats__item"><strong>20+</strong><span>лет в ремонте спецтехники</span></div>
+        <div class="about-stats__item"><strong>1500+</strong><span>агрегатов восстановлено</span></div>
+        <div class="about-stats__item"><strong>300+</strong><span>узлов в обменном фонде</span></div>
+        <div class="about-stats__item"><strong>до 24</strong><span>месяцев гарантии по договору</span></div>
     </div>
 
-    <h2>Наш цех и техника</h2>
+    {# Преимущества — карточки-факты, без списков #}
+    <h2>Почему нам доверяют технику</h2>
+    <div class="facts-grid">
+        <div class="fact"><strong>Дешевле нового в 3–4 раза.</strong> Ремонтируем узел, а не меняем: восстановленный насос работает как новый, но без цены нового.</div>
+        <div class="fact"><strong>Стенд испытаний.</strong> Каждый насос и распределитель гоняем под нагрузкой до выдачи — вы получаете проверенный агрегат, а не надежду.</div>
+        <div class="fact"><strong>Смета до начала работ.</strong> Цена фиксируется письменно после дефектовки и в процессе не растёт.</div>
+        <div class="fact"><strong>Обменный фонд.</strong> Не ждёте ремонта: берёте готовый восстановленный узел со склада, ваш уходит в восстановление.</div>
+        <div class="fact"><strong>Гарантия по договору.</strong> 6–24 месяца в зависимости от узла — и мы реально отвечаем по ней, а не «до кассы».</div>
+        <div class="fact"><strong>Выезд по всей Беларуси.</strong> Диагностируем гидросистему прямо в поле или на объекте — без лишней перевозки техники.</div>
+    </div>
+
+    {# Блок-схема: как проходит работа #}
+    <h2>Как проходит работа</h2>
+    <ol class="steps-flow">
+        <li class="step">
+            <span class="step__num">1</span>
+            <span class="step__text"><strong>Звонок.</strong> Называете модель и симптомы — сразу озвучиваем ориентир по цене и срокам.</span>
+        </li>
+        <li class="step">
+            <span class="step__num">2</span>
+            <span class="step__text"><strong>Диагностика.</strong> В нашем цеху или выездом к вам: проверяем гидросистему под нагрузкой и находим настоящую причину, а не симптом.</span>
+        </li>
+        <li class="step">
+            <span class="step__num">3</span>
+            <span class="step__text"><strong>Смета и договор.</strong> Объём работ и итоговая сумма фиксируются письменно — до начала ремонта вы знаете цену.</span>
+        </li>
+        <li class="step">
+            <span class="step__num">4</span>
+            <span class="step__text"><strong>Ремонт.</strong> Дефектовка, замена изношенного, сборка. Типовые запчасти на складе — не ждём поставку неделями.</span>
+        </li>
+        <li class="step">
+            <span class="step__num">5</span>
+            <span class="step__text"><strong>Испытания и выдача.</strong> Агрегат проходит стенд, вы получаете гарантийный талон — от 6 до 24 месяцев.</span>
+        </li>
+    </ol>
+
+    {# Зебра 2: цех (фото + текст) #}
+    <div class="media-split media-split--rev">
+        <div class="media-split__media">
+            <img src="{% static 'images/photo_2024-12-06_10-07-21.jpg' %}" alt="Ремонтный цех Агросервиса «Фольц»" loading="lazy">
+        </div>
+        <div class="media-split__text">
+            <h2>Свой цех — это скорость и контроль</h2>
+            <p>
+                Расточка, шлифовка, герметизация, испытательный стенд гидроагрегатов — весь цикл
+                у нас, без передачи на сторону. Поэтому мы отвечаем за каждый этап и контролируем сроки.
+            </p>
+            <p>
+                Склад типовых запчастей: уплотнения, валы, распределители — самое ходовое всегда
+                в наличии. Именно это позволяет отдавать большинство ремонтов за 1–3 дня.
+            </p>
+        </div>
+    </div>
+
+    {# Малая галерея: работы #}
     <div class="about-gallery">
         <figure>
-            <img src="{% static 'images/photo_2024-12-06_10-07-21.jpg' %}" alt="Цех Агросервиса «Фольц»" loading="lazy">
-            <figcaption>Ремонтный цех</figcaption>
-        </figure>
-        <figure>
             <img src="{% static 'images/engine_jcb1.jpg' %}" alt="Капитальный ремонт двигателя JCB" loading="lazy">
-            <figcaption>Двигатели JCB и Deutz</figcaption>
+            <figcaption>Капремонт двигателя JCB</figcaption>
         </figure>
         <figure>
-            <img src="{% static 'images/raspred_bosch.jpg' %}" alt="Гидрораспределитель Bosch" loading="lazy">
+            <img src="{% static 'images/raspred_bosch.jpg' %}" alt="Гидрораспределитель Bosch после ремонта" loading="lazy">
             <figcaption>Гидрораспределители</figcaption>
         </figure>
         <figure>
@@ -55,22 +108,20 @@
         </figure>
     </div>
 
-    <h2>Как мы работаем</h2>
-    <ol class="about-steps">
-        <li><strong>Звонок и консультация.</strong> Уточняем модель техники и симптомы — сразу называем ориентир по цене и срокам.</li>
-        <li><strong>Диагностика.</strong> В нашем цеху или выездом к вам — проверяем гидросистему под нагрузкой.</li>
-        <li><strong>Смета и сроки.</strong> Фиксируем объём работ письменно, до начала ремонта вы знаете итоговую сумму.</li>
-        <li><strong>Ремонт и испытания.</strong> Каждый агрегат прогоняем на стенде, выдаём гарантийный талон.</li>
-    </ol>
-
     <h2>Где мы находимся</h2>
     <p class="about-address">
         Офис и мастерская: <strong>{{ site.address }}</strong>. Режим работы: {{ site.hours }}.
     </p>
-    <iframe class="about-map"
-            src="https://yandex.ru/map-widget/v1/?text=%D0%9C%D0%B8%D0%BD%D1%81%D0%BA%2C%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%20%D0%A1%D1%83%D1%85%D0%B0%D1%80%D0%B5%D0%B2%D1%81%D0%BA%D0%B0%D1%8F%2C%2016&z=16"
-            title="Офис и мастерская «Фольц» на карте — {{ site.address }}"
-            loading="lazy" allowfullscreen></iframe>
+    <div id="office-map" class="about-map"
+         data-lat="53.8859313" data-lon="27.4388081"></div>
+    {% if site.yandex_maps_api_key %}
+    <script src="https://api-maps.yandex.ru/2.1/?apikey={{ site.yandex_maps_api_key }}&lang=ru_RU"></script>
+    <script src="{% static 'js/office-map.js' %}"></script>
+    {% else %}
+    {# Без ключа — статичная схема-заглушка (картинка отдаётся с нашего сервера). #}
+    <img class="about-map" src="{% static 'images/about-map.jpg' %}" width="650" height="450"
+         alt="Схема проезда: офис и мастерская «Фольц», {{ site.address }}" loading="lazy">
+    {% endif %}
 
     {% include '_cta.html' with cta_title='Обсудим вашу технику?' cta_text='Позвоните — мастер ответит на вопросы и сориентирует по цене и срокам ещё до начала работ.' %}
 </section>

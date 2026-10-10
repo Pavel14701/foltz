@@ -41,11 +41,11 @@ def _steps(*items: str) -> str:
 def _svc(title, slug, preview, prices, how, why, adv, extra=()):
     """Собирает услугу: продающий текст + секции + прайс."""
     sections = [
-        {'order': 1, 'subtitle': 'Как проходит работа у нас'},
+        {'order': 1, 'subtitle': 'Как отрабатывается заявка'},
         {'order': 2, 'content': how},
-        {'order': 3, 'subtitle': 'Почему это стоит именно столько'},
+        {'order': 3, 'subtitle': 'Что входит в цену'},
         {'order': 4, 'content': why},
-        {'order': 5, 'subtitle': 'Почему выбирают нас'},
+        {'order': 5, 'subtitle': 'Наши преимущества'},
         {'order': 6, 'content': adv},
     ]
     for i, (sub, content) in enumerate(extra, start=len(sections) + 1):
