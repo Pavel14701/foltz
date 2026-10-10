@@ -2,7 +2,7 @@
 {% load static %}
 {% load reviews_tags %}
 {% block title %}Агросервис «Фольц» — ремонт гидравлики и двигателей спецтехники в Беларуси{% endblock %}
-{% block meta_description %}Ремонт гидравлики МТЗ и Амкодор, капитальный ремонт двигателей Deutz, JCB, Perkins, выездная диагностика гидросистем по Беларуси. Гарантия до 24 месяцев, работа по договору.{% endblock %}
+{% block meta_description %}Ремонт гидравлики МТЗ и Амкодор, капитальный ремонт двигателей Deutz, JCB, Perkins, выездная диагностика гидросистем по Беларуси. Запчасти и обменный фонд — 300+ узлов. Гарантия до 24 месяцев, работа по договору.{% endblock %}
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'styles/home/gallery.css' %}">
 <link rel="stylesheet" href="{% static 'styles/home/benefits.css' %}">
@@ -19,8 +19,13 @@
     <div class="card hero-card grid-gallery">
         <div class="hero-overlay">
             <h1>Ремонт гидравлики и двигателей спецтехники в Беларуси</h1>
-            <p>МТЗ, Амкодор, Manitou, JCB: гидронасосы, гидрораспределители, капитальный ремонт ДВС. Гарантия до 24 месяцев, работа по договору.</p>
-            <a class="cta-button hero-cta" href="tel:{{ site.phone_link }}">{{ site.phone }}</a>
+            <p>С 2004 года возвращаем в строй технику МТЗ, Амкодор, Manitou и JCB: гидронасосы, гидрораспределители, капитальный ремонт ДВС. Обменный фонд — вы сразу получаете рабочий узел, а не ждёте окончания ремонта.</p>
+            <ul class="hero-badges" aria-label="Ключевые условия работы">
+                <li>Гарантия до 24 месяцев</li>
+                <li>Работа по договору</li>
+                <li>Выезд по всей Беларуси</li>
+                <li>300+ узлов обменного фонда</li>
+            </ul>
         </div>
         <div class="grid">
             <div class="row">
@@ -142,35 +147,52 @@
         </div>
     </div>
 </section>
-{% include '_cta.html' %}
-<section class="benefit" aria-label="Преимущества">
-        <div class="card-large card">
-            <div class="card-content ">
-                <div class="card-top">
-                    <span class="card-title">02.<br>
-                        <h2>Почему выбирают «Фольц»</h2>
-                    </span>
-                </div>
-                <ul class="benefits-list">
-                    <li>Собственный цех с испытательным стендом гидроагрегатов.</li>
-                    <li>Выездная диагностика гидросистем по всей Беларуси.</li>
-                    <li>Обменный фонд: гидронасосы и распределители в наличии.</li>
-                    <li>Работаем по договору с юрлицами, фермерами и ИП.</li>
-                </ul>
+<section class="home-section" aria-labelledby="what-we-do-title">
+    <h2 id="what-we-do-title">Чем занимается Агросервис «Фольц»</h2>
+    <p class="home-section__lead">Полный цикл работ по гидравлике и двигателям спецтехники: от выездной диагностики до капитального ремонта и испытания агрегата на собственном стенде.</p>
+    <div class="directions-grid">
+        <a class="direction-card" href="{% url 'services:services' %}">
+            <img src="{% static 'images/raspred_bosch.jpg' %}" alt="Ремонт гидрораспределителя Bosch в цехе Агросервиса «Фольц»" loading="lazy">
+            <div class="direction-card__body">
+                <h3>Ремонт гидравлики</h3>
+                <p>Гидронасосы, гидромоторы, распределители и цилиндры для МТЗ, Амкодор, Manitou и JCB: дефектовка, ремонт и проверка под нагрузкой.</p>
             </div>
-        </div>
-        <div class="card-small card">
-            <div class="card-content ">
-                <div class="card-top">
-                    <span class="card-title">03.<br>
-                        <h2>Гарантия до 24 месяцев</h2>
-                    </span>
-                </div>
-                <p>Даём письменную гарантию на работы и восстановленные агрегаты: насосы — 6 месяцев, капитальный ремонт двигателя — до 24 месяцев.</p>
+        </a>
+        <a class="direction-card" href="{% url 'services:services' %}">
+            <img src="{% static 'images/engine_jcb1.jpg' %}" alt="Капитальный ремонт двигателя JCB в цехе" loading="lazy">
+            <div class="direction-card__body">
+                <h3>Капитальный ремонт ДВС</h3>
+                <p>Deutz, Perkins, JCB, Д-243 и Д-260: полный цикл от дефектовки до обкатки с письменной гарантией до 24 месяцев.</p>
             </div>
-        </div>
+        </a>
+        <a class="direction-card" href="{% url 'services:services' %}">
+            <img src="{% static 'images/jcb_traktor.jpg' %}" alt="Выездная диагностика гидросистемы спецтехники JCB" loading="lazy">
+            <div class="direction-card__body">
+                <h3>Выездная диагностика</h3>
+                <p>Приезжаем на вашу площадку в любой точке Беларуси, находим причину отказа на месте и забираем агрегат в цех.</p>
+            </div>
+        </a>
+        <a class="direction-card" href="{% url 'products:catalog' %}">
+            <img src="{% static 'images/korobka_mtz.jpg' %}" alt="Коробка передач МТЗ из обменного фонда" loading="lazy">
+            <div class="direction-card__body">
+                <h3>Запчасти и обменный фонд</h3>
+                <p>Восстановленные узлы и новые запчасти со склада: гидронасос вы получаете сегодня, а не через месяц ремонта.</p>
+            </div>
+        </a>
+    </div>
 </section>
-
+<section class="home-section" aria-labelledby="advantages-title">
+    <h2 id="advantages-title">Почему нам доверяют</h2>
+    <p class="home-section__lead">Мы отвечаем за результат документально: договор, смета после дефектовки и письменная гарантия на каждую работу.</p>
+    <div class="facts-grid">
+        <div class="fact"><strong>20+ лет</strong> на рынке спецтехники — от старых МТЗ до новых JCB и Manitou</div>
+        <div class="fact"><strong>1500+</strong> отремонтированных гидроагрегатов вернулись в работу</div>
+        <div class="fact"><strong>300+</strong> позиций обменного фонда: насосы, распределители, мосты</div>
+        <div class="fact"><strong>До 24 месяцев</strong> письменной гарантии на капитальный ремонт двигателя</div>
+        <div class="fact"><strong>Свой цех</strong> с испытательным стендом — узел проверяем до выдачи</div>
+        <div class="fact"><strong>Выезд по всей Беларуси</strong> — работаем с юрлицами, фермерами и ИП по договору</div>
+    </div>
+</section>
 <section class="gallery-wrapper" aria-label="Услуги">
     <h2 class="visually-hidden">Услуги по ремонту спецтехники</h2>
     {% for card in service_cards %}
@@ -178,7 +200,7 @@
         <div class="card need-background-image" data-image-name="{{ card.image }}" data-image-back-pos="right">
             <div class="card-content">
                 <div class="card-top">
-                    <span class="card-title">{{ forloop.counter|add:3 }}.<br>
+                    <span class="card-title">
                         <h2>{{ card.title }}</h2>
                     </span>
                 </div>
@@ -209,35 +231,16 @@
 </section>
 {% url 'services:services' as services_url %}
 {% include '_section_jump.html' with jump_url=services_url jump_text='Все услуги и цены' jump_note='Полный перечень работ с актуальными ценами — от диагностики до капитального ремонта.' %}
-{% include '_cta.html' with cta_title='Не нашли нужную услугу?' cta_text='Берёмся и за нестандартные задачи: гидроцилиндры, коробки передач, редукторы. Опишите проблему — подскажем, чем поможем.' cta_variant='accent' %}
-<section class="benefit" aria-label="Факты о компании">
-    <h2 class="visually-hidden">О компании в цифрах</h2>
-    <div class="card-small card">
-        <div class="card-content ">
-            <div class="card-top">
-                <span class="card-title">08.<br>
-                    <h2>Выезд по всей Беларуси</h2>
-                </span>
-            </div>
-            <p>Минск, Гомель, Брест, Витебск, Гродно, Могилёв — диагностируем гидросистему на месте и забираем агрегат в цех.</p>
-        </div>
-    </div>
-    <div class="card-large card">
-        <div class="card-content">
-            <div class="card-top">
-                <span class="card-title">09.<br>
-                    <h2>Факты о нас</h2>
-                </span>
-            </div>
-            <ul class="facts-list">
-                <li><strong>20+</strong> лет на рынке спецтехники</li>
-                <li><strong>1500+</strong> отремонтированных гидроагрегатов</li>
-                <li><strong>300+</strong> позиций в обменном фонде</li>
-            </ul>
-        </div>
+<section class="home-section" aria-labelledby="services-adv-title">
+    <h2 id="services-adv-title">Почему ремонт у нас — это быстро</h2>
+    <div class="facts-grid">
+        <div class="fact"><strong>Обменный фонд.</strong> Вы получаете рабочий узел сразу, а не ждёте окончания ремонта своего</div>
+        <div class="fact"><strong>Испытательный стенд.</strong> Каждый насос и распределитель проверяем под нагрузкой до выдачи</div>
+        <div class="fact"><strong>Смета после дефектовки.</strong> Цена фиксируется до начала работ и не растёт в процессе</div>
+        <div class="fact"><strong>Гарантия 6–24 месяца</strong> на работы — письменно, по договору</div>
     </div>
 </section>
-
+{% include '_cta.html' with cta_title='Не нашли нужную услугу?' cta_text='Берёмся и за нестандартные задачи: гидроцилиндры, коробки передач, редукторы. Опишите проблему — подскажем, чем поможем.' cta_variant='accent' %}
 <section class="gallery-wrapper" aria-label="Обменный фонд">
     <h2 class="visually-hidden">Обменный фонд — гидроагрегаты в наличии</h2>
     {% for product in fund_products %}
@@ -245,7 +248,7 @@
         <div class="card need-background-image" data-image-name="{{ product.image }}" data-image-back-pos="right">
             <div class="card-content">
                 <div class="card-top">
-                    <span class="card-title">{{ forloop.counter|add:9 }}.<br>
+                    <span class="card-title">
                         <h2>{{ product.title }}</h2>
                     </span>
                 </div>
@@ -268,7 +271,7 @@
         <div class="card">
             <div class="card-content">
                 <div class="card-top">
-                    <span class="card-title">13.<br>
+                    <span class="card-title">
                         <h2>Не нашли агрегат?</h2>
                     </span>
                 </div>
@@ -289,12 +292,20 @@
 </section>
 {% url 'products:catalog' as catalog_url %}
 {% include '_section_jump.html' with jump_url=catalog_url jump_text='Открыть каталог запчастей' jump_note='Цены на складе, обменный фонд и доставка по всей Беларуси.' %}
+<section class="home-section" aria-labelledby="parts-adv-title">
+    <h2 id="parts-adv-title">Почему запчасти выгодно брать у нас</h2>
+    <div class="facts-grid">
+        <div class="fact"><strong>Цены со склада</strong> — без наценок посредников, наличие видно в каталоге</div>
+        <div class="fact"><strong>Обмен старого узла</strong> — ваш изношенный агрегат идёт в зачёт стоимости</div>
+        <div class="fact"><strong>Нет на складе — привезём под заказ</strong> и назовём точный срок поставки</div>
+        <div class="fact"><strong>Гарантия 6 месяцев</strong> на все узлы обменного фонда</div>
+    </div>
+</section>
 {% include '_cta.html' with cta_title='Не нашли запчасть? Найдём под заказ' cta_text='Скажите модель техники и узел — проверим наличие на складе и у партнёров, назовём цену и срок поставки.' cta_variant='accent' %}
 {% reviews_block 0 wide=True %}
-{% include '_cta.html' with cta_title='Остались вопросы?' cta_text='Позвоните или оставьте заявку — подскажем по ремонту, запчастям и обменному фонду.' cta_variant='contrast' %}
 <section class="benefit home-blog" aria-label="Статьи из блога">
     <div class="home-blog__head">
-        <span class="card-title">14.<br>
+        <span class="card-title">
             <h2>Из блога</h2>
         </span>
         <a class="home-blog__all" href="{% url 'blog:blog' %}">Все статьи →</a>
@@ -322,7 +333,7 @@
     <div class="card map-card">
         <div class="card-content ">
             <div class="card-top">
-                <span class="card-title">15.<br>
+                <span class="card-title">
                     <h2>Работаем по всей Беларуси</h2>
                 </span>
             </div>
