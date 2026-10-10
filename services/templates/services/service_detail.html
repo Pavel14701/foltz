@@ -76,16 +76,14 @@
 
     {% if service.prices.all %}
     <h2>Цены на работы</h2>
-    <table class="price-table--detail">
-        <tbody>
+    <div class="price-cards">
         {% for item in service.prices.all %}
-            <tr>
-                <td>{{ item.name }}</td>
-                <td>{{ item.price }}</td>
-            </tr>
+        <div class="price-card">
+            <span class="price-card__name">{{ item.name }}</span>
+            <span class="price-card__value">{{ item.price }}</span>
+        </div>
         {% endfor %}
-        </tbody>
-    </table>
+    </div>
     <p class="price-note">Цены являются публичной офертой, НДС не облагается. Стоимость запчастей рассчитывается отдельно после дефектовки.</p>
     {% endif %}
 
