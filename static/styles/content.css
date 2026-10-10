@@ -53,10 +53,9 @@ a {
 }
 
 .content-section {
-    width: 100%; /* одинаковая ширина всех секций — блоки выровнены друг к другу */
-    max-width: 1100px;
+    width: min(90vw, 1440px); /* та же ширина контента, что и на главной */
     margin: 0 auto;
-    padding: 140px 20px 60px; /* запас под фиксированный хедер */
+    padding: 0;
 }
 
 .section-lead {
@@ -192,14 +191,14 @@ a {
 }
 
 @media screen and (max-width: 900px) {
-    .content-section {
-        padding: 80px 16px 48px;
+    .content-section:first-child {
+        padding-top: 80px;
     }
 }
 
 @media screen and (max-width: 640px) {
-    .content-section {
-        padding: 72px 12px 40px;
+    .content-section:first-child {
+        padding-top: 72px;
     }
 
     .cta-actions .cta-button {
@@ -347,11 +346,30 @@ a {
     line-height: 1.6;
 }
 
-/* Единый вертикальный ритм на контентных страницах: между любыми секциями
-   ровно 56px (margin), как на главной — паддинги не суммируются. */
+/* Единый вертикальный ритм на контентных страницах: между секциями
+   var(--section-gap), ширина колонки — как на главной. */
 .content-section {
-    padding: 0 20px;
     margin-top: var(--section-gap);
+}
+
+/* Внутренние блоки не вылезают за колонку страницы (на широких экранах
+   90vw > cap 1440px — переходы/CTA живут в ширину секции). */
+.content-section .section-jump {
+    width: 100%;
+}
+
+/* Контент не вылезает за колонки и контейнер. */
+.media-split__text {
+    min-width: 0;
+}
+
+.service-section-content img,
+.service-section-content iframe {
+    max-width: 100%;
+}
+
+.services-search__input {
+    min-width: 0;
 }
 
 /* отступ низа последней секции перед футером — на самом main */
