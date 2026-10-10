@@ -1,16 +1,25 @@
-<section class="content-section reviews-section" aria-labelledby="reviews-title">
+{% load static %}
+<section class="content-section reviews-section{% if wide %} reviews-section--wide{% endif %}" aria-labelledby="reviews-title">
     <h2 id="reviews-title">Отзывы о нас</h2>
-    <div class="reviews-grid">
-        {% for review in reviews %}
-        <figure class="review-card">
-            <blockquote class="review-card__text">{{ review.text }}</blockquote>
-            <figcaption class="review-card__meta">
-                <span class="review-card__author">{{ review.author }}</span>
-                <time class="review-card__date" datetime="{{ review.date|date:'Y-m-d' }}">{{ review.date|date:'d.m.Y' }}</time>
-            </figcaption>
-        </figure>
-        {% empty %}
-        <p>Отзывы скоро появятся.</p>
-        {% endfor %}
+    <div class="reviews-slider" data-reviews-slider>
+        <div class="reviews-slider__viewport">
+            <div class="reviews-slider__track">
+                {% for review in reviews %}
+                <figure class="review-card">
+                    <blockquote class="review-card__text">{{ review.text }}</blockquote>
+                    <figcaption class="review-card__meta">
+                        <span class="review-card__author">{{ review.author }}</span>
+                        <time class="review-card__date" datetime="{{ review.date|date:'Y-m-d' }}">{{ review.date|date:'d.m.Y' }}</time>
+                    </figcaption>
+                </figure>
+                {% empty %}
+                <p>Отзывы скоро появятся.</p>
+                {% endfor %}
+            </div>
+        </div>
+        <button type="button" class="reviews-slider__btn reviews-slider__btn--prev blog-gallery__btn blog-gallery__btn--prev" aria-label="Предыдущий отзыв">&#10094;</button>
+        <button type="button" class="reviews-slider__btn reviews-slider__btn--next blog-gallery__btn blog-gallery__btn--next" aria-label="Следующий отзыв">&#10095;</button>
+        <div class="reviews-slider__dots"></div>
     </div>
 </section>
+<script src="{% static 'js/reviews_slider.js' %}" defer></script>

@@ -7,7 +7,7 @@ register = template.Library()
 
 
 @register.inclusion_tag('reviews/_reviews_block.html')
-def reviews_block(limit: int = 3):
-    """limit=0 -> показать все отзывы, иначе — первые N (по дате убыв.)."""
+def reviews_block(limit: int = 3, wide: bool = False):
+    """limit=0 -> показать все отзывы, иначе — первые N. wide=True -> блок 90vw как на главной."""
     queryset = Review.objects.all() if not limit else Review.objects.all()[:limit]
-    return {'reviews': queryset}
+    return {'reviews': queryset, 'wide': wide}

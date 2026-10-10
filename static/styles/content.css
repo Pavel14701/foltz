@@ -1498,11 +1498,62 @@ a.contacts-card__value:hover {
 }
 
 /* Отзывы о нас: белые карточки в общей стилистике (как facts-grid/post-image-card). */
-.reviews-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 24px;
+/* Широкий вариант на главной — вровень с блоками .benefit/.cta-block--wide (90vw). */
+.reviews-section--wide {
+    width: 90vw;
+    max-width: 1440px;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+/* Слайдер отзывов: 3 карточки по горизонту, автопрокрутка 10с, пауза при ховере. */
+.reviews-slider {
+    position: relative;
     margin: 12px 0 24px;
+}
+
+.reviews-slider__viewport {
+    overflow: hidden;
+}
+
+.reviews-slider__track {
+    display: flex;
+    gap: 24px;
+    align-items: stretch;
+    transition: transform 0.45s ease;
+}
+
+.reviews-slider__track .review-card {
+    flex: 0 0 calc((100% - 48px) / 3); /* 3 карточки по горизонту */
+    margin: 0;
+}
+
+.reviews-slider__btn.is-hidden {
+    display: none;
+}
+
+.reviews-slider__dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 18px;
+}
+
+@media screen and (max-width: 900px) {
+    .reviews-slider__track .review-card {
+        flex: 0 0 calc((100% - 24px) / 2); /* 2 карточки */
+    }
+}
+
+@media screen and (max-width: 640px) {
+    .reviews-slider__track .review-card {
+        flex: 0 0 100%; /* 1 карточка */
+    }
+
+    .reviews-section--wide {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
 }
 
 .review-card {
