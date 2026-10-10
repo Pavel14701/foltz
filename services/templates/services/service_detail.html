@@ -91,6 +91,9 @@
 
     {% include 'forms/_request_form.html' %}
 
+    {% url 'products:catalog' as catalog_url %}
+    {% include '_section_jump.html' with jump_url=catalog_url jump_text='Подобрать запчасти в каталоге' jump_note='Новые запчасти и восстановленные узлы обменного фонда — с ценами.' %}
+
     {% include '_cta.html' with cta_title='Нужен ремонт? Обсудим детали' cta_text='Согласуем смету до начала работ. Если агрегат в обменном фонде — отдадим сразу, без ожидания ремонта.' cta_variant='accent' %}
 </section>
 {% endblock %}

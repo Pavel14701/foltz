@@ -28,6 +28,10 @@
         {% include "services/_service_grid.html" %}
     </div>
 
+    {% url 'products:catalog' as catalog_url %}
+    {% include '_section_jump.html' with jump_url=catalog_url jump_text='Нужны запчасти? Открыть каталог' jump_note='Гидронасосы, распределители, мосты и узлы из обменного фонда — с ценами.' %}
+
+
     {% include '_cta.html' with cta_title='Подберём решение под вашу технику' cta_text='Опишите модель и симптомы — назовём ориентир по цене и срокам. При необходимости выедем на диагностику по всей Беларуси.' cta_variant='accent' %}
 </section>
 

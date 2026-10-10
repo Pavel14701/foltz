@@ -1497,6 +1497,40 @@ a.contacts-card__value:hover {
     filter: grayscale(1) brightness(0.82) contrast(1.18);
 }
 
+/* Переход между разделами: крупная ссылка-стрелка после секции, перед CTA. */
+.section-jump {
+    text-align: center;
+    margin: 40px 20px 26px;
+}
+
+.section-jump__link {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 12px;
+    font-size: clamp(20px, 2.6vw, 30px);
+    font-weight: 700;
+    color: hsla(41, 92%, 45%, 1);
+    text-decoration: none;
+}
+
+.section-jump__link:hover {
+    color: hsla(41, 92%, 38%, 1);
+}
+
+.section-jump__arrow {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.section-jump__link:hover .section-jump__arrow {
+    transform: translateX(8px);
+}
+
+.section-jump__note {
+    margin: 8px 0 0;
+    color: #6b6558;
+}
+
 /* Отзывы о нас: белые карточки в общей стилистике (как facts-grid/post-image-card). */
 /* Широкий вариант на главной — вровень с блоками .benefit/.cta-block--wide (90vw). */
 .reviews-section--wide {

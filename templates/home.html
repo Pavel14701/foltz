@@ -207,6 +207,9 @@
     </div>
     {% endfor %}
 </section>
+{% url 'services:services' as services_url %}
+{% include '_section_jump.html' with jump_url=services_url jump_text='Все услуги и цены' jump_note='Полный перечень работ с актуальными ценами — от диагностики до капитального ремонта.' %}
+{% include '_cta.html' with cta_title='Не нашли нужную услугу?' cta_text='Берёмся и за нестандартные задачи: гидроцилиндры, коробки передач, редукторы. Опишите проблему — подскажем, чем поможем.' cta_variant='accent' %}
 <section class="benefit" aria-label="Факты о компании">
     <h2 class="visually-hidden">О компании в цифрах</h2>
     <div class="card-small card">
@@ -284,8 +287,11 @@
         </div>
     </div>
 </section>
+{% url 'products:catalog' as catalog_url %}
+{% include '_section_jump.html' with jump_url=catalog_url jump_text='Открыть каталог запчастей' jump_note='Цены на складе, обменный фонд и доставка по всей Беларуси.' %}
+{% include '_cta.html' with cta_title='Не нашли запчасть? Найдём под заказ' cta_text='Скажите модель техники и узел — проверим наличие на складе и у партнёров, назовём цену и срок поставки.' cta_variant='accent' %}
 {% reviews_block 0 wide=True %}
-{% include '_cta.html' with cta_title='Не нашли нужную услугу?' cta_text='Берёмся и за нестандартные задачи: гидроцилиндры, коробки передач, редукторы. Опишите проблему — подскажем, чем поможем.' cta_variant='contrast' %}
+{% include '_cta.html' with cta_title='Остались вопросы?' cta_text='Позвоните или оставьте заявку — подскажем по ремонту, запчастям и обменному фонду.' cta_variant='contrast' %}
 <section class="benefit home-blog" aria-label="Статьи из блога">
     <div class="home-blog__head">
         <span class="card-title">14.<br>
