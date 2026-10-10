@@ -1514,24 +1514,24 @@ a.contacts-card__value:hover {
 
 .reviews-slider__viewport {
     overflow: hidden;
-    /* вертикальные поля не дают overflow:hidden срезать тень карточек
-       (15px в покое, до ~32px вниз при ховере); отрицательные маргины
-       компенсируют их, чтобы сетка карточек не сдвигалась.
-       Горизонталь без полей: куски соседних карточек/теней за краями
-       сетки не должны быть видны — обрезка ровно по краю карточек. */
-    padding: 20px 0 32px;
-    margin: -20px 0 -32px;
+    /* поля не дают overflow:hidden срезать тень карточек (вбок до ~24px
+       при ховере, вниз до 32px); отрицательные маргины компенсируют их,
+       чтобы сетка карточек не сдвигалась. Запас по бокам 26px меньше,
+       чем зазор до соседки минус её тень (44-15=29px) — куски соседних
+       карточек/теней за краями сетки не видны, свои тени не режутся. */
+    padding: 20px 26px 32px;
+    margin: -20px -26px -32px;
 }
 
 .reviews-slider__track {
     display: flex;
-    gap: 24px;
+    gap: 44px;
     align-items: stretch;
     transition: transform 0.45s ease;
 }
 
 .reviews-slider__track .review-card {
-    flex: 0 0 calc((100% - 48px) / 3); /* 3 карточки по горизонту */
+    flex: 0 0 calc((100% - 88px) / 3); /* 3 карточки по горизонту */
     margin: 0;
 }
 
@@ -1548,7 +1548,7 @@ a.contacts-card__value:hover {
 
 @media screen and (max-width: 900px) {
     .reviews-slider__track .review-card {
-        flex: 0 0 calc((100% - 24px) / 2); /* 2 карточки */
+        flex: 0 0 calc((100% - 44px) / 2); /* 2 карточки */
     }
 }
 
