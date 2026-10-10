@@ -1672,9 +1672,18 @@ a.contacts-card__value:hover {
     grid-column: span 2;
 }
 
-/* варианты на 4 карточки: широкие ячейки по диагонали */
-.bento--duo {
+/* варианты на 4 карточки: широкие ячейки по диагонали.
+   Важно: сбрасываем span от правил 6-карточной сетки, иначе строки не сходятся. */
+.bento--duo,
+.bento--duo-rev {
     grid-template-columns: repeat(3, 1fr);
+}
+
+.bento--duo > .bento__card:nth-child(1),
+.bento--duo > .bento__card:nth-child(4),
+.bento--duo-rev > .bento__card:nth-child(1),
+.bento--duo-rev > .bento__card:nth-child(6) {
+    grid-column: auto;
 }
 
 .bento--duo > .bento__card:nth-child(1),
@@ -1682,6 +1691,7 @@ a.contacts-card__value:hover {
     grid-column: span 2;
 }
 
+/* зеркальный вариант: широкие ячейки по диагонали в другую сторону */
 .bento--duo-rev > .bento__card:nth-child(2),
 .bento--duo-rev > .bento__card:nth-child(3) {
     grid-column: span 2;
@@ -1695,6 +1705,12 @@ a.contacts-card__value:hover {
     .bento--duo,
     .bento--duo-rev {
         grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* на двух колонках все карточки поровну — без «ветряной мельницы» и дыр */
+    .bento--duo-rev > .bento__card:nth-child(2),
+    .bento--duo-rev > .bento__card:nth-child(3) {
+        grid-column: auto;
     }
 }
 
