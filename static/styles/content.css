@@ -270,12 +270,6 @@ a {
     padding: 16px;
     box-shadow: 0.3px 0.7px 15px black;
     overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.post-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
 }
 
 .post-card > .post-card__image,
@@ -384,16 +378,6 @@ a {
 }
 
 /* Hover-эффекты CTA — в тон карточкам услуг (scale + тень). */
-.cta-block {
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
-}
-
-.cta-block:hover {
-    transform: scale(0.985);
-    box-shadow: 0.3px 0.7px 18px rgba(0, 0, 0, 0.55);
-}
-
-/* CTA на контентных страницах: в границах .content-section, по центру. */
 .cta-block:not(.cta-block--wide) {
     width: 100%;
     max-width: none; /* вровень с остальными секциями страницы */
@@ -513,15 +497,6 @@ main {
     margin-top: auto;
     font-weight: 600;
     color: hsla(41, 92%, 45%, 1);
-}
-
-.service-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
-}
-
-.service-card {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 /* На странице услуги картинка — полноширинная, фикс-высота только в списке. */
@@ -774,10 +749,6 @@ a.pagination__link:hover {
     transition: transform 0.3s ease;
 }
 
-.about-gallery figure:hover img {
-    transform: translateY(-4px);
-}
-
 .about-gallery figcaption {
     font-size: 14px;
     opacity: 0.75;
@@ -793,7 +764,7 @@ a.pagination__link:hover {
 
 /* Варианты CTA: accent — золотая рамка, contrast — белый блок. */
 .cta-block--accent {
-    border: 2px solid hsla(41, 92%, 55%, 1);
+    /* чёрный CTA без оранжевой рамки — как базовый .cta-block */
 }
 
 .cta-block--contrast {
@@ -1497,6 +1468,38 @@ a.contacts-card__value:hover {
     filter: grayscale(1) brightness(0.82) contrast(1.18);
 }
 
+/* Единое ховер-поведение для ВСЕХ карточек и блоков: подъём + мягкая тень.
+   Товарные карточки уже используют .service-card; галереи, карта, факты,
+   контактные карточки, карточки главной (.card) и CTA — те же значения. */
+.fact,
+.contacts-card,
+.post-image-card,
+.blog-article-gallery,
+.about-gallery figure,
+.about-map,
+.card,
+.cta-block,
+.post-card,
+.service-card,
+.review-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.fact:hover,
+.contacts-card:hover,
+.post-image-card:hover,
+.blog-article-gallery:hover,
+.about-gallery figure:hover,
+.about-map:hover,
+.card:hover,
+.cta-block:hover,
+.post-card:hover,
+.service-card:hover,
+.review-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+}
+
 /* Переход между разделами: крупная ссылка-стрелка после секции, перед CTA. */
 .section-jump {
     text-align: center;
@@ -1606,13 +1609,6 @@ a.contacts-card__value:hover {
     padding: 20px;
     box-shadow: 0.3px 0.7px 15px black;
     margin: 0;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-/* ховер — как у .post-card/.service-card */
-.review-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
 }
 
 .review-card__text {
