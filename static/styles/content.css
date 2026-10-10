@@ -1639,22 +1639,39 @@ a.contacts-card__value:hover {
 
 /* Переход между разделами: крупная ссылка-стрелка после секции, перед CTA. */
 .section-jump {
-    text-align: center;
     margin: 40px 20px 26px;
 }
 
+/* В том же стиле, что шапка блога: заголовок слева, ссылка справа — одна строка. */
+.section-jump__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.section-jump__title {
+    margin: 0;
+    font-family: 'Rubik Mono One', 'Montserrat', system-ui, sans-serif;
+    font-weight: 400;
+    font-size: clamp(19px, 2.6vw, 30px);
+}
+
 .section-jump__link {
+    flex-shrink: 0;
     display: inline-flex;
     align-items: baseline;
-    gap: 12px;
-    font-size: clamp(20px, 2.6vw, 30px);
-    font-weight: 700;
-    color: hsla(41, 92%, 45%, 1);
+    gap: 8px;
+    padding-top: 6px;
+    color: hsla(41, 92%, 55%, 1);
     text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
 }
 
 .section-jump__link:hover {
-    color: hsla(41, 92%, 38%, 1);
+    color: hsla(49, 100%, 55%, 1);
 }
 
 .section-jump__arrow {
@@ -1668,6 +1685,7 @@ a.contacts-card__value:hover {
 
 .section-jump__note {
     margin: 8px 0 0;
+    max-width: 75ch;
     color: #6b6558;
 }
 

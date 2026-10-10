@@ -1,10 +1,10 @@
-{# Переход между разделами: крупная ссылка-стрелка. Ставится сразу после #}
-{# секции, перед соответствующим CTA: #}
+{# Переход между разделами: заголовок слева + ссылка справа, в одну строку — #}
+{# как шапка блока «Из блога». Ставится сразу после секции, перед CTA: #}
 {# {% include '_section_jump.html' with jump_url='...' jump_text='...' %} #}
 <div class="section-jump">
-    <a class="section-jump__link" href="{{ jump_url }}">
-        {{ jump_text|default:'Смотреть раздел' }}
-        <span class="section-jump__arrow" aria-hidden="true">→</span>
-    </a>
+    <div class="section-jump__head">
+        <h2 class="section-jump__title">{{ jump_text|default:'Смотреть раздел' }}</h2>
+        <a class="section-jump__link" href="{{ jump_url }}">Перейти <span class="section-jump__arrow" aria-hidden="true">→</span></a>
+    </div>
     {% if jump_note %}<p class="section-jump__note">{{ jump_note }}</p>{% endif %}
 </div>
