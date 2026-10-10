@@ -1514,6 +1514,11 @@ a.contacts-card__value:hover {
 
 .reviews-slider__viewport {
     overflow: hidden;
+    /* внутренние поля не дают overflow:hidden срезать тень карточек
+       (15px в покое, до ~32px вниз при ховере); отрицательные маргины
+       компенсируют их, чтобы сетка карточек не сдвигалась */
+    padding: 20px 20px 32px;
+    margin: -20px -20px -32px;
 }
 
 .reviews-slider__track {
@@ -1565,6 +1570,13 @@ a.contacts-card__value:hover {
     padding: 20px;
     box-shadow: 0.3px 0.7px 15px black;
     margin: 0;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* ховер — как у .post-card/.service-card */
+.review-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
 }
 
 .review-card__text {

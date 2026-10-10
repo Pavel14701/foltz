@@ -24,7 +24,12 @@
             var card = track.children[0];
             var gap = parseFloat(getComputedStyle(track).columnGap) || 0;
             var step = card.getBoundingClientRect().width + gap;
-            var perView = Math.max(1, Math.round(viewport.clientWidth / step));
+            /* clientWidth включает компенсирующий паддинг вьюпорта —
+               считаем видимую ширину без него */
+            var vs = getComputedStyle(viewport);
+            var inner = viewport.clientWidth
+                - parseFloat(vs.paddingLeft) - parseFloat(vs.paddingRight);
+            var perView = Math.max(1, Math.round(inner / step));
             return { step: step, maxIdx: Math.max(0, track.children.length - perView) };
         }
 
