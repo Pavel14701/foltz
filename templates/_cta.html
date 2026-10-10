@@ -1,9 +1,24 @@
-{# Единый блок призыва к действию (DRY): подключается через {% include '_cta.html' %} #}
-<section class="cta-block">
-    <h2 class="cta-title">Есть задача? Обсудим</h2>
-    <p class="cta-text">Позвоните — подскажем по ремонту гидравлики, двигателям и обменному фонду.</p>
+{# Единый блок призыва к действию (DRY), но настраиваемый под страницу: #}
+{# {% include '_cta.html' with cta_wide=True %} — широкий (главная, с фактами) #}
+{# {% include '_cta.html' with cta_title='...' cta_text='...' cta_variant='accent' %} #}
+{# Варианты: accent — золотая рамка, contrast — белый блок с тёмным текстом. #}
+<section class="cta-block{% if cta_wide %} cta-block--wide{% endif %}{% if cta_variant %} cta-block--{{ cta_variant }}{% endif %}">
+    <h2 class="cta-title">{{ cta_title|default:'Есть задача? Обсудим' }}</h2>
+    <p class="cta-text">{{ cta_text|default:'Позвоните — подскажем по ремонту гидравлики, двигателям и обменному фонду.' }}</p>
+    {% if cta_wide %}
+    <ul class="cta-facts">
+        <li>Пн–Сб: 08:00–18:00</li>
+        <li>Выезд по всей Беларуси</li>
+        <li>Гарантия 6–24 месяца</li>
+        <li>Работаем по договору</li>
+    </ul>
+    {% endif %}
     <div class="cta-actions">
-        <a class="cta-button" href="tel:+375295410647">+375 (29) 541-06-47</a>
-        <a class="cta-button cta-button--ghost" href="{% url 'forms:contact' %}">Оставить заявку</a>
+        <a class="cta-button" href="tel:{{ site.phone_link }}">{{ site.phone }}</a>
+        {# Форма заявки (#request-form) есть на каждой странице — кнопка скроллит к ней. #}
+        <a class="cta-button cta-button--ghost" href="#request-form">Оставить заявку</a>
     </div>
+    {% if cta_link_url %}
+    <a class="cta-link" href="{{ cta_link_url }}">{{ cta_link_text|default:'Подробнее об услуге' }} →</a>
+    {% endif %}
 </section>

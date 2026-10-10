@@ -39,3 +39,424 @@
 .map-card{
     height:40vh;
 }
+
+/* Наполнение блоков «Почему мы» и «Факты» */
+.card-content p {
+    max-width: 560px;
+    margin: 14px 0 0;
+    line-height: 1.55;
+}
+
+.benefits-list {
+    margin: 16px 0 0;
+    padding-left: 20px;
+    display: grid;
+    gap: 10px;
+}
+
+.benefits-list li {
+    line-height: 1.5;
+}
+
+.facts-list {
+    margin: 16px 0 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 10px;
+}
+
+.facts-list strong {
+    font-size: 22px;
+    margin-right: 6px;
+}
+
+.map-lead {
+    max-width: 560px;
+    margin: 14px 0 0;
+    line-height: 1.55;
+}
+
+.map-lead a {
+    color: hsla(41, 92%, 55%, 1);
+}
+
+@media screen and (max-width: 640px) {
+    .benefit {
+        height: auto;
+        max-height: none;
+        flex-direction: column;
+        width: 100%;
+        padding: 0 12px;
+    }
+
+    .card-large,
+    .card-small {
+        width: 100%;
+        height: auto;
+        min-height: 220px;
+    }
+}
+
+/* Компактная вертикаль: секции по контенту, а не жёсткие 50vh. */
+.benefit {
+    height: auto;
+    max-height: none;
+    min-height: 360px;
+    margin-top: 24px;
+}
+
+.benefit.hero {
+    height: 100vh; /* первый экран — как был */
+    margin-top: 0;
+}
+
+.benefit.map {
+    height: 42vh;
+    min-height: 300px;
+}
+
+.card-large,
+.card-small {
+    height: auto;
+    min-height: 320px;
+}
+
+/* Единый вертикальный ритм всех секций лендинга. */
+.benefit {
+    margin-top: var(--section-gap, 56px);
+}
+
+.benefit.hero {
+    margin-top: 0;
+}
+
+/* Блок статей блога на главной: сетка карточек в стиле пост-карточек. */
+.home-blog {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    width: 90vw;
+    padding: 0;
+}
+
+.home-blog .home-blog__title {
+    grid-column: 1 / -1;
+    margin: 0;
+    font-family: var(--h-font, 'Montserrat', sans-serif);
+    font-size: clamp(19px, 2.6vw, 30px);
+}
+
+.home-blog .post-card {
+    flex-direction: column;
+    margin: 0;
+}
+
+.home-blog .post-card > .post-card__image,
+.home-blog .post-card > .post-card__video {
+    width: 100%;
+}
+
+.home-blog .post-card__body {
+    padding: 16px 20px 20px;
+}
+
+.home-blog .post-card__body p {
+    display: none; /* на главной — компактные карточки без аннотации */
+}
+
+@media screen and (max-width: 640px) {
+    .home-blog {
+        width: 92vw;
+    }
+}
+
+/* Карточки статей на главной — в стилистике белых карточек сайта. */
+.home-blog .post-card {
+    min-width: 0; /* сетка не разъезжается от длинных заголовков */
+    flex-direction: column;
+    margin: 0;
+    background: #ffffff;
+    color: #111;
+    border: none;
+    border-radius: 2.5em;
+    padding: 2em;
+    box-shadow: 0.3px 0.7px 15px black;
+    transition: transform 0.4s ease;
+}
+
+.home-blog .post-card:hover {
+    transform: scale(0.97);
+}
+
+/* Превью фиксированной высоты: карточки в ряду получаются ровными */
+.home-blog .post-card > .post-card__image,
+.home-blog .post-card > .post-card__video {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 1.5em;
+}
+
+.home-blog .post-card__body {
+    padding: 18px 0 0;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.home-blog .post-card__body h2 {
+    font-family: var(--h-font, 'Montserrat', sans-serif);
+    font-weight: 700;
+    font-size: clamp(16px, 1.7vw, 20px);
+    line-height: 1.35;
+    margin: 0 0 8px;
+}
+
+.home-blog .post-card__body h2 a {
+    color: #111;
+}
+
+.home-blog .post-card__body h2 a:hover {
+    color: hsla(41, 92%, 38%, 1);
+}
+
+.home-blog .post-card__body time {
+    color: #111;
+    opacity: 0.6;
+    margin-bottom: 12px;
+}
+
+.home-blog .post-card__more {
+    margin-top: auto; /* «читать» прижата к низу — карточки одинаковой структуры */
+    color: hsla(41, 92%, 32%, 1);
+}
+
+/* Последний блок (карта): тот же отступ, что у всех секций, + карточка по центру. */
+.benefit.map {
+    margin-top: var(--section-gap, 56px);
+}
+
+.map-card {
+    width: 100%;
+}
+
+/* Слайдеры услуг/фонда — тот же вертикальный ритм. */
+.gallery-wrapper {
+    margin-top: var(--section-gap, 56px);
+}
+
+/* Первый экран примыкает к шапке без отступа. */
+.benefit.hero:not(.map) {
+    margin-top: 0;
+}
+
+/* Блок «Из блога» — чёрная секция в стиле CTA-блоков. */
+.home-blog {
+    display: block;
+    background: black;
+    color: #fff;
+    border-radius: 2.5em;
+    padding: 2em;
+    box-shadow: 0.3px 0.7px 15px black;
+}
+
+.home-blog__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 1.4em;
+}
+
+.home-blog__head .card-title {
+    font-family: 'Montserrat', 'Segoe UI', system-ui, sans-serif;
+    font-weight: 700;
+    font-size: clamp(14px, 1.4vw, 18px);
+}
+
+.home-blog__head h2 {
+    font-family: 'Rubik Mono One', 'Montserrat', system-ui, sans-serif;
+    font-weight: 400;
+    font-size: clamp(19px, 2.6vw, 30px);
+    margin: 0;
+}
+
+.home-blog__all {
+    flex-shrink: 0;
+    color: hsla(41, 92%, 55%, 1);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+    padding-top: 6px;
+}
+
+.home-blog__all:hover {
+    color: hsla(49, 100%, 55%, 1);
+}
+
+.home-blog__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.home-blog__card {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 1.5em;
+    overflow: hidden;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.home-blog__card:hover {
+    transform: translateY(-4px);
+    border-color: hsla(41, 92%, 50%, 0.8);
+}
+
+.home-blog__card-img {
+    display: block;
+    height: 180px;
+    flex-shrink: 0;
+    background: linear-gradient(140deg, #1d1d1d, #2b2b2b); /* плейсхолдер без превью */
+}
+
+.home-blog__card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.home-blog__card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 18px 20px 20px;
+    flex: 1;
+}
+
+.home-blog__card-body time {
+    font-size: 13px;
+    opacity: 0.6;
+}
+
+.home-blog__card-body h3 {
+    margin: 0;
+    font-size: clamp(16px, 1.7vw, 19px);
+    line-height: 1.35;
+}
+
+.home-blog__card-body h3 a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.home-blog__card-body h3 a:hover {
+    color: hsla(49, 100%, 55%, 1);
+}
+
+.home-blog__card-body p {
+    font-size: 14px;
+    line-height: 1.55;
+    opacity: 0.75;
+    margin: 0 0 10px;
+}
+
+.home-blog__more {
+    margin-top: auto;
+    color: hsla(41, 92%, 55%, 1);
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.home-blog__arrow {
+    display: inline-block;
+    transition: transform 0.25s ease;
+}
+
+.home-blog__card:hover .home-blog__arrow {
+    transform: translateX(5px);
+}
+
+/* Откат текста карточек: заголовок + дата, как было до редизайна,
+   картинка и «читать статью» остаются. */
+.home-blog__card-body h2 {
+    margin: 0;
+    font-family: 'Montserrat', 'Segoe UI', system-ui, sans-serif;
+    font-weight: 700;
+    font-size: clamp(16px, 1.7vw, 19px);
+    line-height: 1.35;
+}
+
+.home-blog__card-body h2 a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.home-blog__card-body h2 a:hover {
+    color: hsla(49, 100%, 55%, 1);
+}
+
+/* Без чёрной секции-обёртки и без заливки карточек:
+   блок живёт на общем фоне, карточки — прозрачные с бордером. */
+.home-blog {
+    background: transparent;
+    box-shadow: none;
+    padding: 0;
+}
+
+.home-blog__card {
+    background: transparent;
+}
+
+.home-blog__card-img {
+    background: #1d1d1d; /* плейсхолдер без превью */
+}
+
+/* Карточки статей — белые, как остальные карточки сайта. */
+.home-blog__card {
+    background: #fff;
+    box-shadow: 0.3px 0.7px 15px black;
+}
+
+.home-blog__card-body h2 a {
+    color: #000;
+}
+
+.home-blog__card-body h2 a:hover {
+    color: hsla(41, 92%, 45%, 1);
+}
+
+.home-blog__card-body time {
+    color: #000;
+    opacity: 0.55;
+}
+
+.home-blog__more {
+    color: hsla(41, 92%, 45%, 1);
+}
+
+/* Заголовок «Из блога» — чёрный, в стиле остальных заголовков секций. */
+.home-blog__head .card-title {
+    color: #000;
+}
+
+.home-blog__head h2 {
+    color: #000;
+}
+
+/* «Все статьи» — вровень с «Из блога»: тот же шрифт и размер, по центру. */
+.home-blog__head {
+    align-items: center;
+}
+
+.home-blog__all {
+    font-family: 'Rubik Mono One', 'Montserrat', system-ui, sans-serif;
+    font-weight: 400;
+    font-size: clamp(19px, 2.6vw, 30px);
+    padding-top: 0;
+}

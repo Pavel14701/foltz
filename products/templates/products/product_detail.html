@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load richtext %}
+
+{% block title %}{{ product.title }} — {{ product.price|default:'цена по запросу' }} | Фольц{% endblock %}
+{% block meta_description %}{{ product.title }}{% if product.category %} — {{ product.category.title }}{% endif %}{% if product.price %}, цена {{ product.price }}{% endif %}. Обменный фонд, доставка по Беларуси, гарантия.{% endblock %}
+
+{% block content %}
+<section class="content-section">
+    <a class="back-link" href="{% url 'products:catalog' %}">← Все запчасти</a>
+    <h1>{{ product.title }}</h1>
+
+    {% if product.category %}
+        {% url 'products:catalog' as catalog_url %}
+        <p class="product-card__category product-detail__category">
+            Категория: <a href="{{ catalog_url }}?category={{ product.category.slug }}">{{ product.category.title }}</a>
+        </p>
+    {% endif %}
+
+    {% if product.price %}
+        <p class="service-card__price product-detail__price">{{ product.price }}</p>
+    {% endif %}
+
+    {# Галерея: превью + картинки секций (1 фото / пара / слайдер). #}
+    {% with gallery_items=gallery_items %}
+        {% if gallery_items|length >= 3 %}
+        <div class="blog-article-gallery" data-gallery>
+            <div class="blog-gallery__viewport">
+                <div class="blog-gallery__track">
+                    {% for gi in gallery_items %}
+                    <div class="blog-gallery__slide"><img src="{{ gi.image.url }}" alt="{{ product.title }}" loading="lazy"></div>
+                    {% endfor %}
+                </div>
+            </div>
+            <button type="button" class="blog-gallery__btn blog-gallery__btn--prev" aria-label="Предыдущее фото">&#10094;</button>
+            <button type="button" class="blog-gallery__btn blog-gallery__btn--next" aria-label="Следующее фото">&#10095;</button>
+            <div class="blog-gallery__dots"></div>
+        </div>
+        {% elif gallery_items|length == 2 %}
+        <div class="blog-article-gallery blog-article-gallery--pair">
+            {% for gi in gallery_items %}
+            <div class="post-image-card"><img src="{{ gi.image.url }}" alt="{{ product.title }}" loading="lazy"></div>
+            {% endfor %}
+        </div>
+        {% elif gallery_items %}
+        <div class="blog-article-gallery">
+            <img src="{{ gallery_items.0.image.url }}" alt="{{ product.title }}" loading="lazy">
+        </div>
+        {% endif %}
+    {% endwith %}
+
+    {% if product.preview_text %}
+        <p class="service-section-content">{{ product.preview_text }}</p>
+    {% endif %}
+
+    {% for section in product.product_section.all %}
+        {% if section.subtitle %}
+            <h2>{{ section.subtitle }}</h2>
+        {% endif %}
+        {% if section.content %}
+            <div class="service-section-content">{{ section.content|richtext }}</div>
+        {% endif %}
+        {% if section.image %}
+            <img class="post-card__image" src="{{ section.image.url }}" alt="{{ product.title }} — фото {{ section.order }}" loading="lazy">
+        {% endif %}
+    {% endfor %}
+
+    {# CTA под ремонт в зависимости от категории товара. #}
+    {% include 'forms/_request_form.html' %}
+
+    {% with category=product.category %}
+        {% if category %}
+            {% include '_cta.html' with cta_title=category.cta_title|default:'Есть вопросы по этой запчасти?' cta_text=category.cta_text|default:'Позвоните — уточним наличие, комплектацию и условия обмена. При необходимости подберём аналог под вашу технику.' cta_link_url=category.repair_link cta_link_text=category.cta_link_text cta_has_form=1 %}
+        {% else %}
+            {% include '_cta.html' with cta_title='Есть вопросы по этой запчасти?' cta_text='Позвоните — уточним наличие, комплектацию и условия обмена.' cta_has_form=1 %}
+        {% endif %}
+    {% endwith %}
+</section>
+{% endblock %}
+
+{% block extra_js %}
+{% if gallery_items|length >= 3 %}
+<script type="text/javascript" src="{% static 'js/blog_gallery.js' %}" defer></script>
+{% endif %}
+{% endblock %}

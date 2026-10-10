@@ -1,33 +1,58 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Услуги — ремонт гидравлики, двигателей и спецтехники | Фольц{% endblock %}
-{% block meta_description %}Каталог услуг: ремонт гидравлики МТЗ и Амкодор, гидронасосов, гидромоторов и гидрораспределителей, капитальный ремонт двигателей Deutz, JCB, Perkins, выездная диагностика гидросистем. Цены и гарантия до 24 месяцев.{% endblock %}
+{% block title %}Услуги и цены — ремонт гидравлики, двигателей и спецтехники | Фольц{% endblock %}
+{% block meta_description %}Каталог услуг и цены: ремонт гидравлики МТЗ и Амкодор, гидронасосов, гидромоторов и гидрораспределителей, капитальный ремонт двигателей Deutz, JCB, Perkins, выездная диагностика гидросистем. Гарантия до 24 месяцев.{% endblock %}
 
 {% block content %}
 <section class="content-section">
-    <h1>Услуги Агросервиса «Фольц»</h1>
+    <h1>Услуги и цены Агросервиса «Фольц»</h1>
     <p class="section-lead">
         Ремонт гидравлики, капитальный ремонт двигателей и выездная диагностика гидросистем
         тракторов МТЗ, погрузчиков Амкодор и импортной спецтехники. Работа по договору,
         гарантия 6–24 месяца.
     </p>
 
-    <div class="services-grid">
-        {% for service in services %}
-        <a class="service-card" href="{% url 'services:service_detail' service.slug %}">
-            {% if service.preview_image %}
-                <img class="service-card__image" src="{{ service.preview_image.url }}" alt="{{ service.title }}">
-            {% endif %}
-            <h2>{{ service.title }}</h2>
-            <p>{{ service.preview_text }}</p>
-            <span class="service-card__more">Подробнее →</span>
-        </a>
-        {% empty %}
-        <p>Каталог услуг сейчас наполняется — свяжитесь с нами, и мы подскажем по вашей задаче.</p>
-        {% endfor %}
+    <form class="services-search" method="get" action="{% url 'services:services' %}" role="search"
+          data-partial-url="{% url 'services:services' %}">
+        <input class="services-search__input" type="search" name="q" value="{{ query }}"
+               placeholder="Поиск по услугам и ценам: гидронасос, Deutz, диагностика…"
+               aria-label="Поиск по услугам">
+        <button class="services-search__button" type="submit">Найти</button>
+        {% if query %}
+            <a class="services-search__reset" href="{% url 'services:services' %}">Сбросить</a>
+        {% endif %}
+    </form>
+
+    <div id="services-grid-wrap">
+        {% include "services/_service_grid.html" %}
     </div>
 
-    {% include '_cta.html' %}
+    {% include '_cta.html' with cta_title='Подберём решение под вашу технику' cta_text='Опишите модель и симптомы — назовём ориентир по цене и срокам. При необходимости выедем на диагностику по всей Беларуси.' cta_variant='accent' %}
 </section>
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "OfferCatalog",
+    "name": "Услуги и цены Агросервиса «Фольц»",
+    "itemListElement": [
+        {% for service in services_with_prices %}
+        {
+            "@type": "Offer",
+            "itemOffered": { "@type": "Service", "name": "{{ service.title|escapejs }}" },
+            "priceSpecification": [
+                {% for item in service.prices.all %}
+                { "@type": "PriceSpecification", "description": "{{ item.name|escapejs }}", "price": "{{ item.price }}" }{% if not forloop.last %},{% endif %}
+                {% endfor %}
+            ]
+        }{% if not forloop.last %},{% endif %}
+        {% endfor %}
+    ]
+}
+</script>
+{% endblock %}
+
+{% block extra_js %}
+<script type="text/javascript" src="{% static 'js/services_search.js' %}" defer></script>
 {% endblock %}

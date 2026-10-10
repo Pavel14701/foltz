@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}Главная страница{% endblock %}
+{% block title %}Агросервис «Фольц» — ремонт гидравлики и двигателей спецтехники в Беларуси{% endblock %}
+{% block meta_description %}Ремонт гидравлики МТЗ и Амкодор, капитальный ремонт двигателей Deutz, JCB, Perkins, выездная диагностика гидросистем по Беларуси. Гарантия до 24 месяцев, работа по договору.{% endblock %}
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'styles/home/gallery.css' %}">
 <link rel="stylesheet" href="{% static 'styles/home/benefits.css' %}">
@@ -12,10 +13,14 @@
 
 {% endblock %}
 {% block content %}
-<div class="background" data-display="flex"></div>
 <!-- end gallery -->
 <section class="benefit hero" >
     <div class="card hero-card grid-gallery">
+        <div class="hero-overlay">
+            <h1>Ремонт гидравлики и двигателей спецтехники в Беларуси</h1>
+            <p>МТЗ, Амкодор, Manitou, JCB: гидронасосы, гидрораспределители, капитальный ремонт ДВС. Гарантия до 24 месяцев, работа по договору.</p>
+            <a class="cta-button hero-cta" href="tel:{{ site.phone_link }}">{{ site.phone }}</a>
+        </div>
         <div class="grid">
             <div class="row">
                 <div class="row__item">
@@ -136,261 +141,184 @@
         </div>
     </div>
 </section>
-<section class="benefit" >
+{% include '_cta.html' with cta_wide=True %}
+<section class="benefit" aria-label="Преимущества">
         <div class="card-large card">
             <div class="card-content ">
                 <div class="card-top">
-                    <span class="card-title">05.<br>
-                        <h2>Benefits</h2>
+                    <span class="card-title">02.<br>
+                        <h2>Почему выбирают «Фольц»</h2>
                     </span>
                 </div>
+                <ul class="benefits-list">
+                    <li>Собственный цех с испытательным стендом гидроагрегатов.</li>
+                    <li>Выездная диагностика гидросистем по всей Беларуси.</li>
+                    <li>Обменный фонд: гидронасосы и распределители в наличии.</li>
+                    <li>Работаем по договору с юрлицами, фермерами и ИП.</li>
+                </ul>
             </div>
         </div>
         <div class="card-small card">
             <div class="card-content ">
                 <div class="card-top">
-                    <span class="card-title">05.<br>
-                        <h2>Benifits imgs</h2>
+                    <span class="card-title">03.<br>
+                        <h2>Гарантия до 24 месяцев</h2>
                     </span>
                 </div>
+                <p>Даём письменную гарантию на работы и восстановленные агрегаты: насосы — 6 месяцев, капитальный ремонт двигателя — до 24 месяцев.</p>
             </div>
         </div>
 </section>
 
-<section class="gallery-wrapper" >
+<section class="gallery-wrapper" aria-label="Услуги">
+    <h2 class="visually-hidden">Услуги по ремонту спецтехники</h2>
+    {% for card in service_cards %}
     <div class="card-wrapper">
-        <div class="card need-background-image" data-image-name="manitoo_pogr.jpg" data-image-back-pos="right">
+        <div class="card need-background-image" data-image-name="{{ card.image }}" data-image-back-pos="right">
             <div class="card-content">
                 <div class="card-top">
-                    <span class="card-title">01.<br>
-                        <svg width="48" viewBox="0 -960 960 960" height="48" xmlns="http://www.w3.org/2000/svg"><path d="m393-165 279-335H492l36-286-253 366h154l-36 255Zm-73 85 40-280H160l360-520h80l-40 320h240L400-80h-80Zm153-395Z"></path>
-                        <h2>Service1</h2><br>
-                    </svg>
+                    <span class="card-title">{{ forloop.counter|add:3 }}.<br>
+                        <h2>{{ card.title }}</h2>
                     </span>
                 </div>
+                <div class="card-info">
+                    <p>{{ card.text }}</p>
+                    {% if card.prices %}
+                    <ul class="card-prices">
+                        {% for price in card.prices %}
+                        <li><span>{{ price.name }}</span><b>{{ price.price }}</b></li>
+                        {% endfor %}
+                    </ul>
+                    <p class="card-min">от {{ card.min_price }} р. за работу — <a href="{% url 'services:services' %}#prices">все цены</a></p>
+                    {% else %}
+                    <p class="card-min">Стоимость — по договору после дефектовки</p>
+                    {% endif %}
+                </div>
                 <div class="card-bottom">
-                    <h3>Hover Me?</h3>
-                    <div class="change-loader"></div>
-                    <svg width="32" viewBox="0 -960 960 960" height="32" xmlns="http://www.w3.org/2000/svg"><path d="M226-160q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19ZM226-414q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19ZM226-668q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Z"></path>
-                    </svg>
-                    
-                    <button class="more-button">
-                        <svg viewBox="0 0 16 16" class="bi bi-lightning-charge-fill" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
+                        <div class="change-loader"></div>
+                    <a class="more-button" href="{% url 'services:service_detail' card.slug %}"><svg viewBox="0 0 16 16" class="bi bi-lightning-charge-fill" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
                             <path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"></path>
                         </svg>
-                        <a class="span" href="{% url 'services:services' %}">подробнее</a>
-                    </button>
+                            подробнее</a>
                 </div>
             </div>
         </div>
     </div>
-    <div class="card-wrapper">
-        <div class="card need-background-image" data-image-name="amkodor_pogr_new.jpg" data-image-back-pos="right">
-            <div class="card-content">
-                <div class="card-top">
-                    <span class="card-title">01.<br>
-                        <svg width="48" viewBox="0 -960 960 960" height="48" xmlns="http://www.w3.org/2000/svg"><path d="m393-165 279-335H492l36-286-253 366h154l-36 255Zm-73 85 40-280H160l360-520h80l-40 320h240L400-80h-80Zm153-395Z"></path>
-                        <h2>Service2</h2><br>
-                    </svg>
-                    </span>
-                </div>
-                <div class="card-bottom">
-                    <h3>Hover Me?</h3>
-                    <div class="change-loader"></div>
-                    <svg width="32" viewBox="0 -960 960 960" height="32" xmlns="http://www.w3.org/2000/svg"><path d="M226-160q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19ZM226-414q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19ZM226-668q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Z"></path>
-                    </svg>
-                    <button class="more-button">
-                        <svg viewBox="0 0 16 16" class="bi bi-lightning-charge-fill" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"></path>
-                        </svg>
-                        <a class="span" href="{% url 'services:services' %}">подробнее</a>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="card-wrapper">
-        <div class="card need-background-image" data-image-name="engine_jcb2.jpg" data-image-back-pos="right">
-            <div class="card-content">
-                <div class="card-top">
-                    <span class="card-title">01.<br>
-                        <svg width="48" viewBox="0 -960 960 960" height="48" xmlns="http://www.w3.org/2000/svg"><path d="m393-165 279-335H492l36-286-253 366h154l-36 255Zm-73 85 40-280H160l360-520h80l-40 320h240L400-80h-80Zm153-395Z"></path>
-                        <h2>Service3</h2><br>
-                    </svg>
-                    </span>
-                </div>
-                <div class="card-bottom">
-                    <h3>Hover Me?</h3>
-                    <div class="change-loader"></div>
-                    <svg width="32" viewBox="0 -960 960 960" height="32" xmlns="http://www.w3.org/2000/svg"><path d="M226-160q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19ZM226-414q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19ZM226-668q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Z"></path>
-                    </svg>
-                    <button class="more-button">
-                        <svg viewBox="0 0 16 16" class="bi bi-lightning-charge-fill" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"></path>
-                        </svg>
-                        <a class="span" href="{% url 'services:services' %}">подробнее</a>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="card-wrapper">
-        <div class="card need-background-image" data-image-name="raspred_bosch.jpg" data-image-back-pos="right">
-            <div class="card-content">
-                <div class="card-top">
-                    <span class="card-title">01.<br>
-                        <svg width="48" viewBox="0 -960 960 960" height="48" xmlns="http://www.w3.org/2000/svg"><path d="m393-165 279-335H492l36-286-253 366h154l-36 255Zm-73 85 40-280H160l360-520h80l-40 320h240L400-80h-80Zm153-395Z"></path>
-                        </svg>
-                        <h2>Service4</h2>
-                    </span>
-                </div>
-                <div class="card-bottom">
-                    <h3>Hover Me?</h3>
-                    <div class="change-loader"></div>
-                    <svg width="32" viewBox="0 -960 960 960" height="32" xmlns="http://www.w3.org/2000/svg"><path d="M226-160q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19ZM226-414q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19ZM226-668q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Z"></path>
-                    </svg>
-                    <button class="more-button">
-                        <svg viewBox="0 0 16 16" class="bi bi-lightning-charge-fill" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"></path>
-                        </svg>
-                        <a class="span" href="{% url 'services:services' %}">подробнее</a>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
+    {% endfor %}
 </section>
-<section class="benefit">
+<section class="benefit" aria-label="Факты о компании">
+    <h2 class="visually-hidden">О компании в цифрах</h2>
     <div class="card-small card">
         <div class="card-content ">
             <div class="card-top">
-                <span class="card-title">05.<br>
-                    <h2>imgs about us</h2>
+                <span class="card-title">08.<br>
+                    <h2>Выезд по всей Беларуси</h2>
                 </span>
             </div>
+            <p>Минск, Гомель, Брест, Витебск, Гродно, Могилёв — диагностируем гидросистему на месте и забираем агрегат в цех.</p>
         </div>
     </div>
     <div class="card-large card">
         <div class="card-content">
             <div class="card-top">
-                <span class="card-title">05.<br>
-                    <h2>Facts about us</h2>
+                <span class="card-title">09.<br>
+                    <h2>Факты о нас</h2>
                 </span>
             </div>
+            <ul class="facts-list">
+                <li><strong>20+</strong> лет на рынке спецтехники</li>
+                <li><strong>1500+</strong> отремонтированных гидроагрегатов</li>
+                <li><strong>300+</strong> позиций в обменном фонде</li>
+            </ul>
         </div>
     </div>
 </section>
 
-<section class="gallery-wrapper">
+<section class="gallery-wrapper" aria-label="Обменный фонд">
+    <h2 class="visually-hidden">Обменный фонд — гидроагрегаты в наличии</h2>
+    {% for product in fund_products %}
     <div class="card-wrapper">
-        <div class="card need-background-image" data-image-name="manitoo_pogr.jpg" data-image-back-pos="right">
+        <div class="card need-background-image" data-image-name="{{ product.image }}" data-image-back-pos="right">
             <div class="card-content">
                 <div class="card-top">
-                    <span class="card-title">01.<br>
-                        <svg width="48" viewBox="0 -960 960 960" height="48" xmlns="http://www.w3.org/2000/svg"><path d="m393-165 279-335H492l36-286-253 366h154l-36 255Zm-73 85 40-280H160l360-520h80l-40 320h240L400-80h-80Zm153-395Z"></path>
-                        <h2>Product1</h2><br>
-                    </svg>
+                    <span class="card-title">{{ forloop.counter|add:9 }}.<br>
+                        <h2>{{ product.title }}</h2>
                     </span>
                 </div>
+                <div class="card-info">
+                    <p>{{ product.text }}</p>
+                    <p class="card-min">Обменный фонд · гарантия 6 месяцев</p>
+                </div>
                 <div class="card-bottom">
-                    <h3>Hover Me?</h3>
-                    <div class="change-loader"></div>
-                    <svg width="32" viewBox="0 -960 960 960" height="32" xmlns="http://www.w3.org/2000/svg"><path d="M226-160q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19ZM226-414q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19ZM226-668q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Z"></path>
-                    </svg>
-                    <button class="more-button">
-                        <svg viewBox="0 0 16 16" class="bi bi-lightning-charge-fill" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
+                        <div class="change-loader"></div>
+                    <a class="more-button" href="{% url 'forms:contact' %}"><svg viewBox="0 0 16 16" class="bi bi-lightning-charge-fill" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
                             <path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"></path>
                         </svg>
-                        <a class="span" href="{% url 'services:services' %}">подробнее</a>
-                    </button>
+                            уточнить наличие</a>
                 </div>
             </div>
         </div>
     </div>
+    {% endfor %}
     <div class="card-wrapper">
-        <div class="card need-background-image" data-image-name="amkodor_pogr_new.jpg" data-image-back-pos="right">
+        <div class="card">
             <div class="card-content">
                 <div class="card-top">
-                    <span class="card-title">01.<br>
-                        <svg width="48" viewBox="0 -960 960 960" height="48" xmlns="http://www.w3.org/2000/svg"><path d="m393-165 279-335H492l36-286-253 366h154l-36 255Zm-73 85 40-280H160l360-520h80l-40 320h240L400-80h-80Zm153-395Z"></path>
-                        <h2>Product2</h2><br>
-                    </svg>
+                    <span class="card-title">13.<br>
+                        <h2>Не нашли агрегат?</h2>
                     </span>
                 </div>
+                <div class="card-info">
+                    <p>Подберём гидронасос или распределитель по каталогу, привезём под заказ или возьмём ваш в ремонт с выдачей заменителя из фонда.</p>
+                    <p class="card-min">Позвоните: {{ site.phone }}</p>
+                </div>
                 <div class="card-bottom">
-                    <h3>Hover Me?</h3>
-                    <div class="change-loader"></div>
-                    <svg width="32" viewBox="0 -960 960 960" height="32" xmlns="http://www.w3.org/2000/svg"><path d="M226-160q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19ZM226-414q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19ZM226-668q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Z"></path>
-                    </svg>
-                    <button class="more-button">
-                        <svg viewBox="0 0 16 16" class="bi bi-lightning-charge-fill" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
+                        <div class="change-loader"></div>
+                    <a class="more-button" href="{% url 'forms:contact' %}"><svg viewBox="0 0 16 16" class="bi bi-lightning-charge-fill" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
                             <path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"></path>
                         </svg>
-                        <a class="span" href="{% url 'services:services' %}">подробнее</a>
-                    </button>
+                            оставить заявку</a>
                 </div>
             </div>
         </div>
     </div>
-    <div class="card-wrapper">
-        <div class="card need-background-image" data-image-name="engine_jcb2.jpg" data-image-back-pos="right">
-            <div class="card-content">
-                <div class="card-top">
-                    <span class="card-title">01.<br>
-                        <svg width="48" viewBox="0 -960 960 960" height="48" xmlns="http://www.w3.org/2000/svg"><path d="m393-165 279-335H492l36-286-253 366h154l-36 255Zm-73 85 40-280H160l360-520h80l-40 320h240L400-80h-80Zm153-395Z"></path>
-                        <h2>Product3</h2><br>
-                    </svg>
-                    </span>
-                </div>
-                <div class="card-bottom">
-                    <h3>Hover Me?</h3>
-                    <div class="change-loader"></div>
-                    <svg width="32" viewBox="0 -960 960 960" height="32" xmlns="http://www.w3.org/2000/svg"><path d="M226-160q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19ZM226-414q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19ZM226-668q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Z"></path>
-                    </svg>
-                    <button class="more-button">
-                        <svg viewBox="0 0 16 16" class="bi bi-lightning-charge-fill" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"></path>
-                        </svg>
-                        <a class="span" href="{% url 'services:services' %}">подробнее</a>
-                    </button>
-                </div>
-            </div>
-        </div>
+</section>
+{% include '_cta.html' with cta_title='Не нашли нужную услугу?' cta_text='Берёмся и за нестандартные задачи: гидроцилиндры, коробки передач, редукторы. Опишите проблему — подскажем, чем поможем.' cta_variant='contrast' %}
+<section class="benefit home-blog" aria-label="Статьи из блога">
+    <div class="home-blog__head">
+        <span class="card-title">14.<br>
+            <h2>Из блога</h2>
+        </span>
+        <a class="home-blog__all" href="{% url 'blog:blog' %}">Все статьи →</a>
     </div>
-    <div class="card-wrapper">
-        <div class="card need-background-image" data-image-name="raspred_bosch.jpg" data-image-back-pos="right">
-            <div class="card-content">
-                <div class="card-top">
-                    <span class="card-title">01.<br>
-                        <svg width="48" viewBox="0 -960 960 960" height="48" xmlns="http://www.w3.org/2000/svg"><path d="m393-165 279-335H492l36-286-253 366h154l-36 255Zm-73 85 40-280H160l360-520h80l-40 320h240L400-80h-80Zm153-395Z"></path>
-                        </svg>
-                        <h2>Product4</h2>
-                    </span>
-                </div>
-                <div class="card-bottom">
-                    <h3>Hover Me?</h3>
-                    <div class="change-loader"></div>
-                    <svg width="32" viewBox="0 -960 960 960" height="32" xmlns="http://www.w3.org/2000/svg"><path d="M226-160q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19ZM226-414q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19ZM226-668q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Z"></path>
-                    </svg>
-                    <button class="more-button">
-                        <svg viewBox="0 0 16 16" class="bi bi-lightning-charge-fill" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"></path>
-                        </svg>
-                        <a class="span" href="{% url 'services:services' %}">подробнее</a>
-                    </button>
-                </div>
+    <div class="home-blog__grid">
+        {% for post in blog_posts %}
+        <article class="home-blog__card">
+            <a class="home-blog__card-img" href="{% url 'blog:post_detail' post.slug %}" aria-label="{{ post.title }}">
+                {% if post.preview_image %}
+                    <img src="{{ post.preview_image.url }}" alt="{{ post.title }}" loading="lazy">
+                {% endif %}
+            </a>
+            <div class="home-blog__card-body">
+                <h2><a href="{% url 'blog:post_detail' post.slug %}">{{ post.title }}</a></h2>
+                <time datetime="{{ post.created_at|date:'Y-m-d' }}">{{ post.created_at|date:'d.m.Y' }}</time>
+                <span class="home-blog__more">Читать статью <span class="home-blog__arrow">→</span></span>
             </div>
-        </div>
+        </article>
+        {% empty %}
+        <p>Статьи готовятся — загляните позже или свяжитесь с нами напрямую.</p>
+        {% endfor %}
     </div>
 </section>
 <section class="benefit hero map">
     <div class="card map-card">
         <div class="card-content ">
             <div class="card-top">
-                <span class="card-title">05.<br>
-                    <h1>Hero block</h1>
+                <span class="card-title">15.<br>
+                    <h2>Работаем по всей Беларуси</h2>
                 </span>
             </div>
+            <p class="map-lead">Позвоните — подскажем по вашей задаче и рассчитаем стоимость: <a href="tel:{{ site.phone_link }}">{{ site.phone }}</a></p>
         </div>
     </div>
 </section>

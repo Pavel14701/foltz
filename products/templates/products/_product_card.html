@@ -1,0 +1,18 @@
+<a class="service-card product-card" href="{% url 'products:product_detail' product.slug %}">
+    {% if product.preview_image %}
+        <img class="service-card__image" src="{{ product.preview_image.url }}" alt="{{ product.title }}" loading="lazy">
+    {% endif %}
+    <div class="service-card__body">
+        {% if product.category %}
+            <span class="product-card__category">{{ product.category.title }}</span>
+        {% endif %}
+        <h2>{{ product.title }}</h2>
+        {% if product.preview_text %}
+            <p class="service-card__text">{{ product.preview_text|truncatewords:18 }}</p>
+        {% endif %}
+        {% if product.price %}
+            <p class="service-card__price product-card__price">{{ product.price }}</p>
+        {% endif %}
+        <span class="service-card__more">Подробнее →</span>
+    </div>
+</a>

@@ -1,16 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Form</title>
-</head>
-<body>
-    <h1>Contact Us</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Отправить</button>
-    </form>
-</body>
-</html>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Контакты | Фольц{% endblock %}
+{% block meta_description %}Контакты агросервиса «Фольц»: телефон {{ site.phone }}, {{ site.hours }}, г. Минск, ул. Сухаревская, д. 16, пом. 6. Форма на консультацию — ответим на вопросы по ремонту и запчастям.{% endblock %}
+
+{% block content %}
+<section class="content-section">
+    <h1>Контакты</h1>
+    <p class="section-lead">
+        Позвоните или оставьте заявку — подскажем по ремонту гидравлики и двигателей,
+        обменному фонду и наличию запчастей.
+    </p>
+
+    <div class="contacts-grid">
+        <div class="contacts-card">
+            <span class="contacts-card__caption">Телефон</span>
+            <a class="contacts-card__value" href="tel:{{ site.phone_link }}">{{ site.phone }}</a>
+        </div>
+        <div class="contacts-card">
+            <span class="contacts-card__caption">Email</span>
+            <a class="contacts-card__value" href="mailto:{{ site.email }}">{{ site.email }}</a>
+        </div>
+        <div class="contacts-card">
+            <span class="contacts-card__caption">Режим работы</span>
+            <span class="contacts-card__value">{{ site.hours }}</span>
+        </div>
+        <div class="contacts-card">
+            <span class="contacts-card__caption">Адрес</span>
+            <span class="contacts-card__value">{{ site.address }}</span>
+        </div>
+    </div>
+
+    {% include 'forms/_request_form.html' with request_question='Консультация: подскажите по моей задаче' %}
+</section>
+{% endblock %}

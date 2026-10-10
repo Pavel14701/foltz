@@ -1,8 +1,37 @@
-{% for post in posts %}
-    <h2><a href="{% url 'blog:post_detail' post.slug %}">{{ post.title }}</a></h2>
-    {% if post.preview_image %}
-        <img src="{{ post.preview_image.url }}" alt="{{ post.title }}">
-    {% elif post.preview_video_url %}
-        <iframe width="560" height="315" src="{{ post.preview_video_url }}" frameborder="0" allowfullscreen></iframe>
-    {% endif %}
-{% endfor %}
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Блог — ремонт и обслуживание спецтехники | Фольц{% endblock %}
+{% block meta_description %}Статьи о ремонте гидравлики и двигателей спецтехники: гидронасосы, гидрораспределители, капитальный ремонт ДВС Deutz, JCB, Perkins, диагностика гидросистем МТЗ и Амкодор.{% endblock %}
+
+{% block content %}
+<section class="content-section">
+    <h1>Блог Агросервиса «Фольц»</h1>
+    <p class="section-lead">
+        Практические материалы о ремонте гидравлики, двигателей и диагностике
+        гидросистем тракторов, погрузчиков и спецтехники.
+    </p>
+
+    <div class="posts-list">
+        {% for post in posts %}
+        <article class="post-card">
+            {% if post.preview_image %}
+                <img class="post-card__image" src="{{ post.preview_image.url }}" alt="{{ post.title }}">
+            {% elif post.preview_video_url %}
+                <iframe class="post-card__video" width="560" height="315" src="{{ post.preview_video_url }}" title="{{ post.title }}" frameborder="0" allowfullscreen></iframe>
+            {% endif %}
+            <div class="post-card__body">
+                <h2><a href="{% url 'blog:post_detail' post.slug %}">{{ post.title }}</a></h2>
+                <time datetime="{{ post.created_at|date:'Y-m-d' }}">{{ post.created_at|date:'d.m.Y' }}</time>
+                <p>{{ post.meta_description }}</p>
+                <a class="post-card__more" href="{% url 'blog:post_detail' post.slug %}">Читать →</a>
+            </div>
+        </article>
+        {% empty %}
+        <p>Статьи готовятся — загляните позже или свяжитесь с нами напрямую.</p>
+        {% endfor %}
+    </div>
+
+    {% include '_cta.html' with cta_title='Не нашли ответ в статьях?' cta_text='Спросите мастера напрямую — подскажем по вашей модели техники. Консультация бесплатна.' cta_variant='contrast' %}
+</section>
+{% endblock %}

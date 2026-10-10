@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Запчасти и обменный фонд — каталог с ценами | Фольц{% endblock %}
+{% block meta_description %}Каталог запчастей для Амкодор, МТЗ и гидравлических систем с ценами: ГМП, мосты, ДВС, гидронасосы. Обменный фонд восстановленных узлов. Поиск по каталогу и фильтр по категориям.{% endblock %}
+
+{% block content %}
+<section class="content-section">
+    <h1>Запчасти и обменный фонд</h1>
+    <p class="section-lead">
+        Запчасти для техники Амкодор и МТЗ, узлы гидравлических систем и восстановленные
+        агрегаты из обменного фонда. Цены актуальны на складе; не нашли нужное — позвоните,
+        привезём под заказ.
+    </p>
+
+    <form class="services-search" method="get" action="{% url 'products:catalog' %}" role="search"
+          data-partial-url="{% url 'products:catalog' %}">
+        <input class="services-search__input" type="search" name="q" value="{{ query }}"
+               placeholder="Поиск по запчастям: ГМП, мост, ДВС, гидронасос…"
+               aria-label="Поиск по запчастям">
+        <button class="services-search__button" type="submit">Найти</button>
+        {% if query or category_slug %}
+            <a class="services-search__reset" href="{% url 'products:catalog' %}">Сбросить</a>
+        {% endif %}
+    </form>
+
+    <nav class="catalog-chips" aria-label="Категории запчастей">
+        <a class="chip{% if not category_slug %} chip--active{% endif %}"
+           href="{% url 'products:catalog' %}{% if query %}?q={{ query|urlencode }}{% endif %}">Все</a>
+        {% for category in categories %}
+            <a class="chip{% if category_slug == category.slug %} chip--active{% endif %}"
+               href="?category={{ category.slug }}{% if query %}&amp;q={{ query|urlencode }}{% endif %}">
+                {{ category.title }} <span class="chip__count">{{ category.products.count }}</span>
+            </a>
+        {% endfor %}
+    </nav>
+
+    <div id="products-grid-wrap">
+        {% include 'products/_product_grid.html' %}
+    </div>
+
+    {% include '_cta.html' with cta_title='Не нашли запчасть? Найдём под заказ' cta_text='Скажите модель техники и узел — проверим наличие на складе и у партнёров, назовём цену и срок поставки.' cta_variant='accent' %}
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script type="text/javascript" src="{% static 'js/products_search.js' %}" defer></script>
+{% endblock %}

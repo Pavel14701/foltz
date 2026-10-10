@@ -1,39 +1,59 @@
-/*
-html, body {
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden; Отключает горизонтальную прокрутку 
-}
-*/
-
+/* Футер: во всю ширину, прижат к низу страницы. */
 .footer {
+    margin-top: auto; /* прижимает футер к низу при коротком контенте */
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    box-sizing: border-box;
     background-color: black;
     color: #fff;
-    padding: 25px 0;
+    padding: 24px 20px calc(24px + env(safe-area-inset-bottom));
     text-align: center;
-    width: 100%; /* Убедитесь, что ширина ограничена 100% */
-    height:20vh;
-    box-sizing: border-box; /* Включаем паддинги в ширину */
-    position: relative; /* Оставляем элемент в нормальном потоке */
-    left: 0; /* Обеспечиваем, что он будет в начале окна */
 }
 
 .footer-content {
-    width: 100%; /* Убедитесь, что ширина ограничена 100% */
+    max-width: 1100px;
     margin: 0 auto;
-    padding: 0 20px;
-    box-sizing: border-box; /* Включаем паддинги в ширину */
+}
+
+.footer-content p {
+    margin: 0 0 10px;
+    font-size: 14px;
+    opacity: 0.8;
 }
 
 .footer-links {
-    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px 24px;
 }
 
 .footer-links a {
     color: #fff;
     text-decoration: none;
+    font-size: 14px;
 }
 
 .footer-links a:hover {
     text-decoration: underline;
+}
+
+@media screen and (max-width: 640px) {
+    .footer {
+        padding: 20px 16px calc(20px + env(safe-area-inset-bottom));
+    }
+
+    .footer-links {
+        flex-direction: column;
+        gap: 8px;
+    }
+}
+
+/* Защита футера от наложений и сжатия во flex-родителе. */
+.footer {
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+    clear: both;
 }

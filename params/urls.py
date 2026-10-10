@@ -5,13 +5,14 @@ from django.conf.urls import handler404, handler500, handler403, handler400
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.sitemaps.views import sitemap
-from .sitemap import StaticViewSitemap, ServiceSitemap, PostSitemap
+from .sitemap import StaticViewSitemap, ServiceSitemap, PostSitemap, ProductSitemap
 from rest_framework_simplejwt.views import (TokenObtainPairView,TokenRefreshView,)
 
 sitemaps = {
     'static': StaticViewSitemap,
     'services': ServiceSitemap,
     'blog': PostSitemap,
+    'products': ProductSitemap,
 }
 
 urlpatterns = [

@@ -1,7 +1,7 @@
 * { box-sizing: border-box; }
 
 main{
-    width: 100vw;
+    width: 100%; /* не 100vw: vw учитывает ширину скроллбара и даёт гориз. скролл */
     display: flex;
     pointer-events: auto;
     justify-content: center;
@@ -51,6 +51,20 @@ main{
     z-index: -100;
 }
 
-.content-wrapper { 
-    display: flex; 
-} 
+/* Каркас страницы: колонка, футер прижат к низу на коротких страницах. */
+.content-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 100vh;
+}
+/* Клетка: фиксированный «обои»-слой на весь экран.
+   Было absolute height:100% — слой жил только в пределах первого экрана. */
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}

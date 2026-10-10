@@ -1,93 +1,89 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
     <head>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>{% block title %}{% endblock %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+        <title>{% block title %}Агросервис «Фольц» — ремонт гидравлики и двигателей спецтехники{% endblock %}</title>
+        <meta name="description" content="{% block meta_description %}Ремонт гидравлики МТЗ и Амкодор, капитальный ремонт двигателей Deutz, JCB, Perkins, выездная диагностика гидросистем по Беларуси. Гарантия до 24 месяцев, работа по договору.{% endblock %}">
+        <meta name="theme-color" content="#000000">
+        <meta property="og:type" content="website">
+        <meta property="og:site_name" content="Агросервис «Фольц»">
+        <meta property="og:title" content="{% block og_title %}Агросервис «Фольц» — ремонт гидравлики и двигателей спецтехники{% endblock %}">
+        <meta property="og:description" content="{% block og_description %}Ремонт гидравлики МТЗ и Амкодор, двигателей Deutz, JCB, Perkins. Гарантия до 24 месяцев.{% endblock %}">
+        <meta property="og:locale" content="ru_RU">
+        {% block canonical %}{% endblock %}
+        <link rel="icon" href="{% static 'images/main_logo.webp' %}">
         <link rel="stylesheet" href="{% static 'fonts/fonts.css' %}">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap">
         <link rel="stylesheet" href="{% static 'styles/base/header.css' %}">
         <link rel="stylesheet" href="{% static 'styles/base/background.css' %}">
         <link rel="stylesheet" href="{% static 'styles/base/loader.css' %}">
         <link rel="stylesheet" href="{% static 'styles/base/footer.css' %}">
-        <link rel="stylesheet" href="{% static 'styles/content.css' %}">
-        <script type="text/javascript" src="{% static 'js/loader.js' %}"></script>
+        <link rel="stylesheet" href="{% static 'styles/content.css' %}?v=10">
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "AutoRepair",
+            "name": "Агросервис «Фольц»",
+            "telephone": "{{ site.phone }}",
+            "areaServed": "Беларусь",
+            "address": {
+                "@type": "PostalAddress",
+                "addressCountry": "BY"
+            },
+            "openingHours": "Mo-Sa 08:00-18:00"
+        }
+        </script>
+        <script src="{% static 'js/loader.js' %}" defer></script>
+        <script src="{% static 'js/header.js' %}" defer></script>
+        <script src="{% static 'js/blog_gallery.js' %}?v=2" defer></script>
         {% block extra_css %}{% endblock %}
         {% block extra_js %}{% endblock %}
     </head>
     <body class="loading">
+        <div class="background" data-display="flex"></div>
         <div id="loading" class="preloader">
             <div class="loader"></div>
         </div>
         <div class="content-wrapper">
-            <div id="custom-cursor">🔧</div>
-            <div class="content header" data-display="flex">
-                <div class="logo">
-                    <img url="{% url 'home' %}" class="logo-img" src="{% static 'images/main_logo.webp' %}" alt="Агросервис">
-                    <img url="{% url 'home' %}" class="logo-text" src="{% static 'images/logo_text_white.webp' %}" alt="Foltz">
-                </div>
-                <div class="nav-buttons">
-                    <button class="header-button">
-                        <svg viewBox="0 0 16 16" class="bi bi-lightning-charge-fill" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"></path>
-                        </svg>
-                        <a class="span" href="{% url 'services:services' %}">УСЛУГИ</a>
-                    </button>
-                    <button class="header-button">
-                        <svg viewBox="0 0 16 16" class="bi bi-lightning-charge-fill" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"></path>
-                        </svg>
-                        <a class="span" href="{% url 'about' %}">О НАС</a>
-                    </button>
-                    <button class="header-button">
-                        <svg viewBox="0 0 16 16" class="bi bi-lightning-charge-fill" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"></path>
-                        </svg>
-                        <a class="span" href="{% url 'blog:blog' %}">БЛОГ</a>
-                    </button>
-                    <button class="header-button">
-                        <svg viewBox="0 0 16 16" class="bi bi-lightning-charge-fill" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"></path>
-                        </svg>
-                        <a class="span" href="{% url 'services:services' %}">КОНТАКТЫ</a>
-                    </button>
-                </div>
-                <div class="burger-menu">
-                    <div class="line"></div>
-                    <div class="line"></div>
-                    <div class="line"></div>
-                </div>
-                <div class="content header" data-display="flex">
-                    <div class="logo">Логотип</div>
-                    <div class="nav-buttons">
-                        <a href="{% url 'home' %}">Главная</a>
-                        <a href="{% url 'services:services' %}">Услуги</a>
-                        <a href="{% url 'about' %}">О нас</a>
-                        <a href="{% url 'blog:blog' %}">Блог</a>
-                    </div>
-                    <div class="burger-menu">
-                        <div class="line"></div>
-                        <div class="line"></div>
-                        <div class="line"></div>
-                    </div>
-                </div>
-            </div>
+            <header class="site-header">
+                <a class="site-header__logo" href="{% url 'home' %}" aria-label="Агросервис «Фольц» — на главную">
+                    <img class="logo-img" src="{% static 'images/main_logo.webp' %}" alt="Логотип Агросервис Фольц" width="40" height="44">
+                    <img class="logo-text" src="{% static 'images/logo_text_white.webp' %}" alt="Фольц" width="104" height="44">
+                </a>
+                <nav class="site-nav" id="site-nav" aria-label="Главное меню">
+                    <ul class="site-nav__list">
+                        <li><a class="header-button" href="{% url 'services:services' %}">УСЛУГИ</a></li>
+                        <li><a class="header-button" href="{% url 'products:catalog' %}">ЗАПЧАСТИ</a></li>
+                        <li><a class="header-button" href="{% url 'about' %}">О НАС</a></li>
+                        <li><a class="header-button" href="{% url 'blog:blog' %}">БЛОГ</a></li>
+                        <li><a class="header-button header-button--contact" href="{% url 'forms:contact' %}">КОНТАКТЫ</a></li>
+                    </ul>
+                </nav>
+                <button class="burger" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Открыть меню">
+                    <span class="burger__line"></span>
+                    <span class="burger__line"></span>
+                    <span class="burger__line"></span>
+                </button>
+            </header>
             <main>
-            {% block content %}
-            {% endblock %}
-
+                {% block content %}
+                {% endblock %}
+            </main>
+            <footer class="footer">
+                <div class="footer-content">
+                    <p>© 2024 Агросервис «Фольц». Все права защищены.</p>
+                    <div class="footer-links">
+                        <a href="{% url 'privacy' %}">Политика конфиденциальности</a>
+                        <a href="{% url 'terms_of_service' %}">Условия использования</a>
+                        <a href="tel:{{ site.phone_link }}">{{ site.phone }}</a>
+                    </div>
+                </div>
+            </footer>
         </div>
-    </main>
-    <div class="footer">
-        <div class="footer-content">
-            <p>© 2024 Your Company. Все права защищены.</p>
-            <div class="footer-links">
-                <a href="{% url 'privacy' %}">Политика конфиденциальности</a>
-                <a href="{% url 'terms_of_service' %}">Условия использования</a>
-                <a tel="+375295410647">+375(29) 541-06-47</a>
-            </div>
-        </div>
-    </div>
     </body>
 </html>

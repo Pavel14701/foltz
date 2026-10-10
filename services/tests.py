@@ -36,10 +36,19 @@ class ServiceSectionTest(TestCase):
         )
         self.assertEqual(section.embed_url, '')
 
-    def test_two_fields_filled_rejected(self):
+    def test_subtitle_with_content_allowed(self):
+        # Новая семантика секций: заголовок и текст можно совмещать.
         section = ServiceSection(
             service=self.service, order=1,
             subtitle='Заголовок', content='Текст',
+        )
+        section.save()  # не должно падать
+
+    def test_image_with_text_rejected(self):
+        section = ServiceSection(
+            service=self.service, order=1,
+            subtitle='Заголовок',
+            image='x.jpg',
         )
         with self.assertRaises(ValidationError):
             section.save()

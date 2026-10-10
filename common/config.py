@@ -69,9 +69,10 @@ class Env(BaseModel):
     EMAIL_HOST_PASSWORD: str = ''
 
     # --- Контакты сайта (шапка/футер/CTA) ---
-    SITE_PHONE: str = '+375 (29) 541-06-47'
-    SITE_EMAIL: str = ''
-    SITE_ADDRESS: str = ''
+    SITE_PHONE: str = '+375 (44) 577-00-04'
+    SITE_EMAIL: str = 'volksagro@gmail.com'
+    SITE_ADDRESS: str = 'г. Минск, ул. Сухаревская, д. 16, пом. 6'
+    SITE_HOURS: str = 'Пн–Пт: 09:00–17:00'
 
     # --- Сайт и Telegram-бот ---
     SITE_BASE_URL: str = ''

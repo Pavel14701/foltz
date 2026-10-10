@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand
 
-from products.models import Product, ProductSection
+from products.models import Product, ProductCategory, ProductSection
 from products.seed_data import PRODUCTS
 
 
@@ -8,10 +8,14 @@ class Command(BaseCommand):
     help = 'Наполняет каталог продуктов (идемпотентно: существующие записи обновляются).'
 
     def handle(self, *args, **options) -> None:
+        category, _ = ProductCategory.objects.get_or_create(
+            title='Обменный фонд (восстановленные узлы)',
+            defaults={'order': 50, 'slug': 'obmennyy-fond'},
+        )
         for data in PRODUCTS:
             product, _ = Product.objects.update_or_create(
                 title=data['title'],
-                defaults={'preview_text': data['preview_text']},
+                defaults={'preview_text': data['preview_text'], 'category': category},
             )
             for section_data in data['sections']:
                 ProductSection.objects.update_or_create(

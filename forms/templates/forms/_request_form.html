@@ -1,0 +1,40 @@
+{# Переиспользуемая форма заявки (DRY): товары, услуги, контакты. #}
+{# Форма приходит из контекст-процессора (contact_form); #}
+{# request_question — необязательная подсказка: если задана, #}
+{# поле «Вопрос» скрыто и заполнено автоматически. #}
+<section class="request-form" id="request-form">
+    <h2 class="request-form__title">Оставить заявку</h2>
+    <p class="request-form__lead">Оставьте имя и телефон — перезвоним, уточним детали и назовём цену.</p>
+    <form class="request-form__form" method="post" action="{% url 'forms:send_request' %}">
+        {% csrf_token %}
+        <div class="request-form__row">
+            <label class="request-form__field">
+                <span class="request-form__caption">Ваше имя</span>
+                <input class="request-form__input" type="text" name="name" required maxlength="100"
+                       placeholder="Как к вам обращаться" value="{{ contact_form.name.value|default:'' }}">
+            </label>
+            <label class="request-form__field">
+                <span class="request-form__caption">Телефон</span>
+                <input class="request-form__input" type="tel" name="phone" required maxlength="15"
+                       placeholder="+375 (29) 000-00-00" value="{{ contact_form.phone.value|default:'' }}">
+            </label>
+        </div>
+        {% if contact_form.name.errors or contact_form.phone.errors %}
+        <p class="request-form__error">{{ contact_form.name.errors.0 }}{{ contact_form.phone.errors.0 }}</p>
+        {% endif %}
+        {% if request_question %}
+        <input type="hidden" name="question" value="{{ request_question }}">
+        <p class="request-form__question">Заявка: {{ request_question }}</p>
+        {% else %}
+        <label class="request-form__field">
+            <span class="request-form__caption">Вопрос (необязательно)</span>
+            <textarea class="request-form__input request-form__textarea" name="question"
+                      placeholder="Опишите задачу: модель техники, узел, симптомы…">{{ contact_form.question.value|default:'' }}</textarea>
+        </label>
+        {% endif %}
+        <button class="request-form__submit" type="submit">Отправить заявку</button>
+        <p class="request-form__note">
+            Нажимая кнопку, вы соглашаетесь с <a href="/privacy_policy/">политикой конфиденциальности</a>.
+        </p>
+    </form>
+</section>

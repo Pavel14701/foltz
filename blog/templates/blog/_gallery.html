@@ -1,0 +1,28 @@
+{% if imgs %}
+    {% if imgs|length >= 3 %}
+    <div class="blog-article-gallery" data-gallery>
+        <div class="blog-gallery__viewport">
+            <div class="blog-gallery__track">
+                {% for gi in imgs %}
+                <div class="blog-gallery__slide"><img src="{{ gi.image.url }}" alt="{{ post.title }}" loading="lazy"></div>
+                {% endfor %}
+            </div>
+        </div>
+        <button type="button" class="blog-gallery__btn blog-gallery__btn--prev" aria-label="Предыдущее фото">&#10094;</button>
+        <button type="button" class="blog-gallery__btn blog-gallery__btn--next" aria-label="Следующее фото">&#10095;</button>
+        <div class="blog-gallery__dots"></div>
+    </div>
+    {% else %}
+    {% if imgs|length == 2 %}
+    <div class="blog-article-gallery blog-article-gallery--pair">
+        {% for gi in imgs %}
+        <div class="post-image-card"><img src="{{ gi.image.url }}" alt="{{ post.title }}" loading="lazy"></div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="blog-article-gallery">
+        <img src="{{ imgs.0.image.url }}" alt="{{ post.title }}" loading="lazy">
+    </div>
+    {% endif %}
+    {% endif %}
+{% endif %}

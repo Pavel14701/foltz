@@ -6,7 +6,7 @@ from django.test import TestCase
 from django.urls import reverse
 
 from blog.models import Blog, BlogSection
-from blog.seed_data import POSTS
+from blog.seed_data import POSTS, EXTRA_SECTIONS
 
 
 class BlogModelTest(TestCase):
@@ -66,7 +66,10 @@ class SeedPostsCommandTest(TestCase):
         self.assertEqual(Blog.objects.count(), len(POSTS))
         self.assertEqual(
             BlogSection.objects.count(),
-            sum(len(p['sections']) for p in POSTS),
+            sum(
+                len(p['sections']) + len(EXTRA_SECTIONS.get(p['slug'], []))
+                for p in POSTS
+            ),
         )
         post = Blog.objects.get(slug=POSTS[0]['slug'])
         self.assertEqual(post.title, POSTS[0]['title'])

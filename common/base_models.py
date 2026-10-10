@@ -62,12 +62,13 @@ class SectionsBase(models.Model):
         return f"{self.post.title} - {self.order}"
 
     def clean(self):
-        fields = [self.image, self.youtube_url, self.subtitle, self.content]
-        filled_fields = [field for field in fields if field]
-        if len(filled_fields) > 1:
-            raise ValidationError('Можно выбрать только одно поле для заполнения.')
-        if not filled_fields:
-            raise ValidationError('Необходимо заполнить хотя бы одно поле.')
+        media = [field for field in (self.image, self.youtube_url) if field]
+        if len(media) > 1:
+            raise ValidationError('В одной секции только один тип медиа: изображение или видео.')
+        if media and (self.subtitle or self.content):
+            raise ValidationError('Медиа-секция без текста: текст и заголовок вынесите в отдельную секцию.')
+        if not media and not (self.subtitle or self.content):
+            raise ValidationError('Заполните хотя бы одно поле секции.')
 
     def save(
         self,

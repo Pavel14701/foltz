@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Заявка — проверьте данные | Фольц{% endblock %}
+
+{% block content %}
+<section class="content-section">
+    <h1>Проверьте данные заявки</h1>
+    <p class="section-lead">
+        Имя или телефон заполнены неверно — исправьте и отправьте ещё раз.
+    </p>
+    {% include 'forms/_request_form.html' %}
+</section>
+{% endblock %}

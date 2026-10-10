@@ -93,6 +93,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'common.context_processors.site_contacts',
+                'common.context_processors.request_form',
             ],
         },
     },
@@ -224,3 +225,7 @@ EMAIL_HOST_PASSWORD = conf.EMAIL_HOST_PASSWORD
 SITE_PHONE = conf.SITE_PHONE
 SITE_EMAIL = conf.SITE_EMAIL
 SITE_ADDRESS = conf.SITE_ADDRESS
+SITE_HOURS = conf.SITE_HOURS
+
+# Yandex-карта в блоке «О нас» (iframe).
+CONTENT_SECURITY_POLICY['DIRECTIVES']['frame-src'] = ("'self'", 'https://yandex.ru')

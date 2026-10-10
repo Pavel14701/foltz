@@ -301,3 +301,73 @@
     background-repeat: no-repeat;
     background-position: center;
 }
+
+/* H1-оверлей поверх hero-галереи */
+.hero-card {
+    position: relative;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+    padding: 24px;
+    padding-top: calc(24px + var(--header-height));
+    text-align: center;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.65));
+}
+
+.hero-overlay h1 {
+    margin: 0;
+    max-width: 900px;
+    font-family: 'Rubik Mono One', normal;
+    font-size: clamp(20px, 4.2vw, 46px);
+    line-height: 1.25;
+    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.65);
+}
+
+.hero-overlay p {
+    margin: 0;
+    max-width: 640px;
+    font-size: clamp(14px, 1.6vw, 18px);
+    line-height: 1.55;
+    opacity: 0.92;
+}
+
+.hero-cta {
+    margin-top: 8px;
+    padding: 14px 32px;
+    border-radius: 8px;
+    background: linear-gradient(140deg, hsla(41, 92%, 47%, 1) 20%, hsla(41, 92%, 50%, 0.6) 100%);
+    color: #000;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: inset 0.7px 1.5px 4px hsla(0, 0%, 0%, 0.678);
+}
+
+.hero-cta:hover {
+    transform: scale(1.04);
+}
+
+@media screen and (max-width: 640px) {
+    .hero-overlay {
+        padding: 16px;
+        padding-top: calc(56px + 16px);
+        gap: 10px;
+    }
+}
+
+/* Белый текст hero (hero-card наследует чёрный от .card) */
+.hero-overlay {
+    color: #fff;
+}
+
+.hero-overlay h1 {
+    color: #fff;
+    letter-spacing: 0.5px;
+}

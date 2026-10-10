@@ -1,7 +1,32 @@
-html, body {
-    height: 100%;
-    margin: 0;
+/* Блокируем прокрутку только пока крутится прелоадер. */
+html.loading,
+body.loading {
     overflow: hidden;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    /* min-height вместо жёсткого height: иначе body становится
+       scroll-контейнером и ломает раскладку низа страницы */
+    min-height: 100%;
+    margin: 0;
+    overflow-x: hidden; /* горизонтальной прокрутки не должно быть никогда */
+}
+
+/* Полосы прокрутки скрыты, прокрутка колёсиком/тачем работает. */
+html {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    display: none;
 }
 
 .content {

@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand
 
-from services.models import Service, ServiceSection
+from services.models import Service, ServicePrice, ServiceSection
 from services.seed_data import SERVICES
 
 
@@ -26,5 +26,22 @@ class Command(BaseCommand):
                         if key != 'order'
                     },
                 )
+            # Прайс синхронизируем: создаём/обновляем и удаляем устаревшие позиции
+            price_names = []
+            for name, price in data.get('prices', []):
+                ServicePrice.objects.update_or_create(
+                    service=service,
+                    name=name,
+                    defaults={'price': price},
+                )
+                price_names.append(name)
+            service.prices.exclude(name__in=price_names).delete()
             self.stdout.write(self.style.SUCCESS(f'OK: {service.title}'))
+        # Убираем услуги, которых больше нет в каталоге (созданы руками или
+        # остались от старой структуры).
+        seed_slugs = {data['slug'] for data in SERVICES}
+        removed = Service.objects.exclude(slug__in=seed_slugs)
+        for service in removed:
+            self.stdout.write(self.style.WARNING(f'Удалена: {service.title}'))
+        removed.delete()
         self.stdout.write(self.style.SUCCESS(f'Наполнено услуг: {len(SERVICES)}'))

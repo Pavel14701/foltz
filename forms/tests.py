@@ -1,19 +1,34 @@
-"""Тесты формы обратной связи: валидация и отправка заявок."""
+"""Тесты заявок: страница контактов, приём форм, отправка на email и в Telegram."""
 from unittest import mock
 
 from django.test import SimpleTestCase
 
 
-class ContactViewTest(SimpleTestCase):
-    def test_get_renders_form(self):
+class ContactPageTest(SimpleTestCase):
+    """«Контакты» — контактные данные + форма на консультацию."""
+
+    def test_get_renders_contacts_with_consultation_form(self):
         response = self.client.get('/contact/')
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, 'name="name"')
+        # Контактные данные (из site_contacts).
+        self.assertContains(response, '+375 (44) 577-00-04')
+        self.assertContains(response, 'volksagro@gmail.com')
+        self.assertContains(response, 'Сухаревская')
+        # Форма на консультацию.
         self.assertContains(response, 'name="phone"')
+        self.assertContains(response, 'id="request-form"')
+
+
+class SendRequestTest(SimpleTestCase):
+    """Единая точка приёма заявок со страниц товаров и услуг."""
+
+    def test_get_is_not_allowed(self):
+        response = self.client.get('/request/')
+        self.assertEqual(response.status_code, 405)
 
     @mock.patch('forms.views.SendAplications')
     def test_valid_post_sends_and_redirects(self, sender_cls):
-        response = self.client.post('/contact/', {
+        response = self.client.post('/request/', {
             'name': 'Иван',
             'phone': '+375291112233',
             'question': 'Сколько стоит ремонт насоса?',
@@ -28,14 +43,14 @@ class ContactViewTest(SimpleTestCase):
 
     @mock.patch('forms.views.SendAplications')
     def test_invalid_post_rerenders_with_errors(self, sender_cls):
-        response = self.client.post('/contact/', {'phone': '+375291112233'})
-        self.assertEqual(response.status_code, 200)
+        response = self.client.post('/request/', {'phone': '+375291112233'})
+        self.assertEqual(response.status_code, 400)
         self.assertIn('name', response.context['form'].errors)
         sender_cls.assert_not_called()
 
     @mock.patch('forms.views.SendAplications')
     def test_empty_question_is_optional(self, sender_cls):
-        response = self.client.post('/contact/', {'name': 'Иван', 'phone': '123'})
+        response = self.client.post('/request/', {'name': 'Иван', 'phone': '123'})
         self.assertRedirects(response, '/success/', fetch_redirect_response=False)
         self.assertEqual(sender_cls.call_args[0][0].question, '')
 

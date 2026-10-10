@@ -1,6 +1,7 @@
 """Маршруты API продуктов (JWT-защищённые, для бота и админ-панели)."""
 from django.urls import path
 
+from products import views
 from products.api.views import ProductSectionSearchView, ProductViewSet
 
 app_name = 'products'
@@ -58,4 +59,8 @@ urlpatterns = [
     path('api/products/<int:post_id>/sections/create/',
         ProductSectionSearchView.as_view({'post': 'create'}),
         name='product-section-create'),
+    # Каталог товаров (сайт)
+    path('tovary/', views.products_view, name='catalog'),
+    # Страница товара (ЧПУ)
+    path('tovary/<slug:slug>/', views.product_detail_view, name='product_detail'),
 ]

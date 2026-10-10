@@ -1,2 +1,77 @@
 {% extends 'base.html' %}
 {% load static %}
+
+{% block title %}О нас — Агросервис «Фольц» | ремонт спецтехники в Беларуси{% endblock %}
+{% block meta_description %}Агросервис «Фольц»: ремонт гидравлики и двигателей спецтехники, собственный цех, выездная диагностика по Беларуси, работа по договору, гарантия до 24 месяцев.{% endblock %}
+
+{% block content %}
+<section class="content-section">
+    <h1>О Агросервисе «Фольц»</h1>
+
+    <div class="about-hero">
+        <div>
+            <p class="section-lead">
+                Мы ремонтируем гидравлику и двигатели спецтехники с 2004 года: тракторы МТЗ,
+                погрузчики Амкодор, импортная техника с двигателями Deutz, JCB, Perkins.
+            </p>
+            <p>
+                За это время через наш цех прошли тысячи гидронасосов, гидромоторов,
+                гидрораспределителей и двигателей. Мы знаем слабые места каждой модели
+                и держим запас типовых запчастей, чтобы не растягивать сроки.
+            </p>
+            <ul class="about-list">
+                <li>Собственный цех: расточка, шлифовка, испытательный стенд гидроагрегатов.</li>
+                <li>Выездная диагностика гидросистем по всей Беларуси.</li>
+                <li>Обменный фонд насосов и гидрораспределителей — не ждёте ремонта.</li>
+                <li>Работа по договору, гарантия 6–24 месяца.</li>
+            </ul>
+        </div>
+        <img class="about-hero__img" src="{% static 'images/man_hero.jpg' %}" alt="Мастер Агросервиса «Фольц» за работой">
+    </div>
+
+    <div class="about-stats">
+        <div class="about-stats__item"><strong>20+</strong><span>лет опыта с 2004 года</span></div>
+        <div class="about-stats__item"><strong>6–24</strong><span>месяца гарантии по договору</span></div>
+        <div class="about-stats__item"><strong>РБ</strong><span>выездная диагностика по всей Беларуси</span></div>
+    </div>
+
+    <h2>Наш цех и техника</h2>
+    <div class="about-gallery">
+        <figure>
+            <img src="{% static 'images/photo_2024-12-06_10-07-21.jpg' %}" alt="Цех Агросервиса «Фольц»" loading="lazy">
+            <figcaption>Ремонтный цех</figcaption>
+        </figure>
+        <figure>
+            <img src="{% static 'images/engine_jcb1.jpg' %}" alt="Капитальный ремонт двигателя JCB" loading="lazy">
+            <figcaption>Двигатели JCB и Deutz</figcaption>
+        </figure>
+        <figure>
+            <img src="{% static 'images/raspred_bosch.jpg' %}" alt="Гидрораспределитель Bosch" loading="lazy">
+            <figcaption>Гидрораспределители</figcaption>
+        </figure>
+        <figure>
+            <img src="{% static 'images/amkodor_pogr_new.jpg' %}" alt="Погрузчик Амкодор после ремонта" loading="lazy">
+            <figcaption>Техника после ремонта</figcaption>
+        </figure>
+    </div>
+
+    <h2>Как мы работаем</h2>
+    <ol class="about-steps">
+        <li><strong>Звонок и консультация.</strong> Уточняем модель техники и симптомы — сразу называем ориентир по цене и срокам.</li>
+        <li><strong>Диагностика.</strong> В нашем цеху или выездом к вам — проверяем гидросистему под нагрузкой.</li>
+        <li><strong>Смета и сроки.</strong> Фиксируем объём работ письменно, до начала ремонта вы знаете итоговую сумму.</li>
+        <li><strong>Ремонт и испытания.</strong> Каждый агрегат прогоняем на стенде, выдаём гарантийный талон.</li>
+    </ol>
+
+    <h2>Где мы находимся</h2>
+    <p class="about-address">
+        Офис и мастерская: <strong>{{ site.address }}</strong>. Режим работы: {{ site.hours }}.
+    </p>
+    <iframe class="about-map"
+            src="https://yandex.ru/map-widget/v1/?text=%D0%9C%D0%B8%D0%BD%D1%81%D0%BA%2C%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%20%D0%A1%D1%83%D1%85%D0%B0%D1%80%D0%B5%D0%B2%D1%81%D0%BA%D0%B0%D1%8F%2C%2016&z=16"
+            title="Офис и мастерская «Фольц» на карте — {{ site.address }}"
+            loading="lazy" allowfullscreen></iframe>
+
+    {% include '_cta.html' with cta_title='Обсудим вашу технику?' cta_text='Позвоните — мастер ответит на вопросы и сориентирует по цене и срокам ещё до начала работ.' %}
+</section>
+{% endblock %}
