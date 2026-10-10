@@ -1,0 +1,16 @@
+<section class="content-section reviews-section" aria-labelledby="reviews-title">
+    <h2 id="reviews-title">Отзывы о нас</h2>
+    <div class="reviews-grid">
+        {% for review in reviews %}
+        <figure class="review-card">
+            <blockquote class="review-card__text">{{ review.text }}</blockquote>
+            <figcaption class="review-card__meta">
+                <span class="review-card__author">{{ review.author }}</span>
+                <time class="review-card__date" datetime="{{ review.date|date:'Y-m-d' }}">{{ review.date|date:'d.m.Y' }}</time>
+            </figcaption>
+        </figure>
+        {% empty %}
+        <p>Отзывы скоро появятся.</p>
+        {% endfor %}
+    </div>
+</section>

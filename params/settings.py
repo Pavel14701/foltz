@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'user.apps.UserConfig',
     'common.apps.CommonConfig',
     'products.apps.ProductsConfig',
+    'reviews.apps.ReviewsConfig',
 
     'rest_framework',
     'csp',

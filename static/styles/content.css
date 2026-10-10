@@ -874,10 +874,13 @@ a.pagination__link:hover {
     margin: 12px 0 24px;
 }
 
-.post-image-card .post-card__image {
+/* Внутри белой карточки картинка не должна выглядеть второй карточкой:
+   гасим её собственные тень/отступы (специфичность выше .post-article .post-card__image). */
+.post-article .post-image-card .post-card__image,
+.blog-article-gallery--pair .post-image-card img {
     margin: 0;
-    box-shadow: 0.2px 0.5px 10px rgba(0, 0, 0, 0.35);
     border-radius: 1em;
+    box-shadow: none;
 }
 
 /* Галерея статьи: белая карточка; 1 — во всю ширину, 2 — рядом, 3+ — слайдер. */
@@ -900,7 +903,7 @@ a.pagination__link:hover {
     background: none;
     padding: 0;
     border-radius: 0;
-    box-shadow: 0.2px 0.5px 10px rgba(0, 0, 0, 0.35);
+    box-shadow: none; /* тень у контейнера-грида не нужна: каждая карточка имеет свою */
 }
 
 .blog-article-gallery--pair .post-image-card {
@@ -1492,4 +1495,46 @@ a.contacts-card__value:hover {
 
 .about-map [class*="ground-pane"] {
     filter: grayscale(1) brightness(0.82) contrast(1.18);
+}
+
+/* Отзывы о нас: белые карточки в общей стилистике (как facts-grid/post-image-card). */
+.reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    margin: 12px 0 24px;
+}
+
+.review-card {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: #fff;
+    border-radius: 1.5em;
+    padding: 20px;
+    box-shadow: 0.3px 0.7px 15px black;
+    margin: 0;
+}
+
+.review-card__text {
+    flex: 1;
+    margin: 0;
+}
+
+.review-card__meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    padding-top: 10px;
+}
+
+.review-card__author {
+    font-weight: bold;
+}
+
+.review-card__date {
+    white-space: nowrap;
+    opacity: 0.65;
 }
