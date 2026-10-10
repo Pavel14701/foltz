@@ -1480,6 +1480,7 @@ a.contacts-card__value:hover {
 .card,
 .cta-block,
 .direction-card,
+.bento__card,
 .post-card,
 .service-card,
 .review-card {
@@ -1495,6 +1496,7 @@ a.contacts-card__value:hover {
 .card:hover,
 .cta-block:hover,
 .direction-card:hover,
+.bento__card:hover,
 .post-card:hover,
 .service-card:hover,
 .review-card:hover {
@@ -1542,11 +1544,23 @@ a.contacts-card__value:hover {
     padding: 8px 16px;
 }
 
-/* Направления работ («Чем занимается»): белые карточки с фото и ссылкой. */
+/* Направления работ («Чем занимается»): белые карточки с фото и ссылкой,
+   шахматная раскладка — первая и последняя шире. */
 .directions-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: 24px;
+}
+
+@media screen and (min-width: 901px) {
+    .directions-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .direction-card:nth-child(1),
+    .direction-card:nth-child(4) {
+        grid-column: span 2;
+    }
 }
 
 .direction-card {
@@ -1581,6 +1595,88 @@ a.contacts-card__value:hover {
     font-size: 14.5px;
     line-height: 1.55;
     color: #444;
+}
+
+/* Бенто-группировка: асимметричная сетка с широкими ячейками и акцентами
+   вместо ровных рядов одинаковых плиток. */
+.bento {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+}
+
+.bento__card {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border-radius: 1.5em;
+    box-shadow: 0.3px 0.7px 15px black;
+    padding: 22px 24px;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.bento__card strong {
+    font-size: 1.2em;
+}
+
+.bento__card--dark {
+    background: #000;
+    color: #fff;
+}
+
+.bento__card--accent {
+    background: hsla(41, 92%, 55%, 1);
+    color: #111;
+}
+
+/* базовая раскладка на 6 карточек: зигзаг широких ячеек 2-1-1 / 1-1-2 */
+.bento > .bento__card:nth-child(1),
+.bento > .bento__card:nth-child(6) {
+    grid-column: span 2;
+}
+
+/* варианты на 4 карточки: широкие ячейки по диагонали */
+.bento--duo {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.bento--duo > .bento__card:nth-child(1),
+.bento--duo > .bento__card:nth-child(4) {
+    grid-column: span 2;
+}
+
+.bento--duo-rev > .bento__card:nth-child(2),
+.bento--duo-rev > .bento__card:nth-child(3) {
+    grid-column: span 2;
+}
+
+@media screen and (max-width: 900px) {
+    .bento {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .bento--duo,
+    .bento--duo-rev {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 640px) {
+    .bento,
+    .bento--duo,
+    .bento--duo-rev {
+        grid-template-columns: 1fr;
+    }
+
+    /* сброс объединений в одну колонку — перебиваем в т.ч. nth-child правила */
+    .bento > .bento__card,
+    .bento--duo > .bento__card:nth-child(1),
+    .bento--duo > .bento__card:nth-child(4),
+    .bento--duo-rev > .bento__card:nth-child(2),
+    .bento--duo-rev > .bento__card:nth-child(3) {
+        grid-column: auto;
+    }
 }
 
 /* Переход между разделами: крупная ссылка-стрелка после секции, перед CTA. */
