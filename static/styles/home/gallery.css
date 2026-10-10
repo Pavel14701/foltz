@@ -215,6 +215,10 @@
     font-size: 16px;
     line-height: 1.6;
     opacity: 0.85;
+    display: -webkit-box; /* описание обрезается аккуратно, с многоточием */
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .card-prices {
@@ -223,7 +227,7 @@
     padding: 0;
     display: grid;
     gap: 7px;
-    max-height: 136px; /* ~4 позиции — остальное обрезается без прокрутки */
+    max-height: 98px; /* ровно 3 позиции — строки не режутся посередине */
     overflow: hidden;
 }
 
@@ -235,6 +239,13 @@
     line-height: 1.4;
     border-bottom: 1px solid rgba(0, 0, 0, 0.12);
     padding-bottom: 6px;
+}
+
+.card-prices li span {
+    min-width: 0;
+    overflow: hidden; /* длинная работа — ellipsis, цена всегда видна целиком */
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .card-prices b {
