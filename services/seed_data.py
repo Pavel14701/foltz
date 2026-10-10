@@ -41,7 +41,7 @@ def _steps(*items: str) -> str:
 def _svc(title, slug, preview, prices, how, why, adv, extra=()):
     """Собирает услугу: продающий текст + секции + прайс."""
     sections = [
-        {'order': 1, 'subtitle': 'Как отрабатывается заявка'},
+        {'order': 1, 'subtitle': 'Как проходит работа'},
         {'order': 2, 'content': how},
         {'order': 3, 'subtitle': 'Что входит в цену'},
         {'order': 4, 'content': why},

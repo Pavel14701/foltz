@@ -12,4 +12,4 @@ makets
 staticfiles
 .mypy_cache/
 db*.sqlite3
-media/static/posts/
+media
