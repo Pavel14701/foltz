@@ -1642,11 +1642,12 @@ a.contacts-card__value:hover {
     margin: 40px 20px 26px;
 }
 
-/* В том же стиле, что шапка блога: заголовок слева, ссылка справа — одна строка. */
+/* В том же стиле, что шапка блога: чёрный заголовок слева, золотая
+   ссылка того же шрифта и размера справа — одна строка, по центру. */
 .section-jump__head {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
     gap: 16px;
     flex-wrap: wrap;
 }
@@ -1656,18 +1657,19 @@ a.contacts-card__value:hover {
     font-family: 'Rubik Mono One', 'Montserrat', system-ui, sans-serif;
     font-weight: 400;
     font-size: clamp(19px, 2.6vw, 30px);
+    color: #000;
 }
 
 .section-jump__link {
     flex-shrink: 0;
     display: inline-flex;
     align-items: baseline;
-    gap: 8px;
-    padding-top: 6px;
+    gap: 12px;
+    font-family: 'Rubik Mono One', 'Montserrat', system-ui, sans-serif;
+    font-weight: 400;
+    font-size: clamp(19px, 2.6vw, 30px);
     color: hsla(41, 92%, 55%, 1);
     text-decoration: none;
-    font-weight: 600;
-    font-size: 15px;
 }
 
 .section-jump__link:hover {
