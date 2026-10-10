@@ -1508,15 +1508,21 @@ a.contacts-card__value:hover {
 .home-section {
     width: 90vw;
     max-width: 1440px;
-    margin: 34px auto 0;
+    margin: 64px auto 0; /* крупный вертикальный ритм — разделы читаются как отдельные смысловые блоки */
+}
+
+@media screen and (max-width: 640px) {
+    .home-section {
+        margin-top: 44px;
+    }
 }
 
 .home-section h2 {
-    margin: 0 0 10px;
+    margin: 0 0 12px;
 }
 
 .home-section__lead {
-    margin: 0 0 20px;
+    margin: 0 0 28px;
     max-width: 75ch;
     color: #555;
     font-size: clamp(15px, 1.6vw, 18px);
@@ -1549,7 +1555,7 @@ a.contacts-card__value:hover {
 .directions-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 24px;
+    gap: 28px;
 }
 
 @media screen and (min-width: 901px) {
@@ -1610,19 +1616,19 @@ a.contacts-card__value:hover {
 }
 
 .direction-card__body {
-    padding: 16px 18px 18px;
+    padding: 20px 22px 22px;
 }
 
 .direction-card h3 {
-    margin: 0 0 8px;
+    margin: 0 0 10px;
     font-family: var(--h-font);
     font-size: clamp(16px, 1.8vw, 20px);
 }
 
 .direction-card p {
     margin: 0;
-    font-size: 14.5px;
-    line-height: 1.55;
+    font-size: 15px;
+    line-height: 1.65;
     color: #444;
 }
 
@@ -1631,7 +1637,7 @@ a.contacts-card__value:hover {
 .bento {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
+    gap: 22px;
 }
 
 .bento__card {
@@ -1640,9 +1646,9 @@ a.contacts-card__value:hover {
     background: #fff;
     border-radius: 1.5em;
     box-shadow: 0.3px 0.7px 15px black;
-    padding: 22px 24px;
-    font-size: 15px;
-    line-height: 1.5;
+    padding: 26px 30px; /* больше воздуха вокруг текста */
+    font-size: 16px;
+    line-height: 1.65; /* разряженный текст лучше воспринимается */
 }
 
 .bento__card strong {
